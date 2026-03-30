@@ -1,19 +1,28 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header.jsx';
+
+// Importando as páginas que você acabou de criar
+import Home from './pages/Home.jsx';
+import Servicos from './pages/Servicos.jsx';
+import Vantagens from './pages/Vantagens.jsx';
+import Planos from './pages/Planos.jsx';
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4">
-      <div className="bg-slate-800 p-8 rounded-2xl shadow-2xl border border-slate-700 text-center max-w-md w-full">
-        <h1 className="text-4xl font-extrabold text-emerald-400 mb-4 tracking-tight">
-          Tailwind ON! 🚀
-        </h1>
-        
-        <p className="text-slate-300 mb-8 text-lg">
-          Se você está vendo esta mensagem com um fundo escuro e o título verde, o Tailwind está funcionando perfeitamente.
-        </p>
+    <BrowserRouter>
+      <div className="bg-slate-900 font-sans text-white min-h-screen">
+        {/* O Header fica fora das rotas, assim ele aparece em todas as páginas! */}
+        <Header />
 
-        <button className="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/30">
-          Pode ir pra casa! 🏠
-        </button>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/servicos" element={<Servicos />} />
+            <Route path="/vantagens" element={<Vantagens />} />
+            <Route path="/planos" element={<Planos />} />
+          </Routes>
+        </main>
       </div>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
