@@ -1,4 +1,4 @@
-export default function servicos() {
+export default function Servicos() {
   return (
     <div className="min-h-screen flex items-center justify-center pt-20">
       <h1 className="text-5xl font-extrabold text-white">
