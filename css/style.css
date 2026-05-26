@@ -1,0 +1,178 @@
+/* ================================================================
+   CAPYCLOUD - ESTILOS CUSTOMIZADOS
+   ================================================================ */
+
+/* ---------- KEYFRAMES ---------- */
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes aurora-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  33% { opacity: 0.5; transform: scale(1.05); }
+  66% { opacity: 0.4; transform: scale(0.98); }
+}
+
+@keyframes grid-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes text-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+/* ---------- CLASSES UTILITÁRIAS ---------- */
+
+.animate-aurora {
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #064e3b, #0f172a, #1e1b4b);
+  background-size: 400% 400%;
+  animation: aurora 15s ease infinite;
+}
+
+.animate-aurora-glow {
+  animation: aurora-glow 12s ease-in-out infinite;
+}
+
+.animate-grid-pulse {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+.text-shimmer {
+  background: linear-gradient(90deg, #fff 0%, #a7f3d0 30%, #34d399 50%, #a7f3d0 70%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+.badge-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ---------- SPOTLIGHT CARDS ---------- */
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(16,185,129,0.08), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ---------- GLOW CARDS ---------- */
+
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.glow-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1),
+              0 0 40px rgba(16, 185, 129, 0.05);
+  transform: translateY(-4px);
+}
+
+/* ---------- MOBILE MENU ---------- */
+
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.mobile-menu.open {
+  max-height: 400px;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ---------- SELEÇÃO ---------- */
+
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: white;
+}
+
+/* ---------- INPUTS ---------- */
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
