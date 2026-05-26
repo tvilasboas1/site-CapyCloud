@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Planos de TI Gerenciada da Capycloud. Básico, Prata e Ouro. Escolha o ideal para sua empresa.">
+  <meta name="description" content="Planos de Cloud Privada Gerenciada da Capycloud. Escolha o pacote ideal: Básico, Prata ou Ouro.">
   <title>Planos - Capycloud</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css">
-<base target="_blank">
+  <base target="_self">
 </head>
 <body class="bg-slate-900 text-white font-sans antialiased">
 
@@ -20,6 +20,7 @@
           <span class="text-3xl font-bold text-white tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Início</a>
           <a href="servicos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Serviços</a>
           <a href="infraestrutura.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Infraestrutura</a>
           <a href="planos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Planos</a>
@@ -40,6 +41,7 @@
     </div>
     <div id="mobile-menu" class="mobile-menu md:hidden bg-slate-900/95 border-t border-slate-800">
       <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Início</a>
         <a href="servicos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Serviços</a>
         <a href="infraestrutura.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Infraestrutura</a>
         <a href="planos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Planos</a>
@@ -54,21 +56,21 @@
 
       <div class="text-center max-w-3xl mx-auto mb-16 reveal opacity-0">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-          Planos de TI <span class="text-emerald-400">Sob Medida</span>
+          Planos de Cloud <span class="text-emerald-400">Privada</span>
         </h1>
         <p class="text-lg text-slate-400">
-          Escolha o nível de gerenciamento ideal para a sua empresa. Da manutenção básica à infraestrutura e governança completas, a Capycloud cuida de tudo.
+          Da startup à enterprise. Escolha o nível de gerenciamento e serviços que sua operação precisa. Tudo em ambiente dedicado, sem compartilhamento de recursos.
         </p>
       </div>
 
       <!-- Grid de Planos -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
 
         <!-- Básico -->
         <div class="spotlight-card glow-card flex flex-col p-8 rounded-2xl bg-slate-800/60 reveal opacity-0 delay-100">
           <div class="mb-8">
             <h3 class="text-2xl font-bold text-white mb-2">Básico</h3>
-            <p class="text-slate-400 text-sm">Essencial para manter sua operação rodando sem interrupções.</p>
+            <p class="text-slate-400 text-sm">Essencial para pequenas equipes que precisam de storage seguro e acesso remoto.</p>
           </div>
           <div class="mb-8">
             <span class="text-3xl font-extrabold text-white">Sob Consulta</span>
@@ -76,28 +78,28 @@
           <ul class="flex-1 space-y-4 mb-8">
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="text-slate-300 text-sm"><strong>CapyDrive</strong> — 500 GB storage</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="text-slate-300 text-sm"><strong>CapyNet</strong> — VPN para 5 usuários</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span class="text-slate-300 text-sm"><strong>CapyBackup</strong> — Diário + 7 retenção</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               <span class="text-slate-300 text-sm">Suporte Nível 1 (Remoto)</span>
             </li>
-            <li class="flex items-start">
-              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Monitoramento de Rede Básico</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Gestão de Backups Diários</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Manutenção Preventiva Mensal</span>
-            </li>
           </ul>
-          <a href="faleconosco.html" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-slate-700 hover:bg-slate-600 text-white transition-all">
+          <a href="faleconosco.html?plano=basico" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-slate-700 hover:bg-slate-600 text-white transition-all">
             Solicitar Orçamento
           </a>
         </div>
 
         <!-- Prata (Destaque) -->
-        <div class="spotlight-card relative flex flex-col p-8 rounded-2xl bg-slate-800 border-2 border-emerald-500 shadow-xl shadow-emerald-500/20 reveal opacity-0 delay-200">
+        <div class="spotlight-card glow-card relative flex flex-col p-8 rounded-2xl bg-slate-800 border-2 border-emerald-500 shadow-xl shadow-emerald-500/20 reveal opacity-0 delay-200">
           <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span class="bg-emerald-500 text-slate-950 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full badge-pulse">
               Mais Escolhido
@@ -105,7 +107,7 @@
           </div>
           <div class="mb-8 mt-2">
             <h3 class="text-2xl font-bold text-emerald-400 mb-2">Prata</h3>
-            <p class="text-slate-400 text-sm">Gestão avançada de infraestrutura e servidores para empresas em crescimento.</p>
+            <p class="text-slate-400 text-sm">Para empresas em crescimento que precisam de identidade, rede segmentada e hospedagem de aplicações.</p>
           </div>
           <div class="mb-8">
             <span class="text-3xl font-extrabold text-white">Sob Consulta</span>
@@ -113,26 +115,26 @@
           <ul class="flex-1 space-y-4 mb-8">
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Tudo do plano Básico</span>
+              <span class="text-slate-300 text-sm"><strong>Tudo do Básico</strong> + expansão de storage</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Gestão de Virtualização (Proxmox)</span>
+              <span class="text-slate-300 text-sm"><strong>CapyAD</strong> — Active Directory + SSO</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Administração de Storage (TrueNAS)</span>
+              <span class="text-slate-300 text-sm"><strong>CapyHost</strong> — 2 VMs / Containers</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Gestão de Redes e Firewalls</span>
+              <span class="text-slate-300 text-sm"><strong>CapyNet</strong> — VLANs + Firewall avançado</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-400 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Suporte Nível 2 e SLA Reduzido</span>
+              <span class="text-slate-300 text-sm">Suporte Nível 2 — SLA 1h</span>
             </li>
           </ul>
-          <a href="faleconosco.html" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg hover:shadow-emerald-500/30 transition-all hover:-translate-y-0.5">
+          <a href="faleconosco.html?plano=prata" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg hover:shadow-emerald-500/30 transition-all hover:-translate-y-0.5">
             Falar com Especialista
           </a>
         </div>
@@ -141,7 +143,7 @@
         <div class="spotlight-card glow-card flex flex-col p-8 rounded-2xl bg-slate-800/60 reveal opacity-0 delay-300">
           <div class="mb-8">
             <h3 class="text-2xl font-bold text-white mb-2">Ouro</h3>
-            <p class="text-slate-400 text-sm">Terceirização completa de TI com foco em governança e alta disponibilidade.</p>
+            <p class="text-slate-400 text-sm">Cloud privada completa com alta disponibilidade, governança e monitoramento proativo 24/7.</p>
           </div>
           <div class="mb-8">
             <span class="text-3xl font-extrabold text-white">Sob Consulta</span>
@@ -149,37 +151,40 @@
           <ul class="flex-1 space-y-4 mb-8">
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Tudo do plano Prata</span>
+              <span class="text-slate-300 text-sm"><strong>Tudo do Prata</strong> + recursos ilimitados*</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Consultoria em Governança de TI (COSO)</span>
+              <span class="text-slate-300 text-sm"><strong>CapyMonitor</strong> — Monitoramento 24/7</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Infraestrutura de Alta Disponibilidade (HA)</span>
+              <span class="text-slate-300 text-sm"><strong>HA</strong> — Alta disponibilidade + Cluster</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Suporte Nível 3 (24/7)</span>
+              <span class="text-slate-300 text-sm">Consultoria em Governança de TI</span>
             </li>
             <li class="flex items-start">
               <svg class="h-6 w-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-              <span class="text-slate-300 text-sm">Planejamento Estratégico de TI</span>
+              <span class="text-slate-300 text-sm">Suporte Nível 3 — SLA 30min</span>
             </li>
           </ul>
-          <a href="faleconosco.html" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-slate-700 hover:bg-slate-600 text-white transition-all">
+          <a href="faleconosco.html?plano=ouro" class="w-full text-center py-3 px-4 rounded-lg font-bold bg-slate-700 hover:bg-slate-600 text-white transition-all">
             Agendar Reunião
           </a>
         </div>
 
       </div>
 
+      <!-- Nota -->
+      <p class="text-center text-slate-500 text-sm mt-6">* Ilimitado dentro da capacidade contratada do hardware dedicado.</p>
+
       <!-- FAQ / Contato -->
-      <div class="mt-20 text-center bg-slate-800/30 border border-slate-700/50 rounded-2xl p-8 sm:p-12 reveal opacity-0">
+      <div class="mt-16 text-center bg-slate-800/30 border border-slate-700/50 rounded-2xl p-8 sm:p-12 reveal opacity-0">
         <h3 class="text-2xl font-bold text-white mb-4">Precisa de um projeto específico?</h3>
         <p class="text-slate-400 mb-6 max-w-2xl mx-auto">
-          Se a sua empresa possui demandas únicas de hardware, migração de datacenters ou requisitos específicos de segurança, podemos desenhar um plano customizado.
+          Se sua empresa precisa de CapyMail, CapyDB, CapyVoIP ou qualquer serviço customizado, montamos um plano sob medida.
         </p>
         <a href="faleconosco.html" class="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors inline-flex items-center group">
           Montar plano customizado

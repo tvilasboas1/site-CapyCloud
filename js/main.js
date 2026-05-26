@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const nome = document.getElementById('nome').value;
       const empresa = document.getElementById('empresa').value;
       const mensagem = document.getElementById('mensagem').value;
-      const whatsappNumber = '5511999999999'; // <-- ALTERE AQUI
+      const whatsappNumber = '5562994879627'; // <-- ALTERE AQUI
       const text = `Olá! Meu nome é ${nome} da ${empresa}. ${mensagem}`;
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');

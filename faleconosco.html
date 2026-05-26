@@ -7,7 +7,7 @@
   <title>Contato - Capycloud</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css">
-<base target="_blank">
+  <base target="_self">
 </head>
 <body class="bg-slate-900 text-white font-sans antialiased">
 
@@ -20,6 +20,7 @@
           <span class="text-3xl font-bold text-white tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Início</a>
           <a href="servicos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Serviços</a>
           <a href="infraestrutura.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Infraestrutura</a>
           <a href="planos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Planos</a>
@@ -40,6 +41,7 @@
     </div>
     <div id="mobile-menu" class="mobile-menu md:hidden bg-slate-900/95 border-t border-slate-800">
       <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Início</a>
         <a href="servicos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Serviços</a>
         <a href="infraestrutura.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Infraestrutura</a>
         <a href="planos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Planos</a>
@@ -51,7 +53,6 @@
   <!-- CONTEÚDO -->
   <main class="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto">
-
       <div class="text-center mb-16 reveal opacity-0">
         <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
           Fale com um <span class="text-emerald-400">Especialista</span>
@@ -62,7 +63,6 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-
         <!-- Formulário -->
         <div class="lg:col-span-3 bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl reveal opacity-0 delay-100">
           <form id="contact-form" class="space-y-6">
@@ -80,7 +80,6 @@
                   placeholder="voce@empresa.com">
               </div>
             </div>
-
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label for="empresa" class="block text-sm font-medium text-slate-300 mb-2">Empresa</label>
@@ -95,14 +94,12 @@
                   placeholder="(11) 99999-9999">
               </div>
             </div>
-
             <div>
               <label for="mensagem" class="block text-sm font-medium text-slate-300 mb-2">Como podemos ajudar?</label>
               <textarea id="mensagem" name="mensagem" rows="4" required
                 class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors resize-none"
                 placeholder="Descreva sua necessidade..."></textarea>
             </div>
-
             <button type="submit"
               class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-0.5">
               Enviar Mensagem
@@ -112,7 +109,6 @@
 
         <!-- Sidebar -->
         <div class="lg:col-span-2 space-y-6">
-
           <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl reveal opacity-0 delay-200">
             <h3 class="text-xl font-bold text-white mb-4">Resposta rápida</h3>
             <p class="text-slate-400 text-sm mb-6">
@@ -145,7 +141,6 @@
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </div>
