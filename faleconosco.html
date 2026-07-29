@@ -6,32 +6,60 @@
   <meta name="description" content="Fale com a Capycloud. Solicite um orçamento ou converse pelo WhatsApp. Resposta em até 1 hora.">
   <title>Contato - Capycloud</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { capy: {
+              cream: '#EDE4D7',
+              warm: '#E5D2BC',
+              cool: '#D8C4AE',
+              white: '#FFFFFF',
+              copper: '#B07340',
+              copperLight: '#C88A58',
+              copperDark: '#8B5C32',
+              gold: '#C49A42',
+              goldHover: '#A87530',
+              brown: '#8B6914',
+              dark: '#2D2926',
+              footer: '#161410',
+              text: '#4D4033',
+              muted: '#8A7B68',
+              borderLight: '#C0AD95',
+              borderCard: '#D2BFA8',
+              purple: '#7B5EA7',
+              green: '#5BAD7E',
+              coral: '#E07A5F',
+              sec: '#B85C38',
+              maint: '#6B8E4A',
+            } }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <base target="_self">
 </head>
-<body class="bg-slate-900 text-white font-sans antialiased">
+<!-- EFEITO 5: GRAIN TEXTURE -->
+<body class="bg-white text-capy-dark font-sans antialiased fx-grain">
 
   <!-- HEADER -->
-  <header class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800">
+  <header class="bg-capy-cream/90 backdrop-blur-md sticky top-0 z-50 border-b border-capy-borderLight">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-          <span class="text-3xl font-extrabold text-emerald-400 tracking-tighter">Capy</span>
-          <span class="text-3xl font-bold text-white tracking-tighter">cloud</span>
+          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
-          <a href="index.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Início</a>
-          <a href="servicos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Serviços</a>
-          <a href="infraestrutura.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Infraestrutura</a>
-          <a href="planos.html" class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-medium">Planos</a>
+          <a href="index.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Início</a>
+          <a href="quemsomos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Quem Somos</a>
+          <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Serviços</a>
+          <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
+          <a href="faleconosco.html" class="nav-link text-capy-copper transition-colors font-medium">Contato</a>
         </nav>
-        <div class="hidden md:flex items-center">
-          <a href="faleconosco.html" class="bg-emerald-500 hover:bg-emerald-400 text-slate-900 px-6 py-2.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-0.5">
-            Falar com Especialista
-          </a>
-        </div>
         <div class="md:hidden flex items-center">
-          <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+          <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-copper focus:outline-none p-2">
             <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -39,69 +67,76 @@
         </div>
       </div>
     </div>
-    <div id="mobile-menu" class="mobile-menu md:hidden bg-slate-900/95 border-t border-slate-800">
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-capy-cream/95 border-t border-capy-borderLight">
       <div class="px-4 py-4 space-y-3">
-        <a href="index.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Início</a>
-        <a href="servicos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Serviços</a>
-        <a href="infraestrutura.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Infraestrutura</a>
-        <a href="planos.html" class="block text-slate-300 hover:text-emerald-400 py-2 font-medium">Planos</a>
-        <a href="faleconosco.html" class="block bg-emerald-500 text-slate-900 text-center py-3 rounded-lg font-bold mt-2">Falar com Especialista</a>
+        <a href="index.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Início</a>
+        <a href="quemsomos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Quem Somos</a>
+        <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Serviços</a>
+        <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
+        <a href="faleconosco.html" class="block text-capy-copper py-2 font-medium">Contato</a>
       </div>
     </div>
   </header>
 
-  <!-- CONTEÚDO -->
-  <main class="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16 reveal opacity-0">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-          Fale com um <span class="text-emerald-400">Especialista</span>
-        </h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-          Preencha o formulário abaixo ou fale diretamente conosco pelo WhatsApp. Nossa equipe responde em até 1 hora em horário comercial.
-        </p>
-      </div>
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-16 px-4 sm:px-6 lg:px-8 fx-gradient-overlay">
+    <div class="max-w-7xl mx-auto text-center reveal opacity-0">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-capy-dark tracking-tight mb-4">
+        Fale com um <span class="text-capy-copper">Especialista</span>
+      </h1>
+      <p class="text-lg text-capy-text max-w-2xl mx-auto">
+        Preencha o formulário abaixo ou fale diretamente conosco pelo WhatsApp. Nossa equipe responde em até 1 hora em horário comercial.
+      </p>
+    </div>
+  </section>
 
+  <!-- CONTEÚDO -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <main class="pb-20 px-4 sm:px-6 lg:px-8 fx-gradient-overlay">
+    <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
         <!-- Formulário -->
-        <div class="lg:col-span-3 bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl reveal opacity-0 delay-100">
+        <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
+        <div class="lg:col-span-3 spotlight-card glow-card bg-white p-8 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-1">
           <form id="contact-form" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label for="nome" class="block text-sm font-medium text-slate-300 mb-2">Nome completo</label>
+                <label for="nome" class="block text-sm font-medium text-capy-text mb-2">Nome completo</label>
                 <input type="text" id="nome" name="nome" required
-                  class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors"
+                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
                   placeholder="Seu nome">
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-slate-300 mb-2">E-mail corporativo</label>
+                <label for="email" class="block text-sm font-medium text-capy-text mb-2">E-mail corporativo</label>
                 <input type="email" id="email" name="email" required
-                  class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors"
+                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
                   placeholder="voce@empresa.com">
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label for="empresa" class="block text-sm font-medium text-slate-300 mb-2">Empresa</label>
+                <label for="empresa" class="block text-sm font-medium text-capy-text mb-2">Empresa</label>
                 <input type="text" id="empresa" name="empresa"
-                  class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors"
+                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
                   placeholder="Nome da empresa">
               </div>
               <div>
-                <label for="telefone" class="block text-sm font-medium text-slate-300 mb-2">Telefone / WhatsApp</label>
+                <label for="telefone" class="block text-sm font-medium text-capy-text mb-2">Telefone / WhatsApp</label>
                 <input type="tel" id="telefone" name="telefone"
-                  class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors"
+                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
                   placeholder="(11) 99999-9999">
               </div>
             </div>
             <div>
-              <label for="mensagem" class="block text-sm font-medium text-slate-300 mb-2">Como podemos ajudar?</label>
+              <label for="mensagem" class="block text-sm font-medium text-capy-text mb-2">Como podemos ajudar?</label>
               <textarea id="mensagem" name="mensagem" rows="4" required
-                class="w-full px-4 py-3 bg-slate-900 border border-slate-600 rounded-lg text-white placeholder-slate-500 transition-colors resize-none"
+                class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors resize-none focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
                 placeholder="Descreva sua necessidade..."></textarea>
             </div>
+            <!-- EFEITO 6: ACCENT PULSE -->
             <button type="submit"
-              class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-0.5">
+              class="w-full bg-capy-gold hover:bg-capy-goldHover text-capy-dark py-3.5 rounded-lg font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 fx-accent-pulse">
               Enviar Mensagem
             </button>
           </form>
@@ -109,14 +144,17 @@
 
         <!-- Sidebar -->
         <div class="lg:col-span-2 space-y-6">
-          <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl reveal opacity-0 delay-200">
-            <h3 class="text-xl font-bold text-white mb-4">Resposta rápida</h3>
-            <p class="text-slate-400 text-sm mb-6">
+
+          <!-- Card 1: Resposta rápida + WhatsApp -->
+          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
+          <div class="spotlight-card bg-white p-6 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-2">
+            <h3 class="text-xl font-bold text-capy-dark mb-4">Resposta rápida</h3>
+            <p class="text-capy-text text-sm mb-6">
               Prefere conversar pelo WhatsApp? Clique no botão abaixo e fale diretamente com nossa equipe comercial.
             </p>
-            <a href="https://wa.me/5511999999999?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20Capycloud!"
+            <a href="https://wa.me/5562994879627?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Capycloud!"
                target="_blank" rel="noopener noreferrer"
-               class="flex items-center justify-center w-full bg-green-600 hover:bg-green-500 text-white py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-0.5">
+               class="flex items-center justify-center w-full bg-green-600 hover:bg-green-500 text-capy-dark py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-0.5">
               <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
@@ -124,40 +162,92 @@
             </a>
           </div>
 
-          <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 reveal opacity-0 delay-300">
-            <h3 class="text-lg font-bold text-white mb-3">SLA Garantido</h3>
-            <ul class="space-y-3 text-sm text-slate-400">
+          <!-- Card 2: SLA Garantido -->
+          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
+          <div class="glow-card bg-capy-cream p-6 rounded-2xl border border-capy-borderLight reveal opacity-0 delay-300 fx-hover-lift fx-border-glow fx-stagger-3">
+            <h3 class="text-lg font-bold text-capy-dark mb-4">SLA Garantido</h3>
+            <div class="overflow-hidden rounded-lg border border-capy-borderLight/50 mb-4">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-white">
+                    <th class="text-left px-3 py-2 text-capy-text font-medium">Plano</th>
+                    <th class="text-right px-3 py-2 text-capy-text font-medium">Resposta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-t border-capy-borderLight/50">
+                    <td class="px-3 py-2 text-capy-text">CapyEssential</td>
+                    <td class="px-3 py-2 text-right text-capy-text">até 8h úteis</td>
+                  </tr>
+                  <tr class="border-t border-capy-borderLight/50">
+                    <td class="px-3 py-2 text-capy-text">CapyPro</td>
+                    <td class="px-3 py-2 text-right text-capy-text">até 4h úteis</td>
+                  </tr>
+                  <tr class="border-t border-capy-borderLight/50">
+                    <td class="px-3 py-2 text-capy-text">CapyElite</td>
+                    <td class="px-3 py-2 text-right text-capy-text">até 1h útil</td>
+                  </tr>
+                  <tr class="border-t border-capy-borderLight/50">
+                    <td class="px-3 py-2 text-capy-copper font-medium">CapyEnterprise</td>
+                    <td class="px-3 py-2 text-right text-capy-copper font-medium">até 1h útil + emergencial</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="space-y-3 text-sm text-capy-text">
               <li class="flex items-center">
-                <svg class="h-5 w-5 text-emerald-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 Resposta em até 1h (horário comercial)
               </li>
               <li class="flex items-center">
-                <svg class="h-5 w-5 text-emerald-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Suporte remoto ilimitado
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Suporte remoto ilimitado no CapyEnterprise
               </li>
               <li class="flex items-center">
-                <svg class="h-5 w-5 text-emerald-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 Monitoramento 24/7
               </li>
             </ul>
           </div>
+
+          <!-- Card 3: Observações -->
+          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
+          <div class="bg-capy-cream p-6 rounded-2xl border border-capy-borderLight/50 reveal opacity-0 delay-400 fx-hover-lift fx-border-glow fx-stagger-4">
+            <h3 class="text-lg font-bold text-capy-dark mb-3">Importante</h3>
+            <ul class="space-y-2 text-xs text-capy-muted">
+              <li class="flex items-start">
+                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Serviços limitados ao ambiente gerenciado Capycloud
+              </li>
+              <li class="flex items-start">
+                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Chamados excedentes poderão ser cobrados à parte
+              </li>
+              <li class="flex items-start">
+                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                Armazenamento e usuários adicionais sob demanda
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+  <footer class="bg-capy-footer border-t border-capy-borderLight/30 py-10 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="flex items-center">
-        <span class="text-2xl font-extrabold text-emerald-400 tracking-tighter">Capy</span>
-        <span class="text-2xl font-bold text-white tracking-tighter">cloud</span>
+        <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+        <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
       </div>
-      <div class="text-slate-500 text-sm">© 2025 Capycloud. Todos os direitos reservados.</div>
+      <div class="text-capy-muted text-sm">© 2026 Capycloud. Todos os direitos reservados.</div>
       <div class="flex space-x-6">
-        <a href="servicos.html" class="text-slate-400 hover:text-emerald-400 transition-colors text-sm">Serviços</a>
-        <a href="planos.html" class="text-slate-400 hover:text-emerald-400 transition-colors text-sm">Planos</a>
-        <a href="faleconosco.html" class="text-slate-400 hover:text-emerald-400 transition-colors text-sm">Contato</a>
+        <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
+        <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
+        <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
+        <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Privacidade</a>
       </div>
     </div>
   </footer>

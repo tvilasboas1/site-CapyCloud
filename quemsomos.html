@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quem Somos — CapyCloud. Conheça a empresa de Cloud Privada Gerenciada construída sobre Software Livre.">
+  <title>Quem Somos — Capycloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { capy: {
+              cream: '#EDE4D7',
+              warm: '#E5D2BC',
+              cool: '#D8C4AE',
+              white: '#FFFFFF',
+              copper: '#B07340',
+              copperLight: '#C88A58',
+              copperDark: '#8B5C32',
+              gold: '#C49A42',
+              goldHover: '#A87530',
+              brown: '#8B6914',
+              dark: '#2D2926',
+              footer: '#161410',
+              text: '#4D4033',
+              muted: '#8A7B68',
+              borderLight: '#C0AD95',
+              borderCard: '#D2BFA8',
+              purple: '#7B5EA7',
+              green: '#5BAD7E',
+              coral: '#E07A5F',
+              sec: '#B85C38',
+              maint: '#6B8E4A',
+          }}
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <base target="_self">
+</head>
+<!-- EFEITO 5: GRAIN TEXTURE -->
+<body class="bg-white text-capy-dark font-sans antialiased fx-grain">
+
+  <!-- HEADER -->
+  <header class="bg-capy-cream/90 backdrop-blur-md sticky top-0 z-50 border-b border-capy-borderLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Inicio</a>
+          <a href="quemsomos.html" class="nav-link text-capy-copper transition-colors font-medium">Quem Somos</a>
+          <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Servicos</a>
+          <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
+          <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+        </nav>
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2">
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-capy-cream/95 border-t border-capy-borderLight">
+      <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Inicio</a>
+        <a href="quemsomos.html" class="block text-capy-copper py-2 font-medium">Quem Somos</a>
+        <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Servicos</a>
+        <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
+        <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO — Quem Somos -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white fx-gradient-overlay">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+        <!-- LADO ESQUERDO — Mascote -->
+        <div class="w-full lg:w-1/2 flex justify-center reveal opacity-0 delay-100">
+          <!-- EFEITO 7: FLOAT -->
+          <img src="img/capy66.png" alt="Quem Somos — CapyCloud" class="w-full max-w-2xl sm:max-w-3xl lg:max-w-5xl rounded-2xl fx-float">
+        </div>
+
+        <!-- LADO DIREITO — Título -->
+        <div class="w-full lg:w-1/2 text-center lg:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-capy-dark mb-6">
+            Quem <span class="text-capy-gold">Somos</span>
+          </h1>
+          <p class="text-capy-text text-lg leading-relaxed mb-6">
+            A Capycloud nasceu da experiência de profissionais que vivem infraestrutura todos os dias.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSSA HISTÓRIA -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-capy-warm fx-gradient-overlay">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="space-y-6 text-capy-text text-lg leading-relaxed reveal opacity-0">
+        <p>
+          Antes mesmo da empresa existir, já trabalhávamos com virtualização, redes, armazenamento, monitoramento e segurança da informação. Ao longo dessa jornada vimos um cenário se repetir: empresas crescendo, mas convivendo com uma tecnologia cada vez mais fragmentada, cara de manter e difícil de administrar.
+        </p>
+        <p>
+          Em vez de aceitar que esse era o único caminho, decidimos construir uma alternativa.
+        </p>
+        <p>
+          Assim nasceu a Capycloud.
+        </p>
+        <p>
+          Criamos um ecossistema que reúne armazenamento, virtualização, backup, monitoramento, identidade e segurança em uma única plataforma, construída sobre tecnologias Open Source e administrada por quem realmente entende do assunto.
+        </p>
+        <p>
+          Nosso objetivo nunca foi vender servidores ou licenças.
+        </p>
+        <p>
+          Queremos construir uma infraestrutura confiável para que nossos clientes possam trabalhar com tranquilidade, sabendo que existe uma equipe cuidando da tecnologia nos bastidores.
+        </p>
+        <p>
+          Não somos um grande call center.
+        </p>
+        <p>
+          Quando você fala com a Capycloud, conversa diretamente com quem projeta, implanta e mantém a infraestrutura. Gostamos de entender cada ambiente, porque acreditamos que nenhuma empresa cresce da mesma forma — e a tecnologia também não deveria.
+        </p>
+        <p>
+          Antes de existir como empresa, já resolvíamos esses desafios todos os dias. Apenas decidimos fazer disso o nosso negócio.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white fx-gradient-overlay">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12 reveal opacity-0">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
+          O que nos torna <span class="text-capy-gold">diferentes</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+
+        <div class="bg-capy-cream/60 border border-capy-borderLight rounded-xl p-6 text-center hover:border-capy-gold transition-all reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-1">
+          <div class="w-12 h-12 rounded-xl bg-capy-copper/10 flex items-center justify-center mx-auto mb-4 border border-capy-copper/20">
+            <svg class="w-6 h-6 text-capy-copper" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Sem dependência de fornecedor</h3>
+          <p class="text-capy-text text-sm">Software Livre significa que você não fica preso a ninguém. Seus dados são seus, sempre.</p>
+        </div>
+
+        <div class="bg-capy-cream/60 border border-capy-borderLight rounded-xl p-6 text-center hover:border-capy-gold transition-all reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-2">
+          <div class="w-12 h-12 rounded-xl bg-capy-gold/10 flex items-center justify-center mx-auto mb-4 border border-capy-gold/20">
+            <svg class="w-6 h-6 text-capy-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Preço em <span class="text-capy-gold">R$</span></h3>
+          <p class="text-capy-text text-sm">Sem surpresas com câmbio. Nossos planos são em reais, com previsibilidade total de custos.</p>
+        </div>
+
+        <div class="bg-capy-cream/60 border border-capy-borderLight rounded-xl p-6 text-center hover:border-capy-gold transition-all reveal opacity-0 delay-300 fx-hover-lift fx-border-glow fx-stagger-3">
+          <div class="w-12 h-12 rounded-xl bg-capy-green/10 flex items-center justify-center mx-auto mb-4 border border-capy-green/20">
+            <svg class="w-6 h-6 text-capy-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Suporte em Português</h3>
+          <p class="text-capy-text text-sm">Atendimento humano, em português, por especialistas que entendem a sua operação e o seu mercado.</p>
+        </div>
+
+        <div class="bg-capy-cream/60 border border-capy-borderLight rounded-xl p-6 text-center hover:border-capy-gold transition-all reveal opacity-0 delay-400 fx-hover-lift fx-border-glow fx-stagger-4">
+          <div class="w-12 h-12 rounded-xl bg-capy-coral/10 flex items-center justify-center mx-auto mb-4 border border-capy-coral/20">
+            <svg class="w-6 h-6 text-capy-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Camadas Integradas</h3>
+          <p class="text-capy-text text-sm">Camadas de proteção que se reforçam mutuamente. Zabbix monitora, N8N automatiza, Wazuh protege.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK TECNOLÓGICA (A) -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-capy-warm fx-gradient-overlay">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12 reveal opacity-0">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
+          Nossa <span class="text-capy-gold">Stack</span>
+        </h2>
+        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+          Toda a infraestrutura é construída sobre tecnologias Open Source maduras, estáveis e sem custo de licença. Isso significa mais previsibilidade e menos dependência.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             DOCKER — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/docker.png" alt="Docker" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-1">
+          <div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center mx-auto mb-3 border border-sky-200">
+            <!-- 🔧 INSERIR IMAGEM DO DOCKER AQUI → Substitua o src abaixo -->
+            <img src="img/stack/docker.png" alt="Docker" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-sky-600 text-lg font-bold" style="display:none">D</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Docker</h3>
+          <p class="text-capy-muted text-xs mt-1">Containers</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             GRAFANA — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/grafana.png" alt="Grafana" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-2">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-3 border border-orange-200">
+            <!-- 🔧 INSERIR IMAGEM DO GRAFANA AQUI → Substitua o src abaixo -->
+            <img src="img/stack/grafana.png" alt="Grafana" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-orange-500 text-lg font-bold" style="display:none">G</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Grafana</h3>
+          <p class="text-capy-muted text-xs mt-1">Dashboards</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             N8N — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/n8n.png" alt="N8N" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-3">
+          <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mx-auto mb-3 border border-rose-200">
+            <!-- 🔧 INSERIR IMAGEM DO N8N AQUI → Substitua o src abaixo -->
+            <img src="img/stack/n8n.png" alt="N8N" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-rose-500 text-lg font-bold" style="display:none">N</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">N8N</h3>
+          <p class="text-capy-muted text-xs mt-1">Automação</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             NGINX — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/nginx.png" alt="Nginx" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-4">
+          <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-3 border border-green-200">
+            <!-- 🔧 INSERIR IMAGEM DO NGINX AQUI → Substitua o src abaixo -->
+            <img src="img/stack/nginx.png" alt="Nginx" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-green-600 text-lg font-bold" style="display:none">N</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Nginx</h3>
+          <p class="text-capy-muted text-xs mt-1">Proxy / Web</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             OPNSENSE — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/opnsense.png" alt="OPNsense" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-5">
+          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mx-auto mb-3 border border-teal-200">
+            <!-- 🔧 INSERIR IMAGEM DO OPNSENSE AQUI → Substitua o src abaixo -->
+            <img src="img/stack/opnsense.png" alt="OPNsense" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-teal-600 text-lg font-bold" style="display:none">O</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">OPNsense</h3>
+          <p class="text-capy-muted text-xs mt-1">Perímetro</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             PROXMOX — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/proxmox.png" alt="Proxmox" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-6">
+          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mx-auto mb-3 border border-indigo-200">
+            <!-- 🔧 INSERIR IMAGEM DO PROXMOX AQUI → Substitua o src abaixo -->
+            <img src="img/stack/proxmox.png" alt="Proxmox" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-indigo-600 text-lg font-bold" style="display:none">P</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Proxmox</h3>
+          <p class="text-capy-muted text-xs mt-1">Virtualização</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             TRUENAS — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/truenas.png" alt="TrueNAS" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-7">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-3 border border-blue-200">
+            <!-- 🔧 INSERIR IMAGEM DO TRUENAS AQUI → Substitua o src abaixo -->
+            <img src="img/stack/truenas.png" alt="TrueNAS" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-blue-600 text-lg font-bold" style="display:none">T</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">TrueNAS</h3>
+          <p class="text-capy-muted text-xs mt-1">Storage</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ZENTYAL — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/zentyal.png" alt="Zentyal" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-8">
+          <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mx-auto mb-3 border border-violet-200">
+            <!-- 🔧 INSERIR IMAGEM DO ZENTYAL AQUI → Substitua o src abaixo -->
+            <img src="img/stack/zentyal.png" alt="Zentyal" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-violet-600 text-lg font-bold" style="display:none">Z</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Zentyal</h3>
+          <p class="text-capy-muted text-xs mt-1">Identidade</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             WAZUH — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/wazuh.png" alt="Wazuh" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-9">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-3 border border-amber-200">
+            <!-- 🔧 INSERIR IMAGEM DO WAZUH AQUI → Substitua o src abaixo -->
+            <img src="img/stack/wazuh.png" alt="Wazuh" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-amber-600 text-lg font-bold" style="display:none">W</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Wazuh</h3>
+          <p class="text-capy-muted text-xs mt-1">Segurança</p>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             ZABBIX — Stack Card
+             Para trocar o ícone por imagem, substitua o <img> abaixo:
+             <img src="img/stack/zabbix.png" alt="Zabbix" class="w-7 h-7 object-contain">
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-10">
+          <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mx-auto mb-3 border border-red-200">
+            <!-- 🔧 INSERIR IMAGEM DO ZABBIX AQUI → Substitua o src abaixo -->
+            <img src="img/stack/zabbix.png" alt="Zabbix" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-red-600 text-lg font-bold" style="display:none">Z</span>
+          </div>
+          <h3 class="text-sm font-bold text-capy-dark">Zabbix</h3>
+          <p class="text-capy-muted text-xs mt-1">Monitoramento</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA (B) -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white fx-gradient-overlay">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16 reveal opacity-0">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
+          Como funciona <span class="text-capy-gold">na prática</span>
+        </h2>
+        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+          Do primeiro contato à operação estável, em quatro passos.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- Passo 1 -->
+        <div class="relative text-center reveal opacity-0 fx-hover-lift fx-stagger-1">
+          <div class="w-16 h-16 rounded-2xl bg-capy-copper/10 border border-capy-copper/20 flex items-center justify-center mx-auto mb-5">
+            <span class="text-2xl font-extrabold text-capy-copper">1</span>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Diagnóstico</h3>
+          <p class="text-capy-text text-sm leading-relaxed">Conversamos sobre sua operação, mapeamos o que funciona e o que precisa melhorar. Sem compromisso.</p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="relative text-center reveal opacity-0 fx-hover-lift fx-stagger-2">
+          <div class="w-16 h-16 rounded-2xl bg-capy-gold/10 border border-capy-gold/20 flex items-center justify-center mx-auto mb-5">
+            <span class="text-2xl font-extrabold text-capy-gold">2</span>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Projeto</h3>
+          <p class="text-capy-text text-sm leading-relaxed">Desenhamos a infraestrutura ideal para sua realidade — sem empurrar serviços que você não precisa.</p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="relative text-center reveal opacity-0 fx-hover-lift fx-stagger-3">
+          <div class="w-16 h-16 rounded-2xl bg-capy-green/10 border border-capy-green/20 flex items-center justify-center mx-auto mb-5">
+            <span class="text-2xl font-extrabold text-capy-green">3</span>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Implantação</h3>
+          <p class="text-capy-text text-sm leading-relaxed">Migramos, configuramos e testamos tudo. Sua equipe acompanha cada etapa e valida antes de ir para produção.</p>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="relative text-center reveal opacity-0 fx-hover-lift fx-stagger-4">
+          <div class="w-16 h-16 rounded-2xl bg-capy-coral/10 border border-capy-coral/20 flex items-center justify-center mx-auto mb-5">
+            <span class="text-2xl font-extrabold text-capy-coral">4</span>
+          </div>
+          <h3 class="text-lg font-bold text-capy-dark mb-2">Suporte contínuo</h3>
+          <p class="text-capy-text text-sm leading-relaxed">Monitoramento automatizado, manutenção preventiva e atendimento direto com especialistas em horário comercial. Você não fica sozinho.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS (C) -->
+  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-capy-warm fx-gradient-overlay">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12 reveal opacity-0">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
+          Em <span class="text-capy-gold">números</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-6 text-center reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-1">
+          <div class="text-4xl sm:text-5xl font-extrabold text-capy-copper mb-2">24/7</div>
+          <p class="text-capy-text text-sm font-medium">Monitoramento automatizado</p>
+        </div>
+
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-6 text-center reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-2">
+          <div class="text-4xl sm:text-5xl font-extrabold text-capy-gold mb-2">99.9%</div>
+          <p class="text-capy-text text-sm font-medium">Uptime da plataforma</p>
+        </div>
+
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-6 text-center reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-3">
+          <div class="text-4xl sm:text-5xl font-extrabold text-capy-green mb-2">100%</div>
+          <p class="text-capy-text text-sm font-medium">Open Source</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-4xl mx-auto reveal opacity-0">
+      <div class="relative overflow-hidden rounded-3xl p-10 md:p-16 text-center bg-capy-warm border border-capy-gold/20 shadow-sm">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-3xl opacity-20"
+             style="background: radial-gradient(circle, #C49A42, transparent);">
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
+            Quer conhecer a Capycloud de perto?
+          </h2>
+          <p class="text-capy-text text-lg mb-8 max-w-xl mx-auto">
+            Em uma conversa rápida, entendemos sua operação e mostramos como centralizar sua infraestrutura sem complicação.
+          </p>
+          <!-- EFEITO 6: ACCENT PULSE -->
+          <a href="faleconosco.html"
+             class="inline-block px-10 py-4 bg-capy-gold hover:bg-capy-goldHover text-capy-dark font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 text-lg fx-accent-pulse">
+            Falar com um especialista
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-capy-footer border-t border-capy-borderLight/30 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center">
+        <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+        <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
+      </div>
+      <div class="text-capy-muted text-sm">© 2026 Capycloud. Todos os direitos reservados.</div>
+      <div class="flex space-x-6">
+        <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
+        <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
+        <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
+        <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

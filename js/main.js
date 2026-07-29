@@ -1,5 +1,5 @@
 /* ================================================================
-   CAPYCLOUD - JAVASCRIPT
+   CAPYCLOUD — JavaScript
    ================================================================ */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty('--x', x + '%');
-      card.style.setProperty('--y', y + '%');
+      card.style.setProperty('--mouse-x', x + '%');
+      card.style.setProperty('--mouse-y', y + '%');
     });
   });
 
@@ -29,24 +29,24 @@ document.addEventListener('DOMContentLoaded', function() {
         svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
       }
     });
-  }
 
-  /* ---------- NAV LINK ATIVO ---------- */
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href') === currentPage) {
-      link.classList.add('text-emerald-400');
-      link.classList.remove('text-slate-300');
-    }
-  });
+    // Fechar menu ao clicar em um link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        const svg = menuBtn.querySelector('svg');
+        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+      });
+    });
+  }
 
   /* ---------- SCROLL REVEAL ---------- */
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
         entry.target.classList.add('animate-fade-in-up');
-        entry.target.classList.remove('opacity-0');
         revealObserver.unobserve(entry.target);
       }
     });
@@ -61,12 +61,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const nome = document.getElementById('nome').value;
       const empresa = document.getElementById('empresa').value;
       const mensagem = document.getElementById('mensagem').value;
-      const whatsappNumber = '5562994879627'; // <-- ALTERE AQUI
+      const whatsappNumber = '5562994879627';
       const text = `Olá! Meu nome é ${nome} da ${empresa}. ${mensagem}`;
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
     });
   }
+
+  /* ---------- NAV LINK ATIVO ---------- */
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage) {
+      link.classList.add('active');
+    }
+  });
 
   console.log('🚀 Capycloud carregado');
 });

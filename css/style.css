@@ -1,178 +1,431 @@
-/* ================================================================
-   CAPYCLOUD - ESTILOS CUSTOMIZADOS
-   ================================================================ */
+/* =============================================
+   CAPYCLOUD — CSS Customizado v3
+   Tema AMADEIRADO ESCURO — madeira profunda, copper accent, modernidade.
+   Fundo fibra de madeira natural (amadeirado),
+   copper como detalhe, amber/honey como CTA.
+   ============================================= */
 
-/* ---------- KEYFRAMES ---------- */
+/* =============================================
+   FONT FACE — Bulo
+   Pesos: Thin, Light, Regular, Medium, Bold, Black
+   ============================================= */
 
-@keyframes aurora {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo Thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bulo';
+    src: url('../fonts/Font Bulo/Bulo Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
-@keyframes aurora-glow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  33% { opacity: 0.5; transform: scale(1.05); }
-  66% { opacity: 0.4; transform: scale(0.98); }
+/* Fallback: Inter para caso a Bulo não carregue */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* =============================================
+   CSS VARIABLES — Paleta Amadeirado
+   ============================================= */
+
+:root {
+    --capy-cream: #EDE4D7;
+    --capy-warm: #E5D2BC;
+    --capy-cool: #D8C4AE;
+    --capy-card: #FFFFFF;
+    --capy-copper: #B07340;
+    --capy-copper-light: #C88A58;
+    --capy-copper-dark: #8B5C32;
+    --capy-gold: #C49A42;
+    --capy-gold-hover: #A87530;
+    --capy-brown: #8B6914;
+    --capy-dark: #2D2926;
+    --capy-footer: #161410;
+    --capy-text: #4D4033;
+    --capy-muted: #8A7B68;
+    --capy-border-light: #C0AD95;
+    --capy-border-card: #D2BFA8;
+    --capy-whatsapp: #25d366;
+    --capy-sec: #B85C38;
+    --capy-maint: #6B8E4A;
 }
 
-@keyframes grid-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Bulo', 'Inter', 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-color: var(--capy-cream);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes text-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-  }
-}
-
-/* ---------- CLASSES UTILITÁRIAS ---------- */
-
-.animate-aurora {
-  background: linear-gradient(-45deg, #0f172a, #1e293b, #064e3b, #0f172a, #1e1b4b);
-  background-size: 400% 400%;
-  animation: aurora 15s ease infinite;
-}
-
-.animate-aurora-glow {
-  animation: aurora-glow 12s ease-in-out infinite;
-}
-
-.animate-grid-pulse {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: grid-pulse 4s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-.delay-700 { animation-delay: 0.7s; }
-.delay-800 { animation-delay: 0.8s; }
-
-.text-shimmer {
-  background: linear-gradient(90deg, #fff 0%, #a7f3d0 30%, #34d399 50%, #a7f3d0 70%, #fff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: text-shimmer 4s linear infinite;
-}
-
-.badge-pulse {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* ---------- SPOTLIGHT CARDS ---------- */
-
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.spotlight-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(16,185,129,0.08), transparent 40%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.spotlight-card:hover::before {
-  opacity: 1;
-}
-
-/* ---------- GLOW CARDS ---------- */
-
-.glow-card {
-  position: relative;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(51, 65, 85, 0.5);
-}
-
-.glow-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.1),
-              0 0 40px rgba(16, 185, 129, 0.05);
-  transform: translateY(-4px);
-}
-
-/* ---------- MOBILE MENU ---------- */
+/* =============================================
+   MOBILE MENU TOGGLE (JS-driven)
+   ============================================= */
 
 .mobile-menu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+    display: none;
 }
 
 .mobile-menu.open {
-  max-height: 400px;
+    display: block;
 }
 
-/* ---------- SCROLLBAR ---------- */
+/* =============================================
+   NAV LINK ACTIVE STATE
+   ============================================= */
 
-::-webkit-scrollbar {
-  width: 8px;
+.nav-link.active {
+    color: var(--capy-copper);
 }
 
-::-webkit-scrollbar-track {
-  background: #0f172a;
+/* =============================================
+   ANIMATIONS — Amadeirado
+   ============================================= */
+
+/* Aurora Background — warm wood grain + subtle amber/blue */
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+.animate-aurora {
+    background: linear-gradient(
+        -45deg,
+        rgba(212, 162, 78, 0.04) 0%,
+        rgba(176, 115, 64, 0.03) 25%,
+        rgba(139, 105, 20, 0.03) 50%,
+        rgba(212, 162, 78, 0.02) 75%,
+        rgba(176, 115, 64, 0.04) 100%
+    );
+    background-size: 400% 400%;
+    animation: aurora 15s ease infinite;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+/* Aurora Glow — warm amber center */
+@keyframes auroraGlow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.03); }
 }
 
-/* ---------- SELEÇÃO ---------- */
-
-::selection {
-  background: rgba(16, 185, 129, 0.3);
-  color: white;
+.animate-aurora-glow {
+    animation: auroraGlow 8s ease-in-out infinite;
+    background: radial-gradient(ellipse at 50% 30%, rgba(212,162,78,0.08) 0%, rgba(176,115,64,0.04) 40%, transparent 70%);
 }
 
-/* ---------- INPUTS ---------- */
+/* Grid Tech Pulse — wood subtle */
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.04; }
+    50% { opacity: 0.08; }
+}
 
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+.animate-grid-pulse {
+    background-image:
+        linear-gradient(rgba(176, 115, 64, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(176, 115, 64, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridPulse 4s ease-in-out infinite;
+}
+
+/* Text Shimmer — amber warmth */
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+    background: linear-gradient(
+        90deg,
+        #2D2926 0%, #2D2926 40%,
+        #B07340 50%,
+        #2D2926 60%, #2D2926 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Badge Pulse — amber warmth */
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 162, 78, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(212, 162, 78, 0); }
+}
+
+.badge-pulse {
+    animation: badgePulse 2s ease infinite;
+}
+
+/* Bounce */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* =============================================
+   HERO IMAGE — Mascote on amadeirado bg
+   ============================================= */
+
+.hero-mascot {
+    /* ┌────────────────────────────────────────────────────────────────────┐
+       │  🎯 TAMANHO DO MASCOTE — AGORA CONTROLADO PELO HTML              │
+       │                                                                    │
+       │  A imagem agora cresce livremente dentro do container pai.        │
+       │  Para ajustar o tamanho, vá no index.html e altere:               │
+       │                                                                    │
+       │  1) O container pai (div que envolve a imagem):                   │
+       │     lg:w-1/2  → lg:w-2/3  (imagem MAIOR, ocupa 66% da tela)     │
+       │     lg:w-1/2  → lg:w-1/3  (imagem MENOR, ocupa 33% da tela)     │
+       │                                                                    │
+       │  2) Classes max-w na tag <img>:                                   │
+       │     max-w-3xl lg:max-w-4xl → max-w-5xl lg:max-w-6xl (maior)    │
+       │     max-w-3xl lg:max-w-4xl → max-w-xl  lg:max-w-2xl (menor)    │
+       │                                                                    │
+       │  Se o container pai é pequeno, a imagem NÃO cresce além dele.    │
+       └────────────────────────────────────────────────────────────────────┘ */
+    max-height: none;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 30px rgba(139, 105, 20, 0.25));
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* =============================================
+   SPOTLIGHT CARD (mouse-tracking glow)
+   ============================================= */
+
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(176, 115, 64, 0.04),
+        transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.spotlight-card:hover::before {
+    opacity: 1;
+}
+
+/* =============================================
+   GLOW CARD (hover border + shadow)
+   ============================================= */
+
+.glow-card {
+    transition: all 0.3s ease;
+    border: 1px solid var(--capy-border-card);
+}
+
+.glow-card:hover {
+    border-color: rgba(176, 115, 64, 0.3);
+    box-shadow: 0 4px 20px rgba(176, 115, 64, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+}
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =============================================
+   CUSTOM SCROLLBAR — amadeirado
+   ============================================= */
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #EDE4D7; }
+::-webkit-scrollbar-thumb { background: #C0AD95; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #8B6914; }
+
+/* =============================================
+   DELAY CLASSES
+   ============================================= */
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* =============================================
+   EFEITOS VISUAIS — 7 opções para avaliar
+   Cada efeito é independente. Comente ou remova
+   o bloco correspondente para desativar.
+   ============================================= */
+
+/* ── EFEITO 1: GRADIENT OVERLAY ──────────────
+   Gradiente sutil nas bordas das seções,
+   criando transição suave entre blocos.
+   Cores: cream → copper → cream */
+.fx-gradient-overlay {
+    position: relative;
+}
+.fx-gradient-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(237, 228, 215, 0.6), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+.fx-gradient-overlay::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to top, rgba(237, 228, 215, 0.4), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── EFEITO 2: HOVER LIFT ────────────────────
+   Cards levantam sutilmente ao hover com
+   sombra crescente. Dá sensação de profundidade. */
+.fx-hover-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.3s ease;
+}
+.fx-hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(176, 115, 64, 0.12),
+                0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ── EFEITO 3: SCROLL REVEAL STAGGER ─────────
+   Elementos aparecem com delays escalonados
+   ao rolar, criando efeito cascata. */
+.fx-stagger-1 { transition-delay: 0ms; }
+.fx-stagger-2 { transition-delay: 80ms; }
+.fx-stagger-3 { transition-delay: 160ms; }
+.fx-stagger-4 { transition-delay: 240ms; }
+.fx-stagger-5 { transition-delay: 320ms; }
+.fx-stagger-6 { transition-delay: 400ms; }
+.fx-stagger-7 { transition-delay: 480ms; }
+.fx-stagger-8 { transition-delay: 560ms; }
+.fx-stagger-9 { transition-delay: 640ms; }
+.fx-stagger-10 { transition-delay: 720ms; }
+
+/* ── EFEITO 4: BORDER GLOW ───────────────────
+   Brilho sutil na borda inferior dos cards
+   ao hover, no tom copper. */
+.fx-border-glow {
+    position: relative;
+    overflow: hidden;
+}
+.fx-border-glow::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #B07340, transparent);
+    transition: width 0.4s ease, left 0.4s ease;
+    z-index: 2;
+}
+.fx-border-glow:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* ── EFEITO 5: GRAIN TEXTURE ─────────────────
+   Textura de grão sutil sobre toda a página,
+   dá sensação de material impresso/tátil. */
+.fx-grain::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+}
+
+/* ── EFEITO 6: ACCENT PULSE ──────────────────
+   Pulso sutil no botão CTA, atrai o olhar
+   sem ser agressivo. */
+.fx-accent-pulse {
+    animation: accentPulse 3s ease-in-out infinite;
+}
+@keyframes accentPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(196, 154, 66, 0.3); }
+    50% { box-shadow: 0 4px 30px rgba(196, 154, 66, 0.5), 0 0 60px rgba(196, 154, 66, 0.15); }
+}
+
+/* ── EFEITO 7: FLOAT ─────────────────────────
+   Animação de flutuação suave no mascote,
+   como se estivesse suspenso. */
+.fx-float {
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
 }
