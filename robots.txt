@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://capycloud.com.br/sitemap.xml

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Infraestrutura da Capycloud. Stack Open Source: TrueNAS, Zentyal, OPNsense, Proxmox. Ambiente dedicado, seguro e monitorado 24/7.">
+  <title>Infraestrutura - Capycloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { capy: {
+              cream: '#EDE4D7',
+              warm: '#E5D2BC',
+              cool: '#D8C4AE',
+              white: '#FFFFFF',
+              copper: '#B07340',
+              copperLight: '#C88A58',
+              copperDark: '#8B5C32',
+              gold: '#C49A42',
+              goldHover: '#A87530',
+              brown: '#8B6914',
+              dark: '#2D2926',
+              footer: '#161410',
+              text: '#4D4033',
+              muted: '#8A7B68',
+              borderLight: '#C0AD95',
+              borderCard: '#D2BFA8',
+              purple: '#7B5EA7',
+              green: '#5BAD7E',
+              coral: '#E07A5F',
+              sec: '#B85C38',
+              maint: '#6B8E4A',
+            } }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <base target="_self">
+</head>
+<body class="bg-white text-capy-dark font-sans antialiased fx-grain"> <!-- EFEITO 5: GRAIN TEXTURE -->
+
+  <!-- HEADER -->
+  <header class="bg-capy-cream/90 backdrop-blur-md sticky top-0 z-50 border-b border-capy-borderLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Início</a>
+          <a href="quemsomos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Quem Somos</a>
+          <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Serviços</a>
+          <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
+          <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+        </nav>
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-copper focus:outline-none p-2">
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-capy-cream/95 border-t border-capy-borderLight">
+      <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Início</a>
+        <a href="quemsomos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Quem Somos</a>
+        <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Serviços</a>
+        <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
+        <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="min-h-screen py-20 px-4 sm:px-6 lg:px-8 fx-gradient-overlay"> <!-- EFEITO 1: GRADIENT OVERLAY -->
+    <div class="max-w-7xl mx-auto">
+
+      <header class="mb-16 reveal opacity-0">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-capy-dark tracking-tight mb-4">
+          A Fundação da sua <span class="text-capy-copper">Cloud Privada</span>
+        </h1>
+        <p class="text-lg text-capy-text max-w-3xl leading-relaxed">
+          Nossa infraestrutura é construída 100% sobre tecnologias Open Source de classe enterprise. Sem taxas de licenciamento ocultas, sem vendor lock-in. Você contrata o serviço, nós montamos a stack e gerenciamos tudo.
+        </p>
+      </header>
+
+      <!-- Stack Visual -->
+      <div class="mb-20 reveal opacity-0 delay-100">
+        <div class="bg-capy-cream rounded-2xl border border-capy-borderLight/50 p-6 md:p-10">
+          <h2 class="text-xl font-bold text-capy-dark mb-8 text-center">Stack Tecnológica</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- 🔧 INSERIR IMAGEM DO TRUENAS AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-1">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/truenas.png" alt="TrueNAS" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-blue-600 text-lg font-bold" style="display:none">T</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">TrueNAS</div>
+              <div class="text-capy-muted text-xs mt-1">Storage & Backup</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO ZENTYAL AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-2">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/zentyal.png" alt="Zentyal" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-violet-600 text-lg font-bold" style="display:none">Z</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Zentyal</div>
+              <div class="text-capy-muted text-xs mt-1">AD / LDAP / SSO</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO OPNSENSE AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-3">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/opnsense.png" alt="OPNsense" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-teal-600 text-lg font-bold" style="display:none">O</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">OPNsense</div>
+              <div class="text-capy-muted text-xs mt-1">Firewall & VPN</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO PROXMOX AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-4">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/proxmox.png" alt="Proxmox" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-indigo-600 text-lg font-bold" style="display:none">P</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Proxmox</div>
+              <div class="text-capy-muted text-xs mt-1">Virtualização</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO ZABBIX AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-5">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/zabbix.png" alt="Zabbix" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-red-600 text-lg font-bold" style="display:none">Z</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Zabbix</div>
+              <div class="text-capy-muted text-xs mt-1">Monitoramento</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO GRAFANA AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-6">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/grafana.png" alt="Grafana" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-orange-500 text-lg font-bold" style="display:none">G</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Grafana</div>
+              <div class="text-capy-muted text-xs mt-1">Dashboards</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO DOCKER AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-7">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/docker.png" alt="Docker" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-sky-600 text-lg font-bold" style="display:none">D</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Docker</div>
+              <div class="text-capy-muted text-xs mt-1">Containers</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO NGINX AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-borderLight/50 hover:border-capy-copper/30 transition-colors fx-hover-lift fx-border-glow fx-stagger-8">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/nginx.png" alt="Nginx" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-green-600 text-lg font-bold" style="display:none">N</span>
+              </div>
+              <div class="text-capy-copper font-bold text-sm">Nginx</div>
+              <div class="text-capy-muted text-xs mt-1">Proxy & Load Balancer</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO WAZUH AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-sec/30 hover:border-capy-sec transition-colors fx-hover-lift fx-border-glow fx-stagger-9">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/wazuh.png" alt="Wazuh" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-amber-600 text-lg font-bold" style="display:none">W</span>
+              </div>
+              <div class="text-capy-sec font-bold text-sm">Wazuh</div>
+              <div class="text-capy-muted text-xs mt-1">SIEM / XDR / SegInfo</div>
+            </div>
+            <!-- 🔧 INSERIR IMAGEM DO N8N AQUI → Substitua o src abaixo -->
+            <div class="bg-capy-cream/60 rounded-xl p-4 text-center border border-capy-maint/30 hover:border-capy-maint transition-colors fx-hover-lift fx-border-glow fx-stagger-10">
+              <div class="w-10 h-10 flex items-center justify-center mx-auto mb-2">
+                <img src="img/stack/n8n.png" alt="N8N" class="w-8 h-8 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="text-rose-500 text-lg font-bold" style="display:none">N</span>
+              </div>
+              <div class="text-capy-maint font-bold text-sm">N8N</div>
+              <div class="text-capy-muted text-xs mt-1">Automação & Workflows</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+
+        <!-- Bloco 1: Segurança de Perímetro -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-1">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-copper/10 rounded-full flex items-center justify-center border-4 border-capy-copper/20">
+              <span class="text-5xl">🔥</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Perímetro Blindado com OPNsense</h3>
+            <p class="text-capy-text leading-relaxed mb-4">Sua primeira linha de defesa. Firewall de nova geração com IDS/IPS, filtragem de GeoIP, VPN WireGuard de alta performance e segmentação de rede por VLANs. Sua infraestrutura fica invisível na internet.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Firewall stateful com Suricata IDS/IPS
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                VPN site-to-site e client-to-site (WireGuard)
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                VLANs isoladas: Admin, VoIP, Guest, IoT
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloco 2: Storage -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row-reverse items-center gap-8 reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-2">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-copper/10 rounded-full flex items-center justify-center border-4 border-capy-copper/20">
+              <span class="text-5xl">🗄️</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Storage Corporativo TrueNAS</h3>
+            <p class="text-capy-text leading-relaxed mb-4">File server de verdade. ZFS com snapshots incrementais, deduplicação, compressão e replicação off-site. Seus dados nunca tocam nuvem pública — fica tudo no seu ambiente dedicado.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Criptografia AES-256 em repouso e trânsito
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Snapshots versionados a cada 15 minutos
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Replicação assíncrona para DR site
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloco 3: Compute & Virtualização -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-3">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-copper/10 rounded-full flex items-center justify-center border-4 border-capy-copper/20">
+              <span class="text-5xl">⚡</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Compute com Proxmox</h3>
+            <p class="text-capy-text leading-relaxed mb-4">Virtualização bare-metal com KVM e containers LXC. Live migration, HA entre nós, backups automáticos de VMs e orquestração de containers Docker. Sua aplicação roda onde você quiser.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                VMs dedicadas ou containers gerenciados
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Alta disponibilidade com cluster Ceph
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Backup de VMs com snapshot ao vivo
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloco 4: Identidade -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row-reverse items-center gap-8 reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-4">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-copper/10 rounded-full flex items-center justify-center border-4 border-capy-copper/20">
+              <span class="text-5xl">🛡️</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Identidade com Zentyal</h3>
+            <p class="text-capy-text leading-relaxed mb-4">Active Directory, DNS, DHCP e SSO em uma única plataforma. Controle quem acessa o quê, quando e de onde. Conformidade com LGPD e auditoria completa de logs.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Domínio corporativo com GPOs por OU
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                SSO integrado a aplicações internas
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Logs de auditoria e relatórios de acesso
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloco 5: Segurança da Informação (CapySec) — NOVO -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8 reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-5">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-sec/10 rounded-full flex items-center justify-center border-4 border-capy-sec/20">
+              <span class="text-5xl">🔒</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Seguranca da Informacao com Wazuh</h3>
+            <p class="text-capy-text leading-relaxed mb-4">SIEM e XDR open source de classe enterprise. Deteccao de intrusoes, análise de vulnerabilidades, conformidade LGPD e resposta automatica a incidentes — cada camada protegida.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-sec mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                SIEM com correlacao de eventos em tempo real
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-sec mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                XDR: deteccao e resposta extendida (endpoints + rede)
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-sec mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Conformidade LGPD e auditoria automatizada
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloco 6: Manutenção Automatizada (CapyMaint) — NOVO -->
+        <div class="spotlight-card glow-card bg-white p-8 rounded-2xl flex flex-col md:flex-row-reverse items-center gap-8 reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-6">
+          <div class="w-full md:w-1/3 flex justify-center">
+            <div class="w-32 h-32 bg-capy-maint/10 rounded-full flex items-center justify-center border-4 border-capy-maint/20">
+              <span class="text-5xl">🔗</span>
+            </div>
+          </div>
+          <div class="w-full md:w-2/3">
+            <h3 class="text-2xl font-bold text-capy-dark mb-3">Manutencao Automatizada com N8N</h3>
+            <p class="text-capy-text leading-relaxed mb-4">Fluxos inteligentes que conectam Zabbix, Wazuh, TrueNAS e Proxmox. Quando Zabbix detecta um problema, N8N dispara a resposta automatica — notificacao, remedicao ou escalamento sem intervencao humana.</p>
+            <ul class="text-capy-text font-medium space-y-2">
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-maint mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Automacao de incidentes: deteccao → notificacao → remedicao
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-maint mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Integracao nativa com toda a stack Capycloud
+              </li>
+              <li class="flex items-center">
+                <svg class="h-5 w-5 text-capy-maint mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                Workflows customizados para cada cliente
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 text-center reveal opacity-0">
+        <div class="bg-capy-copper/10 border border-capy-copper/20 rounded-2xl p-10 max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-capy-dark mb-4">Quer ver as camadas por dentro?</h2>
+          <p class="text-capy-text mb-8 max-w-2xl mx-auto">Agende uma demonstracao tecnica e veja como Zabbix, N8N e Wazuh trabalham juntos para proteger sua infraestrutura em tempo real.</p>
+          <a href="faleconosco.html" class="inline-block bg-capy-gold hover:bg-capy-goldHover text-capy-dark px-8 py-3.5 rounded-lg font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 fx-accent-pulse"> <!-- EFEITO 6: ACCENT PULSE -->
+            Agendar Demonstração Técnica
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-capy-footer border-t border-capy-borderLight/30 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center">
+        <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+        <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
+      </div>
+      <div class="text-capy-muted text-sm">© 2026 Capycloud. Todos os direitos reservados.</div>
+      <div class="flex space-x-6">
+        <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
+        <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
+        <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
+        <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

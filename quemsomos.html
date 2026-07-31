@@ -39,6 +39,13 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <base target="_self">
+
+  <!-- Favicon — Capivara sorrindo com zoom -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/capysorri.png">
+  <link rel="icon" type="image/x-icon" href="img/capysorri.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/capysorri.png">
 </head>
 <!-- EFEITO 5: GRAIN TEXTURE -->
 <body class="bg-white text-capy-dark font-sans antialiased fx-grain">
@@ -48,7 +55,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <!-- 🔧 TROCAR LOGO — Substitua img/logo.png pela imagem própria -->
+          <img src="img/logo.png" alt="Capycloud" class="h-8 w-8 mr-1 object-contain" onerror="this.style.display='none'"><span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
           <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
@@ -57,6 +65,7 @@
           <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Servicos</a>
           <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
           <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+          <a href="area-do-cliente.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Área do Cliente</a>
         </nav>
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2">
@@ -74,6 +83,7 @@
         <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Servicos</a>
         <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
         <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+        <a href="area-do-cliente.html" class="block text-capy-copper py-2 font-medium">Área do Cliente</a>
       </div>
     </div>
   </header>
@@ -87,7 +97,7 @@
         <!-- LADO ESQUERDO — Mascote -->
         <div class="w-full lg:w-1/2 flex justify-center reveal opacity-0 delay-100">
           <!-- EFEITO 7: FLOAT -->
-          <img src="img/capy66.png" alt="Quem Somos — CapyCloud" class="w-full max-w-2xl sm:max-w-3xl lg:max-w-5xl rounded-2xl fx-float">
+          <img src="img/capytrio.png" alt="Quem Somos — CapyCloud" class="w-full max-w-2xl sm:max-w-3xl lg:max-w-5xl rounded-2xl fx-float">
         </div>
 
         <!-- LADO DIREITO — Título -->
@@ -96,7 +106,7 @@
             Quem <span class="text-capy-gold">Somos</span>
           </h1>
           <p class="text-capy-text text-lg leading-relaxed mb-6">
-            A Capycloud nasceu da experiência de profissionais que vivem infraestrutura todos os dias.
+            A Capycloud nasceu da experiência de profissionais que lidam diariamente com os desafios da infraestrutura de TI e acreditam que ela pode ser muito mais simples para as empresas.
           </p>
         </div>
 
@@ -109,33 +119,42 @@
   <section class="py-20 px-4 sm:px-6 lg:px-8 bg-capy-warm fx-gradient-overlay">
     <div class="max-w-3xl mx-auto">
 
-      <div class="space-y-6 text-capy-text text-lg leading-relaxed reveal opacity-0">
+      <div class="space-y-6 text-capy-text text-lg leading-relaxed text-justify reveal opacity-0">
         <p>
-          Antes mesmo da empresa existir, já trabalhávamos com virtualização, redes, armazenamento, monitoramento e segurança da informação. Ao longo dessa jornada vimos um cenário se repetir: empresas crescendo, mas convivendo com uma tecnologia cada vez mais fragmentada, cara de manter e difícil de administrar.
+          Muito antes da empresa existir, seus fundadores já trabalhavam com virtualização, redes, armazenamento, monitoramento e segurança da informação. Ao longo dessa trajetória, perceberam que, à medida que as empresas cresciam, seus ambientes de TI se tornavam cada vez mais complexos, caros de manter e difíceis de administrar.
         </p>
         <p>
-          Em vez de aceitar que esse era o único caminho, decidimos construir uma alternativa.
+          Para muitas organizações, manter uma infraestrutura confiável exige profissionais altamente especializados, investimentos constantes e tempo dedicado à administração do ambiente. Na prática, isso faz com que diversas empresas adiem melhorias, convivam com riscos de segurança, falhas operacionais e até perda de dados.
+        </p>
+        <p>
+          Foi então que percebemos que a infraestrutura não precisava ser responsabilidade de cada empresa individualmente. Poderia existir uma equipe especializada cuidando desse ambiente para diversas empresas, reduzindo custos, aumentando a segurança e permitindo que cada cliente focasse no próprio negócio.
         </p>
         <p>
           Assim nasceu a Capycloud.
         </p>
         <p>
-          Criamos um ecossistema que reúne armazenamento, virtualização, backup, monitoramento, identidade e segurança em uma única plataforma, construída sobre tecnologias Open Source e administrada por quem realmente entende do assunto.
+          Criamos um ecossistema que reúne armazenamento, virtualização, backup, monitoramento, gerenciamento de identidade e segurança em uma única plataforma, construída sobre tecnologias Open Source e administrada por profissionais que conhecem a operação na prática.
         </p>
         <p>
           Nosso objetivo nunca foi vender servidores ou licenças.
         </p>
         <p>
-          Queremos construir uma infraestrutura confiável para que nossos clientes possam trabalhar com tranquilidade, sabendo que existe uma equipe cuidando da tecnologia nos bastidores.
+          Nossa missão é oferecer uma infraestrutura sólida, segura e previsível para que nossos clientes possam concentrar seus esforços no crescimento do negócio, enquanto cuidamos da tecnologia que sustenta essa operação.
         </p>
         <p>
-          Não somos um grande call center.
+          Também acreditamos que atendimento faz diferença.
         </p>
         <p>
-          Quando você fala com a Capycloud, conversa diretamente com quem projeta, implanta e mantém a infraestrutura. Gostamos de entender cada ambiente, porque acreditamos que nenhuma empresa cresce da mesma forma — e a tecnologia também não deveria.
+          Acreditamos que tecnologia deve aproximar pessoas, não afastá-las. Utilizamos automação para ganhar eficiência, mas, quando um cliente precisa de ajuda, ele fala com pessoas que conhecem seu ambiente e são capazes de resolver o problema.
         </p>
         <p>
-          Antes de existir como empresa, já resolvíamos esses desafios todos os dias. Apenas decidimos fazer disso o nosso negócio.
+          Aqui você não passa por vários níveis de atendimento até encontrar alguém que conhece a sua infraestrutura. Quando fala com a Capycloud, conversa diretamente com quem projeta, implanta e administra a solução. Entendemos que cada empresa possui desafios próprios e, por isso, acreditamos que a tecnologia também deve ser planejada de forma personalizada.
+        </p>
+        <p>
+          Antes de existir como empresa, já resolvíamos esses desafios diariamente. Apenas decidimos transformar essa experiência no nosso negócio.
+        </p>
+        <p>
+          Enquanto nossos clientes constroem seus negócios, nós garantimos que a tecnologia esteja pronta para sustentá-los. Afinal, infraestrutura só deveria chamar atenção quando deixa de funcionar — e nossa missão é justamente impedir que isso aconteça.
         </p>
       </div>
 
@@ -210,157 +229,86 @@
         </p>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             DOCKER — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/docker.png" alt="Docker" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-1">
-          <div class="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center mx-auto mb-3 border border-sky-200">
-            <!-- 🔧 INSERIR IMAGEM DO DOCKER AQUI → Substitua o src abaixo -->
-            <img src="img/stack/docker.png" alt="Docker" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-sky-600 text-lg font-bold" style="display:none">D</span>
+        <!-- DOCKER — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-1">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/docker.png" alt="Docker" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-sky-600 text-2xl font-bold items-center justify-center" style="display:none">D</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Docker</h3>
-          <p class="text-capy-muted text-xs mt-1">Containers</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Docker</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             GRAFANA — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/grafana.png" alt="Grafana" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-2">
-          <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-3 border border-orange-200">
-            <!-- 🔧 INSERIR IMAGEM DO GRAFANA AQUI → Substitua o src abaixo -->
-            <img src="img/stack/grafana.png" alt="Grafana" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-orange-500 text-lg font-bold" style="display:none">G</span>
+        <!-- GRAFANA — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-2">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/grafana.png" alt="Grafana" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-orange-500 text-2xl font-bold items-center justify-center" style="display:none">G</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Grafana</h3>
-          <p class="text-capy-muted text-xs mt-1">Dashboards</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Grafana</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             N8N — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/n8n.png" alt="N8N" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-3">
-          <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mx-auto mb-3 border border-rose-200">
-            <!-- 🔧 INSERIR IMAGEM DO N8N AQUI → Substitua o src abaixo -->
-            <img src="img/stack/n8n.png" alt="N8N" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-rose-500 text-lg font-bold" style="display:none">N</span>
+        <!-- N8N — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-3">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/n8n-color.png" alt="N8N" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-rose-500 text-2xl font-bold items-center justify-center" style="display:none">N</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">N8N</h3>
-          <p class="text-capy-muted text-xs mt-1">Automação</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">N8N</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             NGINX — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/nginx.png" alt="Nginx" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-4">
-          <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-3 border border-green-200">
-            <!-- 🔧 INSERIR IMAGEM DO NGINX AQUI → Substitua o src abaixo -->
-            <img src="img/stack/nginx.png" alt="Nginx" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-green-600 text-lg font-bold" style="display:none">N</span>
+        <!-- NGINX — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-4">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/nginx-3628948-3030173-1.png" alt="Nginx" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-green-600 text-2xl font-bold items-center justify-center" style="display:none">N</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Nginx</h3>
-          <p class="text-capy-muted text-xs mt-1">Proxy / Web</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Nginx</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             OPNSENSE — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/opnsense.png" alt="OPNsense" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-5">
-          <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center mx-auto mb-3 border border-teal-200">
-            <!-- 🔧 INSERIR IMAGEM DO OPNSENSE AQUI → Substitua o src abaixo -->
-            <img src="img/stack/opnsense.png" alt="OPNsense" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-teal-600 text-lg font-bold" style="display:none">O</span>
+        <!-- OPNSENSE — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-5">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/opnsense.png" alt="OPNsense" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-teal-600 text-2xl font-bold items-center justify-center" style="display:none">O</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">OPNsense</h3>
-          <p class="text-capy-muted text-xs mt-1">Perímetro</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">OPNsense</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             PROXMOX — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/proxmox.png" alt="Proxmox" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-6">
-          <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mx-auto mb-3 border border-indigo-200">
-            <!-- 🔧 INSERIR IMAGEM DO PROXMOX AQUI → Substitua o src abaixo -->
-            <img src="img/stack/proxmox.png" alt="Proxmox" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-indigo-600 text-lg font-bold" style="display:none">P</span>
+        <!-- PROXMOX — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-6">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/proxmox.png" alt="Proxmox" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-indigo-600 text-2xl font-bold items-center justify-center" style="display:none">P</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Proxmox</h3>
-          <p class="text-capy-muted text-xs mt-1">Virtualização</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Proxmox</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             TRUENAS — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/truenas.png" alt="TrueNAS" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-7">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-3 border border-blue-200">
-            <!-- 🔧 INSERIR IMAGEM DO TRUENAS AQUI → Substitua o src abaixo -->
-            <img src="img/stack/truenas.png" alt="TrueNAS" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-blue-600 text-lg font-bold" style="display:none">T</span>
+        <!-- TRUENAS — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-7">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/truenas.png" alt="TrueNAS" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-blue-600 text-2xl font-bold items-center justify-center" style="display:none">T</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">TrueNAS</h3>
-          <p class="text-capy-muted text-xs mt-1">Storage</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">TrueNAS</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             ZENTYAL — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/zentyal.png" alt="Zentyal" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-8">
-          <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mx-auto mb-3 border border-violet-200">
-            <!-- 🔧 INSERIR IMAGEM DO ZENTYAL AQUI → Substitua o src abaixo -->
-            <img src="img/stack/zentyal.png" alt="Zentyal" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-violet-600 text-lg font-bold" style="display:none">Z</span>
+        <!-- ZENTYAL — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-8">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/zentyal.png" alt="Zentyal" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-violet-600 text-2xl font-bold items-center justify-center" style="display:none">Z</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Zentyal</h3>
-          <p class="text-capy-muted text-xs mt-1">Identidade</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Zentyal</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             WAZUH — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/wazuh.png" alt="Wazuh" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-9">
-          <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-3 border border-amber-200">
-            <!-- 🔧 INSERIR IMAGEM DO WAZUH AQUI → Substitua o src abaixo -->
-            <img src="img/stack/wazuh.png" alt="Wazuh" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-amber-600 text-lg font-bold" style="display:none">W</span>
+        <!-- WAZUH — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-9">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/wazuh.png" alt="Wazuh" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-amber-600 text-2xl font-bold items-center justify-center" style="display:none">W</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Wazuh</h3>
-          <p class="text-capy-muted text-xs mt-1">Segurança</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Wazuh</h3>
         </div>
-
-        <!-- ═══════════════════════════════════════════════════════════════
-             ZABBIX — Stack Card
-             Para trocar o ícone por imagem, substitua o <img> abaixo:
-             <img src="img/stack/zabbix.png" alt="Zabbix" class="w-7 h-7 object-contain">
-             ═══════════════════════════════════════════════════════════════ -->
-        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-5 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-10">
-          <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center mx-auto mb-3 border border-red-200">
-            <!-- 🔧 INSERIR IMAGEM DO ZABBIX AQUI → Substitua o src abaixo -->
-            <img src="img/stack/zabbix.png" alt="Zabbix" class="w-7 h-7 object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="text-red-600 text-lg font-bold" style="display:none">Z</span>
+        <!-- ZABBIX — Stack Card -->
+        <div class="bg-white/70 border border-capy-borderLight rounded-xl p-3 text-center hover:border-capy-copper/30 transition-all reveal opacity-0 fx-hover-lift fx-border-glow fx-stagger-10">
+          <div class="w-full aspect-square flex items-center justify-center mb-1">
+            <img src="img/zabbix_logo_icon_167937.webp" alt="Zabbix" class="w-full h-full object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="text-red-600 text-2xl font-bold items-center justify-center" style="display:none">Z</span>
           </div>
-          <h3 class="text-sm font-bold text-capy-dark">Zabbix</h3>
-          <p class="text-capy-muted text-xs mt-1">Monitoramento</p>
+          <h3 class="text-xs font-bold text-capy-dark leading-tight">Zabbix</h3>
         </div>
-
       </div>
     </div>
   </section>

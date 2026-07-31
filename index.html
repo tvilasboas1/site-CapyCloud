@@ -39,6 +39,13 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <base target="_self">
+
+  <!-- Favicon — Capivara sorrindo com zoom -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/capysorri.png">
+  <link rel="icon" type="image/x-icon" href="img/capysorri.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/capysorri.png">
 </head>
 <!-- EFEITO 5: GRAIN TEXTURE — adicionado no body -->
 <body class="bg-white text-capy-dark font-sans antialiased fx-grain">
@@ -48,7 +55,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <!-- 🔧 TROCAR LOGO — Substitua img/logo.png pela imagem própria -->
+          <img src="img/logo.png" alt="Capycloud" class="h-8 w-8 mr-1 object-contain" onerror="this.style.display='none'"><span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
           <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
@@ -57,6 +65,7 @@
           <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Servicos</a>
           <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
           <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+          <a href="area-do-cliente.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Área do Cliente</a>
         </nav>
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2">
@@ -74,6 +83,7 @@
         <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Servicos</a>
         <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
         <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+        <a href="area-do-cliente.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Área do Cliente</a>
       </div>
     </div>
   </header>
@@ -103,7 +113,7 @@
             Voce foca no negocio, <span class="text-capy-copper">nos cuidamos do resto</span>.
           </h2>
 
-          <p class="text-lg text-capy-text max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in-up delay-500">
+          <p class="text-lg text-capy-text max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in-up delay-500 text-justify">
             Cloud privada com backup, VPN, monitoramento e seguranca — tudo gerenciado por especialistas, com mensalidade previsivel.
           </p>
 
@@ -126,7 +136,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           O ecossistema <span class="text-capy-gold">Capycloud</span>
         </h2>
-        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+        <p class="text-capy-text text-lg max-w-2xl mx-auto text-justify">
           Oito solucoes integradas que trabalham juntos. Infraestrutura propria, gerenciada por especialistas, construida sobre Software Livre.
         </p>
       </div>
@@ -158,7 +168,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyHost</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-copper/10 border border-capy-copper/20 rounded-full text-capy-copper font-semibold">Infraestrutura</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Sua aplicacao roda em ambiente dedicado. Sem compartilhar recursos, sem vizinhos que derrubam a performance — Proxmox e Docker garantem estabilidade nos bastidores.
                 </p>
               </div>
@@ -177,7 +187,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyDrive</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-brown/10 border border-capy-brown/20 rounded-full text-capy-brown font-semibold">Armazenamento</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Seus arquivos em um unico lugar, organizados e acessíveis de qualquer computador. Se um computador morrer, seus documentos continuam protegidos.
                 </p>
               </div>
@@ -196,7 +206,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyNet</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-gold/10 border border-capy-gold/20 rounded-full text-capy-goldHover font-semibold">Conectividade</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Sua equipe trabalha de casa como se estivesse dentro do escritorio. VPN criptografada e firewall inteligente tornam sua rede invisível na internet.
                 </p>
               </div>
@@ -215,7 +225,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyAD</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-purple/10 border border-capy-purple/20 rounded-full text-capy-purple font-semibold">Identidade</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Cada funcionario acessa apenas o que realmente precisa. Logins unificados, permissoes organizadas e conformidade com a LGPD — tudo gerenciado por Zentyal.
                 </p>
               </div>
@@ -234,7 +244,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyBackup</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-green/10 border border-capy-green/20 rounded-full text-capy-green font-semibold">Protecao</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Se um computador morrer hoje, seus arquivos continuam protegidos. Backup automatizado com politica 3-2-1, versionado e replicado off-site.
                 </p>
               </div>
@@ -253,7 +263,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyMonitor</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-coral/10 border border-capy-coral/20 rounded-full text-capy-coral font-semibold">Observabilidade</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Sabemos do problema antes que voce perceba. Monitoramento 24/7 com dashboards em tempo real e alertas preventivos — Zabbix e Grafana nos bastidores.
                 </p>
               </div>
@@ -272,7 +282,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapySec</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-sec/10 border border-capy-sec/20 rounded-full text-capy-sec font-semibold">Seguranca da Informacao</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Deteccao de ameaças, SIEM, XDR e conformidade LGPD com Wazuh. Sua infraestrutura monitorada contra intrusões, vulnerabilidades e ataques — resposta automatica antes que o problema se espalhe.
                 </p>
               </div>
@@ -291,7 +301,7 @@
                   <h3 class="text-lg font-bold text-capy-dark">CapyMaint</h3>
                   <span class="text-xs px-2 py-0.5 bg-capy-maint/10 border border-capy-maint/20 rounded-full text-capy-maint font-semibold">Manutencao Corporativa</span>
                 </div>
-                <p class="text-capy-text text-sm leading-relaxed">
+                <p class="text-capy-text text-sm leading-relaxed text-justify">
                   Manutencao preventiva e corretiva automatizada por N8N. Fluxos inteligentes que detectam, notificam e resolvem problemas antes que sua operacao pare — Zabbix monitora, N8N executa, voce dorme tranquilo.
                 </p>
               </div>
@@ -308,14 +318,11 @@
             </a>
           </div>
 
-
         </div>
 
       </div>
     </div>
   </section>
-
-
 
   <!-- POR QUE ESCOLHER — Linguagem humana -->
   <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -324,7 +331,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           Porque escolher a <span class="text-capy-gold">Capycloud</span> ?
         </h2>
-        <p class="text-capy-text text-lg max-w-3xl mx-auto leading-relaxed">
+        <p class="text-capy-text text-lg max-w-3xl mx-auto leading-relaxed text-justify">
           Resultados reais para empresas que querem operar com tranquilidade, seguranca e previsibilidade — sem depender de plataformas que mudam as regras da noite para o dia.
         </p>
       </div>
@@ -338,7 +345,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Pare de investir em servidores que ficam obsoletos</h3>
-            <p class="text-capy-text text-xs">Mensalidade fixa, sem surpresas de hardware, energia ou manutencao emergencial. Voce paga uma vez por mes e esquece o resto.</p>
+            <p class="text-capy-text text-xs text-justify">Mensalidade fixa, sem surpresas de hardware, energia ou manutencao emergencial. Voce paga uma vez por mes e esquece o resto.</p>
           </div>
         </div>
         <!-- 2 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -348,7 +355,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Seus dados protegidos todos os dias</h3>
-            <p class="text-capy-text text-xs">Backup automatizado, controle de acesso e monitoramento continuo. Ninguem acessa seus arquivos sem sua autorizacao.</p>
+            <p class="text-capy-text text-xs text-justify">Backup automatizado, controle de acesso e monitoramento continuo. Ninguem acessa seus arquivos sem sua autorizacao.</p>
           </div>
         </div>
         <!-- 3 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -358,7 +365,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Acesse tudo de casa, com seguranca</h3>
-            <p class="text-capy-text text-xs">VPN criptografada para acessar arquivos e sistemas de qualquer lugar, com a mesma seguranca de estar no escritorio.</p>
+            <p class="text-capy-text text-xs text-justify">VPN criptografada para acessar arquivos e sistemas de qualquer lugar, com a mesma seguranca de estar no escritorio.</p>
           </div>
         </div>
         <!-- 4 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -368,7 +375,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Controle quem acessa o que, sem complicacao</h3>
-            <p class="text-capy-text text-xs">Logins unificados, permissoes organizadas por grupos, reset de senhas em minutos. Conformidade LGPD incluida.</p>
+            <p class="text-capy-text text-xs text-justify">Logins unificados, permissoes organizadas por grupos, reset de senhas em minutos. Conformidade LGPD incluida.</p>
           </div>
         </div>
         <!-- 5 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -378,7 +385,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Seus sistemas nao param</h3>
-            <p class="text-capy-text text-xs">Servicos monitorados e redundantes. Reduzimos o risco de downtime para que sua operacao continue sem interrupcao.</p>
+            <p class="text-capy-text text-xs text-justify">Servicos monitorados e redundantes. Reduzimos o risco de downtime para que sua operacao continue sem interrupcao.</p>
           </div>
         </div>
         <!-- 6 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -388,7 +395,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Sua infraestrutura cresce junto com sua empresa</h3>
-            <p class="text-capy-text text-xs">Mais usuarios, mais storage ou novos servicos — tudo sem reinvestir em hardware ou contratar mais pessoas internas.</p>
+            <p class="text-capy-text text-xs text-justify">Mais usuarios, mais storage ou novos servicos — tudo sem reinvestir em hardware ou contratar mais pessoas internas.</p>
           </div>
         </div>
         <!-- 7 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -398,7 +405,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Voce nunca fica sozinho quando algo acontece</h3>
-            <p class="text-capy-text text-xs">Equipe tecnica por tras do seu ambiente, com SLA garantido. Sem necessidade de contratar ou manter profissionais internos.</p>
+            <p class="text-capy-text text-xs text-justify">Equipe tecnica por tras do seu ambiente, com SLA garantido. Sem necessidade de contratar ou manter profissionais internos.</p>
           </div>
         </div>
         <!-- 8 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -408,7 +415,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Mensalidade fixa, sem surpresas</h3>
-            <p class="text-capy-text text-xs">Nada de banda, egresso ou manutencao emergencial no final do mes. Voce sabe exatamente quanto vai pagar — sempre.</p>
+            <p class="text-capy-text text-xs text-justify">Nada de banda, egresso ou manutencao emergencial no final do mes. Voce sabe exatamente quanto vai pagar — sempre.</p>
           </div>
         </div>
         <!-- 9 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -418,7 +425,7 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Backup que funciona, sem voce precisar lembrar</h3>
-            <p class="text-capy-text text-xs">Politica 3-2-1 automatizada, versionamento e replicacao off-site. Seus dados estao protegidos mesmo que voce nunca toque em configuracao.</p>
+            <p class="text-capy-text text-xs text-justify">Politica 3-2-1 automatizada, versionamento e replicacao off-site. Seus dados estao protegidos mesmo que voce nunca toque em configuracao.</p>
           </div>
         </div>
         <!-- 10 — EFEITOS 2+4: HOVER LIFT + BORDER GLOW -->
@@ -428,17 +435,13 @@
           </div>
           <div>
             <h3 class="font-bold text-capy-dark mb-1 text-sm">Foque no que importa. Nos cuidamos do resto.</h3>
-            <p class="text-capy-text text-xs">Sem preocupacoes com TI operacional. Voce foca no seu negocio — a Capycloud cuida de toda a infraestrutura nos bastidores.</p>
+            <p class="text-capy-text text-xs text-justify">Sem preocupacoes com TI operacional. Voce foca no seu negocio — a Capycloud cuida de toda a infraestrutura nos bastidores.</p>
           </div>
         </div>
       </div>
 
     </div>
   </section>
-
-
-
-
 
   <!-- CTA FINAL — humano, conversa -->
   <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -451,7 +454,7 @@
           <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
             Se voce procura uma equipe para caminhar ao lado da sua empresa, vamos conversar.
           </h2>
-          <p class="text-capy-text text-lg mb-8 max-w-xl mx-auto">
+          <p class="text-capy-text text-lg mb-8 max-w-xl mx-auto text-justify">
             Em uma reuniao rapida entendemos sua operacao e mostramos como centralizar arquivos, usuarios, backups e sistemas sem depender das grandes plataformas.
           </p>
           <!-- EFEITO 6: ACCENT PULSE no botão CTA -->

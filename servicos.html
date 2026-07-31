@@ -39,6 +39,13 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <base target="_self">
+
+  <!-- Favicon — Capivara sorrindo com zoom -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/capysorri.png">
+  <link rel="icon" type="image/x-icon" href="img/capysorri.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/capysorri.png">
 </head>
 <body class="bg-white text-capy-dark font-sans antialiased fx-grain">
 
@@ -47,7 +54,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <!-- 🔧 TROCAR LOGO — Substitua img/logo.png pela imagem própria -->
+          <img src="img/logo.png" alt="Capycloud" class="h-8 w-8 mr-1 object-contain" onerror="this.style.display='none'"><span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
           <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
@@ -56,6 +64,7 @@
           <a href="servicos.html" class="nav-link text-capy-copper transition-colors font-medium">Servicos</a>
           <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
           <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+          <a href="area-do-cliente.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Área do Cliente</a>
         </nav>
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2">
@@ -73,6 +82,7 @@
         <a href="servicos.html" class="block text-capy-copper py-2 font-medium">Servicos</a>
         <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
         <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+        <a href="area-do-cliente.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Área do Cliente</a>
       </div>
     </div>
   </header>
@@ -102,7 +112,7 @@
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-capy-dark mb-6">
             O que sua empresa <span class="text-capy-copper">recebe</span>
           </h1>
-          <p class="text-capy-text text-lg leading-relaxed mb-6">
+          <p class="text-capy-text text-lg leading-relaxed mb-6 text-justify">
             Serviços completos de infraestrutura e suporte de TI, sem precisar de equipe interna. Você foca no negócio, nós cuidamos da tecnologia.
           </p>
         </div>
@@ -121,7 +131,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           Tudo que sua empresa <span class="text-capy-gold">recebe</span>
         </h2>
-        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+        <p class="text-capy-text text-lg max-w-2xl mx-auto text-justify">
           Do armazenamento ao monitoramento, cada serviço trabalha junto com os outros. Sem integrações manuais, sem surpresas.
         </p>
       </div>
@@ -136,7 +146,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Servidor de Arquivos Centralizado</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Todos os documentos da empresa em um lugar seguro, acessível de qualquer dispositivo. Organização por departamentos, permissões granulares e snapshots automáticos.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Todos os documentos da empresa em um lugar seguro, acessível de qualquer dispositivo. Organização por departamentos, permissões granulares e snapshots automáticos.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">TrueNAS</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">ZFS</span>
@@ -151,7 +161,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Acesso Remoto via VPN</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Conecte-se ao ambiente corporativo de qualquer lugar com segurança. VPN criptografada por WireGuard, sem expor serviços na internet.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Conecte-se ao ambiente corporativo de qualquer lugar com segurança. VPN criptografada por WireGuard, sem expor serviços na internet.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">OPNsense</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">WireGuard</span>
@@ -166,7 +176,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Gestão de Usuários e Permissões</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Criação, exclusão, reset de senhas e controle de quem acessa o quê. Políticas de acesso por grupo, conformidade LGPD.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Criação, exclusão, reset de senhas e controle de quem acessa o quê. Políticas de acesso por grupo, conformidade LGPD.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zentyal</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">SSO</span>
@@ -182,7 +192,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Backup Automatizado</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Política 3-2-1: backup diário, versionado e replicado off-site. Recuperação em minutos, sem intervenção manual.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Política 3-2-1: backup diário, versionado e replicado off-site. Recuperação em minutos, sem intervenção manual.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Borg</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Rsync</span>
@@ -197,7 +207,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Monitoramento 24/7</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Dashboards em tempo real com alertas preventivos. Detectamos problemas antes que impactem sua operação.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Dashboards em tempo real com alertas preventivos. Detectamos problemas antes que impactem sua operação.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zabbix</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Grafana</span>
@@ -212,7 +222,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Hospedagem de Sistemas</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">APIs, SaaS, sites e aplicações em VMs ou containers dedicados. Deploy gerenciado por especialistas.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">APIs, SaaS, sites e aplicações em VMs ou containers dedicados. Deploy gerenciado por especialistas.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Proxmox</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Docker</span>
@@ -227,7 +237,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Firewall e Segurança de Perímetro</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Firewall de próxima geração com IDS/IPS, filtragem de GeoIP e segmentação por VLANs. Sua rede invisível na internet.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Firewall de próxima geração com IDS/IPS, filtragem de GeoIP e segmentação por VLANs. Sua rede invisível na internet.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">OPNsense</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Suricata</span>
@@ -242,7 +252,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Suporte Técnico com SLA</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Atendimento estruturado com tempo de resposta garantido. Chamados registrados, acompanhados e resolvidos por especialistas.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Atendimento estruturado com tempo de resposta garantido. Chamados registrados, acompanhados e resolvidos por especialistas.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">SLA definido</span>
           </div>
@@ -256,7 +266,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Auditoria e Relatórios</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Logs de acesso, relatórios de segurança e auditoria de conformidade. Visibilidade total sobre o que acontece no seu ambiente.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Logs de acesso, relatórios de segurança e auditoria de conformidade. Visibilidade total sobre o que acontece no seu ambiente.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">LGPD</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zentyal</span>
@@ -271,7 +281,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Segurança da Informação</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">SIEM avançado, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes. Camada de segurança da CapyCloud — proteção enterprise contra ameaças digitais.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">SIEM avançado, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes. Camada de segurança da CapyCloud — proteção enterprise contra ameaças digitais.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Wazuh</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">SIEM</span>
@@ -287,7 +297,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Manutenção Corporativa</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Manutenção preventiva, corretiva e preditiva automatizada — patches, atualizações, otimização e fluxos customizados. Zabbix monitora, N8N executa, você dorme tranquilo.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Manutenção preventiva, corretiva e preditiva automatizada — patches, atualizações, otimização e fluxos customizados. Zabbix monitora, N8N executa, você dorme tranquilo.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">N8N</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zabbix</span>
@@ -303,7 +313,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Rede Corporativa Compartilhada</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Infraestrutura de rede completa compartilhada com segurança — DNS, DHCP, domínio, VPN, VLANs e firewall. Sua empresa conectada e protegida sem investir em hardware próprio.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Infraestrutura de rede completa compartilhada com segurança — DNS, DHCP, domínio, VPN, VLANs e firewall. Sua empresa conectada e protegida sem investir em hardware próprio.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">OPNsense</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zentyal</span>
@@ -325,7 +335,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           Soluções em <span class="text-capy-gold">Camadas</span>
         </h2>
-        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+        <p class="text-capy-text text-lg max-w-2xl mx-auto text-justify">
           Cada camada protege e fortalece a anterior. Da infraestrutura básica à segurança avançada, cada empresa escolhe quantas camadas precisa.
         </p>
       </div>
@@ -338,7 +348,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-3">Camada Base</h3>
-          <p class="text-capy-text text-sm leading-relaxed mb-4">A fundação de tudo: armazenamento, Active Directory, VPN, rede, firewall e hospedagem. Sem essa base, nada funciona — com ela, tudo se conecta.</p>
+          <p class="text-capy-text text-sm leading-relaxed mb-4 text-justify">A fundação de tudo: armazenamento, Active Directory, VPN, rede, firewall e hospedagem. Sem essa base, nada funciona — com ela, tudo se conecta.</p>
           <div class="flex flex-wrap gap-1 justify-center">
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">TrueNAS</span>
             <span class="text-xs px-2 py-1 bg-capy-copper/10 border border-capy-copper/20 rounded text-capy-copper font-semibold">Zentyal</span>
@@ -354,7 +364,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-3">Camada 1 — Monitoramento</h3>
-          <p class="text-capy-text text-sm leading-relaxed mb-4">Visão total da sua infraestrutura com dashboards em tempo real, alertas inteligentes e análise preditiva de performance.</p>
+          <p class="text-capy-text text-sm leading-relaxed mb-4 text-justify">Visão total da sua infraestrutura com dashboards em tempo real, alertas inteligentes e análise preditiva de performance.</p>
           <div class="inline-flex items-center gap-2 bg-capy-gold/10 border border-capy-gold/20 text-capy-gold text-xs font-bold px-4 py-2 rounded-full">
             Zabbix + Grafana
           </div>
@@ -367,7 +377,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-3">Camada 2 — Automação</h3>
-          <p class="text-capy-text text-sm leading-relaxed mb-4">Automatize rotinas, patches, manutenções e fluxos de trabalho — reduzindo erros humanos e garantindo consistência operacional.</p>
+          <p class="text-capy-text text-sm leading-relaxed mb-4 text-justify">Automatize rotinas, patches, manutenções e fluxos de trabalho — reduzindo erros humanos e garantindo consistência operacional.</p>
           <div class="inline-flex items-center gap-2 bg-capy-gold/10 border border-capy-gold/20 text-capy-gold text-xs font-bold px-4 py-2 rounded-full">
             N8N
           </div>
@@ -380,14 +390,14 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-3">Camada 3 — Segurança</h3>
-          <p class="text-capy-text text-sm leading-relaxed mb-4">SIEM avançado, XDR, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes — proteção enterprise e conformidade LGPD.</p>
+          <p class="text-capy-text text-sm leading-relaxed mb-4 text-justify">SIEM avançado, XDR, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes — proteção enterprise e conformidade LGPD.</p>
           <div class="inline-flex items-center gap-2 bg-capy-gold/10 border border-capy-gold/20 text-capy-gold text-xs font-bold px-4 py-2 rounded-full">
             Wazuh
           </div>
         </div>
       </div>
       <div class="mt-12 text-center reveal opacity-0 delay-500">
-        <p class="text-capy-text italic text-base max-w-3xl mx-auto">
+        <p class="text-capy-text italic text-base max-w-3xl mx-auto text-justify">
           A Camada Base é a fundação de tudo. Depois, cada empresa escolhe quantas camadas adicionais precisa — do básico ao enterprise.
         </p>
       </div>
@@ -404,7 +414,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           A Stack <span class="text-capy-copper">por dentro</span>
         </h2>
-        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+        <p class="text-capy-text text-lg max-w-2xl mx-auto text-justify">
           Infraestrutura 100% Open Source. Sem taxas de licenciamento ocultas, sem vendor lock-in.
         </p>
       </div>
@@ -423,7 +433,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyDrive</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Storage corporativo privado com TrueNAS</p>
-            <p class="text-capy-text leading-relaxed mb-4">ZFS com snapshots incrementais, deduplicação, compressão e replicação off-site. Seus dados nunca tocam nuvem pública — fica tudo no seu ambiente dedicado.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">ZFS com snapshots incrementais, deduplicação, compressão e replicação off-site. Seus dados nunca tocam nuvem pública — fica tudo no seu ambiente dedicado.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Criptografia AES-256 em repouso e trânsito</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Snapshots versionados a cada 15 minutos</li>
@@ -444,7 +454,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyAD</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Active Directory e SSO com Zentyal</p>
-            <p class="text-capy-text leading-relaxed mb-4">Domínio corporativo, DNS, DHCP e GPOs. Controle quem acessa o quê, quando e de onde. Conformidade com LGPD e auditoria completa de logs.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Domínio corporativo, DNS, DHCP e GPOs. Controle quem acessa o quê, quando e de onde. Conformidade com LGPD e auditoria completa de logs.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Domínio corporativo com GPOs por OU</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>SSO integrado a aplicações internas</li>
@@ -465,7 +475,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyHost</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Hospedagem de SaaS, APIs e sites com Proxmox, Docker e Nginx</p>
-            <p class="text-capy-text leading-relaxed mb-4">Virtualização bare-metal com containers gerenciados, balanceamento de carga e SSL automatizado. Sua aplicação roda em ambiente dedicado e monitorado.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Virtualização bare-metal com containers gerenciados, balanceamento de carga e SSL automatizado. Sua aplicação roda em ambiente dedicado e monitorado.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>VMs dedicadas ou containers gerenciados</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Alta disponibilidade com cluster Ceph</li>
@@ -486,7 +496,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyNet</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Firewall, VPN e VLANs com OPNsense</p>
-            <p class="text-capy-text leading-relaxed mb-4">Sua primeira linha de defesa. Firewall de nova geração com IDS/IPS, VPN WireGuard de alta performance e segmentação de rede por VLANs. Sua infraestrutura fica invisível na internet.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Sua primeira linha de defesa. Firewall de nova geração com IDS/IPS, VPN WireGuard de alta performance e segmentação de rede por VLANs. Sua infraestrutura fica invisível na internet.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Firewall stateful com Suricata IDS/IPS</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>VPN site-to-site e client-to-site (WireGuard)</li>
@@ -507,7 +517,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyBackup</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Backup 3-2-1 automatizado com Borg e Rsync</p>
-            <p class="text-capy-text leading-relaxed mb-4">Política 3-2-1: 3 cópias, 2 mídias, 1 off-site. Deduplicação e compressão automática, versionamento com retenção configurável e replicação off-site para disaster recovery.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Política 3-2-1: 3 cópias, 2 mídias, 1 off-site. Deduplicação e compressão automática, versionamento com retenção configurável e replicação off-site para disaster recovery.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Deduplicação e compressão automática</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Versionamento com retenção configurável</li>
@@ -528,7 +538,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyMonitor</h3>
             <p class="text-capy-copper text-sm font-semibold mb-3">Monitoramento com Zabbix e Grafana</p>
-            <p class="text-capy-text leading-relaxed mb-4">Monitoramento proativo 24/7 de toda sua stack: rede, servidores, aplicações e dispositivos. Dashboards em tempo real e alertas preventivos.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Monitoramento proativo 24/7 de toda sua stack: rede, servidores, aplicações e dispositivos. Dashboards em tempo real e alertas preventivos.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Dashboards customizados em tempo real</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Alertas por e-mail, SMS e webhook</li>
@@ -549,7 +559,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapySec</h3>
             <p class="text-capy-sec text-sm font-semibold mb-3">Segurança da Informação com Wazuh</p>
-            <p class="text-capy-text leading-relaxed mb-4">SIEM avançado, XDR, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes. Cada camada protegida — resposta automática antes que o problema se espalhe.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">SIEM avançado, XDR, detecção de intrusão, análise de vulnerabilidades e resposta a incidentes. Cada camada protegida — resposta automática antes que o problema se espalhe.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-sec mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>SIEM com correlação de eventos em tempo real</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-sec mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>XDR com detecção e resposta automatizada</li>
@@ -570,7 +580,7 @@
           <div class="w-full md:w-2/3">
             <h3 class="text-2xl font-bold text-capy-dark mb-1">CapyMaint</h3>
             <p class="text-capy-maint text-sm font-semibold mb-3">Manutenção Corporativa Automatizada com N8N</p>
-            <p class="text-capy-text leading-relaxed mb-4">Manutenção preventiva e corretiva automatizada. Zabbix monitora, N8N responde automaticamente — notificação, remediação ou escalamento sem intervenção humana. Fluxos customizados para cada cliente.</p>
+            <p class="text-capy-text leading-relaxed mb-4 text-justify">Manutenção preventiva e corretiva automatizada. Zabbix monitora, N8N responde automaticamente — notificação, remediação ou escalamento sem intervenção humana. Fluxos customizados para cada cliente.</p>
             <ul class="text-capy-text font-medium space-y-2">
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-maint mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Patches e atualizações automatizadas</li>
               <li class="flex items-center"><svg class="h-5 w-5 text-capy-maint mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>Fluxos de remediação automática via N8N</li>
@@ -680,7 +690,7 @@
         <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
           Serviços <span class="text-capy-gold">Extras</span>
         </h2>
-        <p class="text-capy-text text-lg max-w-2xl mx-auto">
+        <p class="text-capy-text text-lg max-w-2xl mx-auto text-justify">
           Além do ecossistema completo, oferecemos serviços adicionais para quem precisa de algo específico — sem compromisso com o pacote completo.
         </p>
       </div>
@@ -695,7 +705,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Hospedagem de Sites</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Sites institucionais, landing pages e aplicações web em servidores dedicados com SSL, CDN e monitoramento. Performance e disponibilidade sem compartilhar recursos.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Sites institucionais, landing pages e aplicações web em servidores dedicados com SSL, CDN e monitoramento. Performance e disponibilidade sem compartilhar recursos.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">Nginx</span>
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">Docker</span>
@@ -710,7 +720,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Manutenção de Redes</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Configuração, diagnóstico e manutenção de infraestrutura de rede local e remota. VLANs, firewall, VPN, switches e roteamento — sem contrato fixo.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Configuração, diagnóstico e manutenção de infraestrutura de rede local e remota. VLANs, firewall, VPN, switches e roteamento — sem contrato fixo.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">OPNsense</span>
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">VLANs</span>
@@ -725,7 +735,7 @@
             </svg>
           </div>
           <h3 class="text-xl font-bold text-capy-dark mb-2">Armazenamento em Nuvem</h3>
-          <p class="text-capy-text leading-relaxed text-sm mb-4">Espaço sob demanda para backup, arquivo ou compartilhamento — sem precisar do ecossistema completo. Storage dedicado com criptografia e replicação.</p>
+          <p class="text-capy-text leading-relaxed text-sm mb-4 text-justify">Espaço sob demanda para backup, arquivo ou compartilhamento — sem precisar do ecossistema completo. Storage dedicado com criptografia e replicação.</p>
           <div class="flex flex-wrap gap-2">
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">TrueNAS</span>
             <span class="text-xs px-2 py-1 bg-capy-gold/10 border border-capy-gold/20 rounded text-capy-gold font-semibold">Sob demanda</span>
@@ -747,7 +757,7 @@
           <h2 class="text-3xl sm:text-4xl font-extrabold text-capy-dark mb-4">
             Pronto para focar no <span class="text-capy-copper">negócio</span>?
           </h2>
-          <p class="text-capy-text text-lg mb-8 max-w-xl mx-auto">
+          <p class="text-capy-text text-lg mb-8 max-w-xl mx-auto text-justify">
             Deixe a tecnologia por nossa conta. Agende uma conversa e descubra como sua empresa pode operar com segurança e previsibilidade.
           </p>
           <a href="faleconosco.html"

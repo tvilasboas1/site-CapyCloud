@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Área do Cliente Capycloud — Acesse sua infraestrutura, chamados e relatórios.">
+  <title>Área do Cliente — Capycloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { capy: {
+              cream: '#EDE4D7',
+              warm: '#E5D2BC',
+              cool: '#D8C4AE',
+              white: '#FFFFFF',
+              copper: '#B07340',
+              copperLight: '#C88A58',
+              copperDark: '#8B5C32',
+              gold: '#C49A42',
+              goldHover: '#A87530',
+              brown: '#8B6914',
+              dark: '#2D2926',
+              footer: '#161410',
+              text: '#4D4033',
+              muted: '#8A7B68',
+              borderLight: '#C0AD95',
+              borderCard: '#D2BFA8',
+              purple: '#7B5EA7',
+              green: '#5BAD7E',
+              coral: '#E07A5F',
+              sec: '#B85C38',
+              maint: '#6B8E4A',
+            } }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <base target="_self">
+  <!-- Favicon — Capivara sorrindo com zoom -->
+  <link rel="icon" type="image/png" sizes="64x64" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/capysorri.png">
+  <link rel="icon" type="image/x-icon" href="img/capysorri.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/capysorri.png">
+</head>
+<body class="bg-white text-capy-dark font-sans antialiased fx-grain">
+
+  <!-- HEADER -->
+  <header class="bg-capy-cream/90 backdrop-blur-md sticky top-0 z-50 border-b border-capy-borderLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+          <!-- 🔧 TROCAR LOGO — Substitua img/logo.png pela imagem própria -->
+          <img src="img/logo.png" alt="Capycloud" class="h-8 w-8 mr-1 object-contain" onerror="this.style.display='none'"><span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Inicio</a>
+          <a href="quemsomos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Quem Somos</a>
+          <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Serviços</a>
+          <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
+          <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+          <a href="area-do-cliente.html" class="nav-link text-capy-copper transition-colors font-medium">Área do Cliente</a>
+        </nav>
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2">
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-capy-cream/95 border-t border-capy-borderLight">
+      <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Inicio</a>
+        <a href="quemsomos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Quem Somos</a>
+        <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Serviços</a>
+        <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
+        <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+        <a href="area-do-cliente.html" class="block text-capy-copper py-2 font-medium">Área do Cliente</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-white fx-gradient-overlay">
+    <div class="w-full max-w-md reveal opacity-0">
+
+      <!-- Card de Login -->
+      <div class="spotlight-card glow-card bg-white p-8 sm:p-10 rounded-2xl border border-capy-borderLight/50 shadow-xl">
+
+        <!-- 🔧 TROCAR IMAGEM DO TOPO — Substitua img/capysorri.png pela imagem própria -->
+        <div class="flex justify-center mb-8">
+          <div class="w-42 h-42 bg-capy-copper/10 rounded-2xl flex items-center justify-center border-2 border-capy-copper/20">
+            <img src="img/capysorri.png" alt="Área do Cliente" class="w-[6.6rem] h-[6.6rem] object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="w-[6.6rem] h-[6.6rem] items-center justify-center text-capy-copper text-4xl font-bold" style="display:none">C</div>
+          </div>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-capy-dark mb-2 text-center">Área do Cliente</h1>
+        <p class="text-capy-text text-sm text-center mb-8">Acesse sua infraestrutura, chamados e relatórios.</p>
+
+        <form id="login-form" class="space-y-5">
+          <div>
+            <label for="usuario" class="block text-sm font-medium text-capy-text mb-2">Usuário</label>
+            <input type="text" id="usuario" name="usuario" required
+              class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
+              placeholder="seu.usuario">
+          </div>
+          <div>
+            <label for="senha" class="block text-sm font-medium text-capy-text mb-2">Senha</label>
+            <input type="password" id="senha" name="senha" required
+              class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
+              placeholder="••••••••">
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center text-capy-text cursor-pointer">
+              <input type="checkbox" class="mr-2 rounded border-capy-borderLight text-capy-copper focus:ring-capy-copper">
+              Lembrar de mim
+            </label>
+            <a href="#" class="text-capy-copper hover:text-capy-copperLight transition-colors font-medium">Esqueceu a senha?</a>
+          </div>
+          <button type="submit"
+            class="w-full bg-capy-gold hover:bg-capy-goldHover text-capy-dark py-3.5 rounded-lg font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 fx-accent-pulse">
+            Entrar
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-capy-muted text-xs">Problemas para acessar? Entre em contato com o suporte.</p>
+          <a href="https://wa.me/5562994879627?text=Ol%C3%A1%2C%20estou%20com%20dificuldade%20para%20acessar%20a%20%C3%A1rea%20do%20cliente!" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center text-capy-copper hover:text-capy-copperLight transition-colors font-semibold text-sm mt-1">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Suporte via WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-capy-footer border-t border-capy-borderLight/30 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center">
+        <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+        <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
+      </div>
+      <div class="text-capy-muted text-sm">© 2026 Capycloud. Todos os direitos reservados.</div>
+      <div class="flex space-x-6">
+        <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
+        <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
+        <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
+        <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
