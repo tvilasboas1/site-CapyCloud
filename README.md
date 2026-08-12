@@ -104,11 +104,13 @@ Site-CapyCloud/
 ## Conteúdo por Página
 
 ### index.html
-- **Hero:** Aurora + glow + grid tech effects, badge "Cloud Privada Gerenciada", stats (100% Open Source, Zero Vendor Lock-in, Dedicado)
-- **Produtos Capy:** 6 cards (CapyDrive/AD/Host/Net/Backup/Monitor) com tags de stack
-- **Comparativo de Custos:** TI Interno vs Capycloud — breakdown detalhado + tabela resumo + projeção 5 anos
-- **10 Vantagens:** Redução custos, Ambiente seguro, Acesso remoto VPN, Gestão usuários, Alta disponibilidade, Escalabilidade, Suporte especializado, Previsibilidade custo, Proteção dados, Foco negócio
-- **CTA Final:** "Pronto para sair das Big Techs?"
+- **Hero:** Aurora + glow + grid tech effects, badge "Cloud Privada Gerenciada", titulo orientado a resultado ("A infraestrutura da sua empresa. Privada, segura e sem mensalidades abusivas."), proof points (dados sob controle, custos previsíveis, sem vendor lock-in, infra dedicada), stats em linguagem de negocio (Seus dados sao seus / Custo previsivel / Suporte especializado)
+- **Produtos Capy:** 6 cards (CapyDrive/AD/Host/Net/Backup/Monitor) — beneficio antes de tecnologia, descricao humana ("Seus arquivos organizados..." nao "Servidor de arquivos centralizado com TrueNAS")
+- **Comparativo de Custos:** TI Interno vs Capycloud — breakdown detalhado + tabela resumo + projeção 5 anos + frase emocional ("Enquanto sua equipe trabalha... a Capycloud cuida da infraestrutura nos bastidores.")
+- **10 Vantagens:** Linguagem humana — "Pare de investir em servidores obsoletos", "Seus dados protegidos todos os dias", "Acesse tudo de casa", etc. (nao checklist tech)
+- **Quem esta por tras:** Seção de confiança com descricao da equipe e badges (Infraestrutura, Virtualizacao, Seguranca da Informacao, Software Livre)
+- **CTA Final:** "Vamos conversar sobre a infraestrutura da sua empresa?" com "Solicitar diagnostico gratuito" (nao "Pronto para sair das Big Techs?")
+- **Footer:** 4 colunas (Logo+tagline, Solucoes, Empresa, Atendimento) + frase filosofica ("Acreditamos que empresas devem ser donas da propria infraestrutura.") + "Feito no Brasil"
 
 ### servicos.html
 - **Hero:** "O que sua empresa recebe" — perspectiva negócio
@@ -173,4 +175,3 @@ Site-CapyCloud/
 ## Licença
 
 © 2026 Capycloud. Todos os direitos reservados.
-

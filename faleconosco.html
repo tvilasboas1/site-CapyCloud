@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fale com a Capycloud. Solicite um orçamento ou converse pelo WhatsApp. Resposta em até 1 hora.">
+  <meta name="description" content="Fale com a Capycloud. Conta o que sua empresa precisa e a gente responde sem enrolação.">
+  <link rel="canonical" href="https://capycloud.com.br/faleconosco.html">
+  <meta property="og:title" content="Contato - Capycloud">
+  <meta property="og:description" content="Fale com a Capycloud. Conta o que sua empresa precisa e a gente responde sem enrolação.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capycloud.com.br/faleconosco.html">
+  <meta property="og:image" content="https://capycloud.com.br/img/capyaba.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Capycloud">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contato - Capycloud">
+  <meta name="twitter:description" content="Fale com a Capycloud. Conta o que sua empresa precisa e a gente responde sem enrolação.">
+  <meta name="twitter:image" content="https://capycloud.com.br/img/capyaba.png">
   <title>Contato - Capycloud</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -38,16 +50,13 @@
     }
   </script>
   <link rel="stylesheet" href="css/style.css">
-  <base target="_self">
 
-  <!-- Favicon — Capivara sorrindo com zoom -->
-  <link rel="icon" type="image/png" sizes="64x64" href="img/capysorri.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/capysorri.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/capysorri.png">
-  <link rel="icon" type="image/x-icon" href="img/capysorri.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/capysorri.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="img/capyaba.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/capyaba.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/capyaba.png">
+  <link rel="icon" type="image/x-icon" href="img/capyaba.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/capyaba.png">
 </head>
-<!-- EFEITO 5: GRAIN TEXTURE -->
 <body class="bg-white text-capy-dark font-sans antialiased fx-grain">
 
   <!-- HEADER -->
@@ -55,8 +64,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-          <!-- 🔧 TROCAR LOGO — Substitua img/logo.png pela imagem própria -->
-          <img src="img/logo.png" alt="Capycloud" class="h-8 w-8 mr-1 object-contain" onerror="this.style.display='none'"><span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
           <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
         </a>
         <nav class="hidden md:flex space-x-8">
@@ -88,176 +96,125 @@
     </div>
   </header>
 
-  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <!-- HERO -->
   <section class="py-16 px-4 sm:px-6 lg:px-8 fx-gradient-overlay">
     <div class="max-w-7xl mx-auto text-center reveal opacity-0">
       <h1 class="text-4xl sm:text-5xl font-extrabold text-capy-dark tracking-tight mb-4">
-        Fale com um <span class="text-capy-copper">Especialista</span>
+        Vamos <span class="text-capy-copper">conversar?</span>
       </h1>
       <p class="text-lg text-capy-text max-w-2xl mx-auto">
-        Preencha o formulário abaixo ou fale diretamente conosco pelo WhatsApp. Nossa equipe responde em até 1 hora em horário comercial.
+        Conta pra gente o que sua empresa precisa. A gente lê, entende e responde, sem enrolação e sem tentar empurrar o plano mais caro.
       </p>
     </div>
   </section>
 
-  <!-- CONTEÚDO -->
-  <!-- EFEITO 1: GRADIENT OVERLAY -->
+  <!-- CONTEÚDO PRINCIPAL -->
   <main class="pb-20 px-4 sm:px-6 lg:px-8 fx-gradient-overlay">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+    <div class="max-w-4xl mx-auto">
 
-        <!-- Formulário -->
-        <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
-        <div class="lg:col-span-3 spotlight-card glow-card bg-white p-8 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-1">
-          <form id="contact-form" class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label for="nome" class="block text-sm font-medium text-capy-text mb-2">Nome completo</label>
-                <input type="text" id="nome" name="nome" required
-                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
-                  placeholder="Seu nome">
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-capy-text mb-2">E-mail corporativo</label>
-                <input type="email" id="email" name="email" required
-                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
-                  placeholder="voce@empresa.com">
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label for="empresa" class="block text-sm font-medium text-capy-text mb-2">Empresa</label>
-                <input type="text" id="empresa" name="empresa"
-                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
-                  placeholder="Nome da empresa">
-              </div>
-              <div>
-                <label for="telefone" class="block text-sm font-medium text-capy-text mb-2">Telefone / WhatsApp</label>
-                <input type="tel" id="telefone" name="telefone"
-                  class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
-                  placeholder="(11) 99999-9999">
-              </div>
-            </div>
-            <div>
-              <label for="mensagem" class="block text-sm font-medium text-capy-text mb-2">Como podemos ajudar?</label>
-              <textarea id="mensagem" name="mensagem" rows="4" required
-                class="w-full px-4 py-3 bg-capy-cream border border-capy-borderLight rounded-lg text-capy-dark placeholder-capy-muted transition-colors resize-none focus:border-capy-copper focus:ring-1 focus:ring-capy-copper outline-none"
-                placeholder="Descreva sua necessidade..."></textarea>
-            </div>
-            <!-- EFEITO 6: ACCENT PULSE -->
-            <button type="submit"
-              class="w-full bg-capy-gold hover:bg-capy-goldHover text-capy-dark py-3.5 rounded-lg font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 fx-accent-pulse">
-              Enviar Mensagem
-            </button>
-          </form>
+      <!-- WhatsApp + Telegram -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+
+        <!-- Card WhatsApp -->
+        <div class="spotlight-card bg-white p-6 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-100 fx-hover-lift fx-border-glow fx-stagger-1">
+          <h3 class="text-xl font-bold text-capy-dark mb-3">WhatsApp</h3>
+          <p class="text-capy-text text-sm mb-6">
+            É mais rápido e direto. Manda uma mensagem e a gente responde em horário comercial.
+          </p>
+          <a href="https://wa.me/5562994879627?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Capycloud!"
+             target="_blank" rel="noopener noreferrer"
+             class="flex items-center justify-center w-full bg-green-600 hover:bg-green-500 text-white py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-0.5">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Conversar no WhatsApp
+          </a>
         </div>
 
-        <!-- Sidebar -->
-        <div class="lg:col-span-2 space-y-6">
-
-          <!-- Card 1: Resposta rápida + WhatsApp -->
-          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
-          <div class="spotlight-card bg-white p-6 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-2">
-            <h3 class="text-xl font-bold text-capy-dark mb-4">Resposta rápida</h3>
-            <p class="text-capy-text text-sm mb-6">
-              Prefere conversar pelo WhatsApp? Clique no botão abaixo e fale diretamente com nossa equipe comercial.
-            </p>
-            <a href="https://wa.me/5562994879627?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Capycloud!"
-               target="_blank" rel="noopener noreferrer"
-               class="flex items-center justify-center w-full bg-green-600 hover:bg-green-500 text-capy-dark py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-green-500/30 hover:-translate-y-0.5">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              Conversar no WhatsApp
-            </a>
-          </div>
-
-          <!-- Card 2: SLA Garantido -->
-          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
-          <div class="glow-card bg-capy-cream p-6 rounded-2xl border border-capy-borderLight reveal opacity-0 delay-300 fx-hover-lift fx-border-glow fx-stagger-3">
-            <h3 class="text-lg font-bold text-capy-dark mb-4">SLA Garantido</h3>
-            <div class="overflow-hidden rounded-lg border border-capy-borderLight/50 mb-4">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="bg-white">
-                    <th class="text-left px-3 py-2 text-capy-text font-medium">Plano</th>
-                    <th class="text-right px-3 py-2 text-capy-text font-medium">Resposta</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="border-t border-capy-borderLight/50">
-                    <td class="px-3 py-2 text-capy-text">CapyEssential</td>
-                    <td class="px-3 py-2 text-right text-capy-text">até 8h úteis</td>
-                  </tr>
-                  <tr class="border-t border-capy-borderLight/50">
-                    <td class="px-3 py-2 text-capy-text">CapyPro</td>
-                    <td class="px-3 py-2 text-right text-capy-text">até 4h úteis</td>
-                  </tr>
-                  <tr class="border-t border-capy-borderLight/50">
-                    <td class="px-3 py-2 text-capy-text">CapyElite</td>
-                    <td class="px-3 py-2 text-right text-capy-text">até 1h útil</td>
-                  </tr>
-                  <tr class="border-t border-capy-borderLight/50">
-                    <td class="px-3 py-2 text-capy-copper font-medium">CapyEnterprise</td>
-                    <td class="px-3 py-2 text-right text-capy-copper font-medium">até 1h útil + emergencial</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <ul class="space-y-3 text-sm text-capy-text">
-              <li class="flex items-center">
-                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Resposta em até 1h (horário comercial)
-              </li>
-              <li class="flex items-center">
-                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Suporte remoto ilimitado no CapyEnterprise
-              </li>
-              <li class="flex items-center">
-                <svg class="h-5 w-5 text-capy-copper mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                Monitoramento 24/7
-              </li>
-            </ul>
-          </div>
-
-          <!-- Card 3: Observações -->
-          <!-- EFEITO 2: HOVER LIFT / EFEITO 4: BORDER GLOW / EFEITO 3: SCROLL REVEAL STAGGER -->
-          <div class="bg-capy-cream p-6 rounded-2xl border border-capy-borderLight/50 reveal opacity-0 delay-400 fx-hover-lift fx-border-glow fx-stagger-4">
-            <h3 class="text-lg font-bold text-capy-dark mb-3">Importante</h3>
-            <ul class="space-y-2 text-xs text-capy-muted">
-              <li class="flex items-start">
-                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Serviços limitados ao ambiente gerenciado Capycloud
-              </li>
-              <li class="flex items-start">
-                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Chamados excedentes poderão ser cobrados à parte
-              </li>
-              <li class="flex items-start">
-                <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                Armazenamento e usuários adicionais sob demanda
-              </li>
-            </ul>
-          </div>
-
+        <!-- Card Telegram -->
+        <div class="spotlight-card bg-white p-6 rounded-2xl border border-capy-borderLight shadow-xl reveal opacity-0 delay-200 fx-hover-lift fx-border-glow fx-stagger-2">
+          <h3 class="text-xl font-bold text-capy-dark mb-3">Telegram</h3>
+          <p class="text-capy-text text-sm mb-6">
+            Prefere o Telegram? Também funciona. Manda sua mensagem que a gente responde igual.
+          </p>
+          <a href="https://t.me/capycloud"
+             target="_blank" rel="noopener noreferrer"
+             class="flex items-center justify-center w-full bg-sky-500 hover:bg-sky-400 text-white py-3.5 rounded-lg font-bold transition-all shadow-lg hover:shadow-sky-400/30 hover:-translate-y-0.5">
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.322 6.268c-.108.512-.444.613-.898.336l-2.482-1.829-1.196 1.152c-.132.132-.24.24-.492.24l.178-2.526 4.632-4.182c.202-.18-.044-.282-.312-.102l-5.714 3.562-2.462-.768c-.534-.166-.536-.534.112-.828l9.628-3.712c.444-.166.828.108.612.828z"/>
+            </svg>
+            Conversar no Telegram
+          </a>
         </div>
+
       </div>
+
+      <!-- Vale saber -->
+      <div class="bg-capy-cream p-6 rounded-2xl border border-capy-borderLight/50 reveal opacity-0 delay-300 fx-hover-lift fx-border-glow fx-stagger-3">
+        <h3 class="text-base font-bold text-capy-dark mb-3">Vale saber</h3>
+        <ul class="space-y-3 text-sm text-capy-muted">
+          <li class="flex items-start">
+            <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            O horário de atendimento é de segunda a sexta das 8h às 18h, e aos sábados das 8h às 12h.
+          </li>
+          <li class="flex items-start">
+            <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Para abrir chamados de suporte, use a Área do Cliente. Assim sua emergência é atendida com mais agilidade.
+          </li>
+          <li class="flex items-start">
+            <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Atendemos o ambiente que a gente gerencia, equipamentos do seu escritório são avaliados separadamente.
+          </li>
+          <li class="flex items-start">
+            <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Também atendemos por videochamada, pra tirar todas as dúvidas do seu negócio sem sair do lugar.
+          </li>
+          <li class="flex items-start">
+            <svg class="h-4 w-4 text-capy-muted mr-2 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Quer uma visita? A gente vai até a sua empresa pra conhecer o seu ambiente e entender melhor o que você precisa.
+          </li>
+        </ul>
+      </div>
+
     </div>
   </main>
 
   <!-- FOOTER -->
   <footer class="bg-capy-footer border-t border-capy-borderLight/30 py-10 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex items-center">
-        <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
-        <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
-      </div>
-      <div class="text-capy-muted text-sm">© 2026 Capycloud. Todos os direitos reservados.</div>
-      <div class="flex space-x-6">
-        <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
-        <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
-        <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
-        <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Privacidade</a>
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+        <!-- Logo + Contato -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center">
+            <span class="text-2xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+            <span class="text-2xl font-bold text-capy-borderLight tracking-tighter">cloud</span>
+          </div>
+          <a href="mailto:contato@capycloud.com.br" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm inline-flex items-center gap-1.5">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            contato@capycloud.com.br
+          </a>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <a href="tel:+5562994879627" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm inline-flex items-center gap-1.5">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.398 4.2a1 1 0 01-.5 1.21l-2.657 1.33a11.042 11.042 0 005.932 5.932l1.33-2.657a1 1 0 011.21-.5l4.2 1.398a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z"/></svg>
+              (62) 99487-9627
+            </a>
+            <a href="tel:+5561991135854" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm inline-flex items-center gap-1.5">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.398 4.2a1 1 0 01-.5 1.21l-2.657 1.33a11.042 11.042 0 005.932 5.932l1.33-2.657a1 1 0 011.21-.5l4.2 1.398a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z"/></svg>
+              (61) 99113-5854
+            </a>
+          </div>
+        </div>
+        <!-- Links -->
+        <div class="flex flex-col items-start md:items-end gap-2">
+          <div class="flex flex-wrap gap-x-6 gap-y-2">
+            <a href="quemsomos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Quem Somos</a>
+            <a href="servicos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Serviços</a>
+            <a href="planos.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Planos</a>
+            <a href="privacidade.html" class="text-capy-borderLight hover:text-capy-gold transition-colors text-sm">Política de Privacidade</a>
+          </div>
+          <div class="text-capy-muted text-xs mt-2">© 2026 Capycloud. Todos os direitos reservados.</div>
+          <div class="text-capy-muted text-xs">Asa Sul, Brasília DF</div>
+        </div>
       </div>
     </div>
   </footer>

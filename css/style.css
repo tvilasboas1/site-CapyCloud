@@ -4,6 +4,8 @@
    Fundo fibra de madeira natural (amadeirado),
    copper como detalhe, amber/honey como CTA.
    ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 
 /* =============================================
    FONT FACE — Bulo
@@ -54,7 +56,6 @@
 }
 
 /* Fallback: Inter para caso a Bulo não carregue */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 /* =============================================
    CSS VARIABLES — Paleta Amadeirado
