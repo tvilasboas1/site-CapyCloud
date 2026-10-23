@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="API de emissão de NF-e: o seu sistema manda a venda, a nota volta autorizada. A partir de R$ 89 por mês.">
+  <link rel="canonical" href="https://capycloud.com.br/capyfiscal.html">
+  <meta property="og:title" content="CapyFiscal - Capycloud">
+  <meta property="og:description" content="API de emissão de NF-e: o seu sistema manda a venda, a nota volta autorizada. A partir de R$ 89 por mês.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capycloud.com.br/capyfiscal.html">
+  <meta property="og:image" content="https://capycloud.com.br/img/capyaba-software.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Capycloud">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>CapyFiscal - Capycloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { capy: {
+              cream: '#EDE4D7',
+              warm: '#E5D2BC',
+              cool: '#D8C4AE',
+              white: '#FFFFFF',
+              copper: '#B07340',
+              copperLight: '#C88A58',
+              copperDark: '#8B5C32',
+              gold: '#C49A42',
+              goldHover: '#A87530',
+              brown: '#8B6914',
+              dark: '#2D2926',
+              footer: '#161410',
+              text: '#4D4033',
+              muted: '#8A7B68',
+              borderLight: '#C0AD95',
+              borderCard: '#D2BFA8',
+              purple: '#7B5EA7',
+              green: '#5BAD7E',
+              coral: '#E07A5F',
+              sec: '#B85C38',
+              maint: '#6B8E4A',
+            } }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/paginas-novas.css">
+
+  <!-- Favicon: capivara com fundo transparente -->
+  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  
+</head>
+<body class="bg-white text-capy-dark font-sans antialiased fx-grain">
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arquivos" viewBox="0 0 24 24"><path d="M3.5 7.5v10a1.5 1.5 0 0 0 1.5 1.5h14a1.5 1.5 0 0 0 1.5-1.5V9.5a1.5 1.5 0 0 0-1.5-1.5h-7l-2-2.5H5a1.5 1.5 0 0 0-1.5 1.5Z"/><path d="M8 13.5h8M8 16h5"/><circle class="n" cx="19" cy="5" r="1.6"/></symbol><symbol id="i-vpn" viewBox="0 0 24 24"><path d="M12 3.5 5 6.2v5.3c0 4.1 2.9 7.2 7 8.5 4.1-1.3 7-4.4 7-8.5V6.2L12 3.5Z"/><path d="M12 9.5v4"/><circle class="n" cx="12" cy="15.2" r="1.4"/></symbol><symbol id="i-usuarios" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M15.5 5.8a3 3 0 0 1 0 5.4"/><path d="M17 14.3c2 .6 3.5 2.4 3.5 4.7"/><circle class="n" cx="16.5" cy="8.5" r="1.2"/></symbol><symbol id="i-backup" viewBox="0 0 24 24"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.5"/><path d="M4.5 6.5v9c0 1.4 2.9 2.5 6.5 2.5"/><path d="M17.5 6.5V11"/><path d="M15.5 16.5h5m0 0-2-2m2 2-2 2"/><circle class="n" cx="19.5" cy="11.5" r="1.5"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M6.5 11.5h2.5l1.5-3 2 6 1.5-3h3.5"/><path d="M9 20h6M12 16.5V20"/><circle class="n" cx="17.5" cy="11.5" r="1.2"/></symbol><symbol id="i-host" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M7.5 7h.01M7.5 17h.01"/><circle class="n" cx="16.5" cy="7" r="1.2"/><circle class="n" cx="16.5" cy="17" r="1.2"/></symbol><symbol id="i-firewall" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M4 6v12M20 6v12M9 6v4M15 6v4M12 10v4M7 14v4M17 14v4"/><circle class="n" cx="12" cy="10" r="1.3"/></symbol><symbol id="i-suporte" viewBox="0 0 24 24"><path d="M5 13v-2a7 7 0 0 1 14 0v2"/><rect x="3.5" y="12" width="4" height="6" rx="1.5"/><rect x="16.5" y="12" width="4" height="6" rx="1.5"/><path d="M18.5 18v1a2 2 0 0 1-2 2H13"/><circle class="n" cx="12" cy="21" r="1.2"/></symbol><symbol id="i-auditoria" viewBox="0 0 24 24"><rect x="5.5" y="4" width="13" height="16" rx="1.8"/><path d="M9 3.5h6v2H9z"/><path d="m8.5 12.5 2 2 4.5-4.5"/><path d="M8.5 17h7"/><circle class="n" cx="18.5" cy="9" r="1.3"/></symbol><symbol id="i-seguranca" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/><circle class="n" cx="12" cy="12" r="1.2"/></symbol><symbol id="i-manutencao" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 4.9 4.9l-7.9 7.9a2 2 0 0 1-2.8-2.8l7.9-7.9a4 4 0 0 0-2.1-2.1Z"/><path d="M15 3.5a4.5 4.5 0 0 1 5.5 5.5"/><circle class="n" cx="6.2" cy="17.8" r="1.2"/></symbol><symbol id="i-rede" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="19" cy="17" r="2"/><path d="m10.8 7.2-4.6 7.9M13.2 7.2l4.6 7.9M7 17h10"/><circle class="n" cx="12" cy="5.5" r="1"/><circle class="n" cx="5" cy="17" r="1"/><circle class="n" cx="19" cy="17" r="1"/></symbol><symbol id="i-cabo" viewBox="0 0 24 24"><path d="M4 12h5M15 12h5"/><rect x="9" y="8.5" width="6" height="7" rx="1.5"/><path d="M11 8.5V6M13 8.5V6M11 18v-2.5M13 18v-2.5"/><circle class="n" cx="4" cy="12" r="1.3"/><circle class="n" cx="20" cy="12" r="1.3"/></symbol><symbol id="i-automacao" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 0 1-12.8 5.3M4.5 12A7.5 7.5 0 0 1 17.3 6.7"/><path d="M17.3 3.5v3.2h-3.2M6.7 20.5v-3.2h3.2"/><circle cx="12" cy="12" r="2.2"/><circle class="n" cx="12" cy="12" r="1"/></symbol><symbol id="i-nfe" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4V20a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M13.5 3.5v4h4"/><path d="M9 11h6M9 14h6M9 17h3.5"/><circle class="n" cx="16" cy="17.5" r="1.4"/></symbol><symbol id="i-site" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="1.8"/><path d="M3 8.5h18"/><path d="M6.5 6.5h.01M9 6.5h.01"/><path d="M6.5 12h7M6.5 15h4.5"/><circle class="n" cx="16.5" cy="14" r="1.6"/></symbol><symbol id="i-vps" viewBox="0 0 24 24"><path d="m12 3.5 7.5 4.3v8.4L12 20.5l-7.5-4.3V7.8L12 3.5Z"/><path d="M12 12 4.5 7.8M12 12l7.5-4.2M12 12v8.5"/><circle class="n" cx="12" cy="12" r="1.3"/></symbol><symbol id="i-remoto" viewBox="0 0 24 24"><rect x="4" y="6" width="13" height="9" rx="1.5"/><path d="M2.5 18.5h16"/><path d="M19.5 7.5a3.5 3.5 0 0 1 0 5M21.5 5.5a6.5 6.5 0 0 1 0 9"/><circle class="n" cx="10.5" cy="10.5" r="1.3"/></symbol><symbol id="i-celular" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17.5h2"/><circle class="n" cx="12" cy="9" r="1.3"/></symbol><symbol id="i-email" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.8"/><path d="m3.5 7 8.5 6 8.5-6"/><circle class="n" cx="12" cy="13" r="1.2"/></symbol><symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8.3 18.9L4 20Z"/><path d="M9.3 9.2c.2 2.6 2.5 5 5.4 5.4l1-1.5-2-1-1 .8a4.7 4.7 0 0 1-1.8-1.9l.8-1-1-2-1.4 1.2Z"/></symbol><symbol id="i-telegram" viewBox="0 0 24 24"><path d="m3.5 11.5 16.5-7-3 15.5-5-3.5-2.5 2.5v-4l7.5-7-9.5 5.5-4-2Z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol><symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/><circle class="n" cx="12" cy="12" r="1"/></symbol><symbol id="i-chave" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.5"/><path d="M11.5 12h9M17.5 12v3M20.5 12v2.5"/><circle class="n" cx="8" cy="12" r="1.2"/></symbol><symbol id="i-pasta5" viewBox="0 0 24 24"><path d="M4 7h5l2 2h9v10H4z"/><path d="M8 13h8"/><circle class="n" cx="16" cy="16" r="1.3"/></symbol><symbol id="i-webhook" viewBox="0 0 24 24"><path d="M9 7.5a3.5 3.5 0 1 1 5 3.2L11 17"/><path d="M6 13.5 9.5 19.5h7"/><circle class="n" cx="12.5" cy="7.5" r="1.1"/><circle class="n" cx="9.5" cy="19.5" r="1.1"/><circle class="n" cx="16.5" cy="19.5" r="1.1"/></symbol><symbol id="i-pdf" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4V20a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M9 17c1-3 2-6 3.5-7.5 1 3-1 6-3.5 7.5Zm0 0c2-.5 5-.5 6.5 0"/></symbol><symbol id="i-painel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.8"/><path d="M3 9h18M8 9v11"/><circle class="n" cx="14.5" cy="14.5" r="1.4"/></symbol><symbol id="i-mapa" viewBox="0 0 24 24"><path d="m3.5 6 5.5-2 6 2 5.5-2v14l-5.5 2-6-2-5.5 2V6Z"/><path d="M9 4v14M15 6v14"/><circle class="n" cx="12" cy="11" r="1.3"/></symbol><symbol id="i-visita" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-10.5a6 6 0 0 1 12 0C18 15.5 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.2"/><circle class="n" cx="12" cy="10.5" r=".9"/></symbol><symbol id="i-alvo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle class="n" cx="12" cy="12" r="1.4"/></symbol><symbol id="i-camadas" viewBox="0 0 24 24"><path d="m12 4 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/><circle class="n" cx="12" cy="8" r="1"/></symbol></svg>
+
+  <!-- HEADER -->
+  <header class="bg-capy-cream/90 backdrop-blur-md sticky top-0 z-50 border-b border-capy-borderLight">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+          <span class="text-3xl font-extrabold text-capy-copper tracking-tighter">Capy</span>
+          <span class="text-3xl font-bold text-capy-dark tracking-tighter">cloud</span>
+        </a>
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Início</a>
+          <a href="quemsomos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Quem Somos</a>
+          <a href="servicos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Serviços</a>
+          <a href="planos.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Planos</a>
+          <a href="faleconosco.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Contato</a>
+          <a href="capyfiscal.html" class="nav-link text-capy-copper transition-colors font-medium">CapyFiscal</a>
+          <a href="area-do-cliente.html" class="nav-link text-capy-text hover:text-capy-copper transition-colors font-medium">Área do Cliente</a>
+        </nav>
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-capy-text hover:text-capy-dark focus:outline-none p-2" aria-label="Menu">
+            <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-capy-cream/95 border-t border-capy-borderLight">
+      <div class="px-4 py-4 space-y-3">
+        <a href="index.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Início</a>
+        <a href="quemsomos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Quem Somos</a>
+        <a href="servicos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Serviços</a>
+        <a href="planos.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Planos</a>
+        <a href="faleconosco.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Contato</a>
+        <a href="capyfiscal.html" class="block text-capy-copper py-2 font-medium">CapyFiscal</a>
+        <a href="area-do-cliente.html" class="block text-capy-text hover:text-capy-copper py-2 font-medium">Área do Cliente</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+
+  <section id="visao" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+        <!-- LADO ESQUERDO: Mascote -->
+        <div class="w-full lg:w-1/2 flex justify-center reveal opacity-0 delay-100">
+          <img src="img/capyfiscal.webp" alt="Capivara emitindo NF-e e DANFE no notebook" class="w-full max-w-2xl sm:max-w-3xl lg:max-w-5xl fx-float" width="1227" height="1014">
+        </div>
+
+        <!-- LADO DIREITO: Título -->
+        <div class="w-full lg:w-1/2 text-center lg:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-capy-dark mb-6 tracking-normal leading-tight">
+            Nota fiscal direto do seu <span class="text-capy-copper">sistema</span>
+          </h1>
+          <p class="text-capy-text text-lg leading-relaxed mb-6 text-justify">
+            Uma API de emissão de NF-e. O seu sistema envia os dados da venda, o CapyFiscal assina com o certificado da sua empresa, conversa com a SEFAZ e devolve o XML autorizado e o DANFE. Cancelamento, carta de correção e inutilização passam pelo mesmo lugar, sem você virar contador.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+<section class="sec" id="como-funciona">
+  <div class="wrap">
+    <div class="mb-10">
+      <h2>Como funciona</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>A empresa é cadastrada uma vez</h3><p>Cadastramos o CNPJ, os dados fiscais e a numeração da sua empresa. O certificado digital A1 é enviado por um link seguro. Em geral, tudo fica pronto em um dia útil.</p></div>
+      <div class="step"><h3>O seu sistema envia a venda</h3><p>O seu sistema manda os dados do cliente, dos produtos e dos impostos. Antes de seguir para a SEFAZ, o CapyFiscal confere tudo para evitar rejeições.</p></div>
+      <div class="step"><h3>A nota volta autorizada</h3><p>O seu sistema recebe o XML autorizado e o DANFE em PDF. Se a SEFAZ recusar a nota, o motivo vem explicado em português claro.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-cream" id="para-quem">
+  <div class="wrap grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <h2>Para quem é</h2>
+      <p class="mt-4">O CapyFiscal nasceu dentro dos nossos Sistemas de Gestão e hoje atende três perfis de empresa.</p>
+    </div>
+    <div class="lg:col-span-8 grid gap-6 sm:grid-cols-3">
+      <div><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-nfe"/></svg></span><h3 class="mt-4">Lojas e comércios</h3><p class="mt-2">Que já usam um sistema de gestão e querem emitir a nota direto dele, sem redigitar em outro emissor.</p></div>
+      <div><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-automacao"/></svg></span><h3 class="mt-4">Empresas com sistema próprio</h3><p class="mt-2">Com software interno ou feito sob medida, que precisam só da parte fiscal, sem trocar o resto.</p></div>
+      <div><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-rede"/></svg></span><h3 class="mt-4">Software houses</h3><p class="mt-2">Que emitem notas para os próprios clientes e precisam de uma API estável, com suporte técnico de verdade.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="o-que-entra">
+  <div class="wrap grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-4 lg:sticky lg:top-28 self-start">
+      <h2>O que vem incluído</h2>
+      <p class="mt-4">Em todos os planos.</p>
+    </div>
+    <div class="lg:col-span-8 ledger">
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-nfe"/></svg></span><div><h3>Emissão e eventos</h3><p>NF-e de saída e de entrada, cancelamento, carta de correção e inutilização de numeração. A numeração é controlada pelo CapyFiscal, sem pular nem repetir.</p></div></div>
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-webhook"/></svg></span><div><h3>Avisos automáticos</h3><p>O seu sistema é avisado sempre que a nota muda de situação. Se ele estiver fora do ar, o aviso é reenviado depois.</p></div></div>
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-pdf"/></svg></span><div><h3>XML e DANFE por 5 anos</h3><p>Os arquivos ficam guardados pelo prazo legal, com download a qualquer momento e um pacote mensal pronto para o contador.</p></div></div>
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-chave"/></svg></span><div><h3>Certificado digital protegido</h3><p>O certificado A1 é enviado por um link seguro e usado só para assinar as notas da sua empresa. Você recebe um aviso 30 e 7 dias antes de ele vencer.</p></div></div>
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-painel"/></svg></span><div><h3>Painel na Área do Cliente</h3><p>Notas emitidas, situação de cada uma e motivos de rejeição, com o mesmo login da Área do Cliente da Capycloud.</p></div></div>
+      <div class="ledger-row"><span class="ico-box"><svg class="ico " aria-hidden="true"><use href="#i-auditoria"/></svg></span><div><h3>Conferência antes da SEFAZ</h3><p>CPF, CNPJ, município, CFOP e totais conferidos antes do envio, para a nota não voltar rejeitada.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-cream" id="planos">
+  <div class="wrap">
+    
+    
+    <div class="mb-10">
+      <h2>Planos do CapyFiscal</h2>
+      <p class="lead mt-4">Preço mensal, sem taxa de adesão e sem fidelidade. As notas que passarem da franquia são cobradas por unidade no mês seguinte. Todos os planos incluem ambiente de testes sem limite, XML e DANFE guardados por 5 anos, avisos por webhook e painel na Área do Cliente.</p>
+    </div>
+    <div class="plans plans-3">
+      
+      <div class="plan">
+        <h3>Loja</h3><p class="who">1 CNPJ</p>
+        <div class="price"><strong>R$ 89</strong><span>/mês</span></div>
+        <p class="price-note">Até 100 NF-e por mês<br>Nota adicional: R$ 0,15</p>
+        <ul><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Emissão, cancelamento, carta de correção e inutilização</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Nota de saída e de entrada, inclusive compra de pessoa física</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>DANFE em PDF e XML autorizado</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Aviso por webhook a cada mudança de situação</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Suporte por WhatsApp em horário comercial</span></li></ul>
+        <a class="btn btn-gold" href="faleconosco.html">Quero este plano</a>
+      </div>
+      
+      <div class="plan plan-hi">
+        <h3>Rede</h3><p class="who">Até 3 CNPJs</p>
+        <div class="price"><strong>R$ 149</strong><span>/mês</span></div>
+        <p class="price-note">Até 300 NF-e por mês<br>Nota adicional: R$ 0,12</p>
+        <ul><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Tudo do plano Loja</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Matriz e filiais no mesmo painel</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Pacote mensal de XMLs enviado ao seu contador</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Relatório mensal de notas por empresa</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Aviso de vencimento do certificado digital</span></li></ul>
+        <a class="btn btn-gold" href="faleconosco.html">Quero este plano</a>
+      </div>
+      
+      <div class="plan">
+        <h3>Integrador</h3><p class="who">CNPJs ilimitados</p>
+        <div class="price"><strong>R$ 349</strong><span>/mês</span></div>
+        <p class="price-note">Até 1.500 NF-e por mês<br>Nota adicional: R$ 0,10</p>
+        <ul><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Tudo do plano Rede</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Feito para software houses e ERPs que emitem para os próprios clientes</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Cadastro de empresas pela API</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Suporte técnico direto com quem desenvolve a API</span></li><li><svg class="ico " aria-hidden="true"><use href="#i-check"/></svg><span>Acompanhamento na homologação do seu sistema</span></li></ul>
+        <a class="btn btn-gold" href="faleconosco.html">Falar com a equipe técnica</a>
+      </div>
+    </div>
+    <p class="plan-note">Clientes dos nossos Sistemas de Gestão têm condição própria, dentro do plano do sistema. O certificado digital A1 da empresa não está incluído: ele é emitido por uma certificadora de sua escolha e enviado ao CapyFiscal por um link seguro.</p>
+  </div>
+</section>
+
+<section class="sec" id="desenvolvedores">
+  <div class="wrap grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <h2>Para desenvolvedores</h2>
+      <p class="lead mt-4">Uma API REST com JSON, no padrão de mercado para emissão de NF-e. Quem já integrou um provedor de nota fiscal adapta o sistema rapidamente.</p>
+      <ul class="mt-6 space-y-3">
+        <li class="flex gap-3"><svg class="ico ico-copper" aria-hidden="true"><use href="#i-check"/></svg><span>Autenticação por token</span></li>
+        <li class="flex gap-3"><svg class="ico ico-copper" aria-hidden="true"><use href="#i-check"/></svg><span>Cada nota leva a referência do seu sistema, sem risco de emissão duplicada</span></li>
+        <li class="flex gap-3"><svg class="ico ico-copper" aria-hidden="true"><use href="#i-check"/></svg><span>Ambientes separados de testes e de produção</span></li>
+        <li class="flex gap-3"><svg class="ico ico-copper" aria-hidden="true"><use href="#i-check"/></svg><span>Documentação completa, com exemplos de cada chamada</span></li>
+      </ul>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn btn-dark" href="capyfiscal-api.html">Abrir a documentação</a>
+        <a class="btn btn-ghost" href="capyfiscal/openapi.yaml" download>Baixar o OpenAPI (YAML)</a>
+      </div>
+    </div>
+    <div class="lg:col-span-7 min-w-0"><pre class="code"><span class="c"># 1. Envia a nota</span>
+curl -u "<span class="s">SEU_TOKEN</span>:" -H "Content-Type: application/json" \
+  -X POST "https://api-fiscal.capycloud.com.br/v2/nfe?ref=<span class="s">venda-123</span>" \
+  -d @nota.json
+<span class="c"># -&gt; 202 {"ref": "venda-123", "status": "processando_autorizacao"}</span>
+
+<span class="c"># 2. Consulta a situação (ou aguarda o aviso por webhook)</span>
+curl -u "<span class="s">SEU_TOKEN</span>:" https://api-fiscal.capycloud.com.br/v2/nfe/<span class="s">venda-123</span>
+<span class="c"># -&gt; {"status": "autorizado", "chave_nfe": "NFe...", "caminho_danfe": "/arquivos/.../danfe.pdf"}</span></pre></div>
+  </div>
+</section>
+
+<section class="sec sec-cream" id="perguntas">
+  <div class="wrap grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-4"><h2>Perguntas frequentes</h2></div>
+    <div class="lg:col-span-8 faq">
+      <details><summary>Preciso trocar de contador?</summary><p>Não. Quem define CFOP, CST e alíquotas continua sendo o seu sistema, com os parâmetros que o seu contador já usa. O CapyFiscal cuida de emitir, guardar e enviar as notas.</p></details>
+      <details><summary>E se a SEFAZ sair do ar?</summary><p>A nota fica na fila e é enviada sozinha quando o serviço volta. O seu sistema é avisado assim que ela for autorizada, sem risco de nota duplicada.</p></details>
+      <details><summary>O meu certificado digital fica seguro?</summary><p>Sim. Ele é enviado por um link seguro, fica protegido e é usado só para assinar as notas que o seu sistema pedir. Isso está no contrato.</p></details>
+      <details><summary>Posso testar antes de pagar?</summary><p>Sim. O ambiente de testes é liberado assim que a empresa é cadastrada e não tem limite de notas. As notas de teste não têm valor fiscal.</p></details>
+      <details><summary>Uso um Sistema de Gestão da Capycloud. Preciso contratar à parte?</summary><p>Não. Nos nossos Sistemas de Gestão o CapyFiscal faz parte do plano e o botão Emitir já fica nas telas de venda e de entrada. Fale com o suporte para ativar.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Quer emitir pelo seu sistema?</h2>
+      <p class="lead mx-auto mt-4">Diga qual sistema você usa e quantas notas emite por mês.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a class="btn btn-wa" href="https://wa.me/5561982597571?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20os%20servi%C3%A7os%20da%20Capycloud." target="_blank" rel="noopener noreferrer"><svg class="ico " aria-hidden="true"><use href="#i-whatsapp"/></svg> Falar no WhatsApp</a>
+        <a class="btn btn-dark" href="faleconosco.html">Outras formas de contato</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a href="index.html" class="logo logo-footer"><span class="logo-a">Capy</span><span class="logo-b">cloud</span></a>
+        <p class="footer-tag">Infraestrutura, sistemas e suporte para empresas que preferem ter alguém para chamar.</p>
+        <p class="footer-contact">
+          <a href="mailto:contato@capycloud.com.br"><svg class="ico " aria-hidden="true"><use href="#i-email"/></svg> contato@capycloud.com.br</a>
+          <a href="tel:+5561982597571"><svg class="ico " aria-hidden="true"><use href="#i-celular"/></svg> (61) 98259-7571</a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <a href="servicos.html#infraestrutura">Cloud privada gerenciada</a>
+        <a href="servicos.html#sistemas">Sistemas e automação</a>
+        <a href="servicos.html#suporte">Suporte técnico e manutenção</a>
+        <a href="servicos.html#redes">Rede do escritório</a>
+        <a href="servicos.html#sites">Sites e hospedagem</a>
+      </div>
+      <div class="footer-col">
+        <h4>CapyFiscal</h4>
+        <a href="capyfiscal.html">Visão geral</a>
+        <a href="capyfiscal.html#planos">Planos e preços</a>
+        <a href="capyfiscal-api.html">Documentação da API</a>
+        <a href="capyfiscal.html#perguntas">Perguntas frequentes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Capycloud</h4>
+        <a href="quemsomos.html">Quem somos</a>
+        <a href="planos.html">Planos</a>
+        <a href="faleconosco.html">Contato</a>
+        <a href="area-do-cliente.html">Área do Cliente</a>
+        <a href="privacidade.html">Política de privacidade</a>
+      </div>
+    </div>
+    <div class="wrap footer-base">
+      <span>© 2026 Capycloud. Todos os direitos reservados.</span>
+      <span>Asa Sul, Brasília, DF</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

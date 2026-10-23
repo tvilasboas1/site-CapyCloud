@@ -1,177 +1,29 @@
-# Capycloud — Site Corporativo
+# Capycloud, site institucional
 
-**Cloud Privada Gerenciada** — Infraestrutura como Serviço (IaaS) construída 100% sobre tecnologias Open Source.
+Site estático: HTML + Tailwind (CDN) + `css/style.css` + `js/main.js`. Sem build. Publicado em https://capycloud.com.br.
 
-> Sua empresa merece uma cloud que responde, respeita seus dados, seu orçamento e sua soberania digital.
+## Páginas
 
----
+| Arquivo | O que é |
+|---|---|
+| `index.html` | Início: cinco frentes de serviço, destaque do CapyFiscal, por que a Capycloud, contato |
+| `servicos.html` | Portfólio completo em cinco frentes (cloud privada, sistemas e automação, suporte e manutenção, redes e cabeamento, sites e hospedagem). Cada serviço traz a forma de cobrar: mensalidade, orçamento após análise ou por projeto |
+| `capyfiscal.html` | Página do produto CapyFiscal, com submenu no cabeçalho: visão geral, como funciona, para quem é, o que vem incluído, planos, para desenvolvedores, perguntas frequentes |
+| `capyfiscal-api.html` | Documentação interativa da API (Swagger UI lendo `capyfiscal/openapi.yaml`). Só funciona servida por HTTP, não abrindo o arquivo direto no navegador |
+| `planos.html` | Planos: cloud privada, CapyFiscal, hospedagem e VPS, sites, manutenção remota mensal, MotoGestor |
+| `quemsomos.html`, `faleconosco.html`, `area-do-cliente.html`, `privacidade.html` | Institucionais |
 
-## Produtos Capycloud
+## Como editar
 
-| Produto | O que sua empresa recebe | Stack |
-|---------|--------------------------|-------|
-| **CapyDrive** | Servidor de arquivos centralizado — todos os documentos em um lugar seguro, acessível de qualquer dispositivo | TrueNAS, ZFS, Snapshots |
-| **CapyAD** | Gestão de usuários e permissões — controle de quem acessa o quê, SSO e conformidade LGPD | Zentyal, LDAP, GPO, SSO |
-| **CapyHost** | Hospedagem de sistemas, APIs e sites — VMs e containers dedicados, deploy gerenciado | Proxmox, Docker, Nginx |
-| **CapyNet** | Acesso remoto seguro + Firewall — VPN criptografada, IDS/IPS, segmentação por VLANs | OPNsense, WireGuard, Suricata |
-| **CapyBackup** | Backup automatizado — política 3-2-1, versionado e replicado off-site, recuperação em minutos | Borg, Rsync, Replicação off-site |
-| **CapyMonitor** | Monitoramento 24/7 — dashboards em tempo real, alertas preventivos | Zabbix, Grafana, SNMP |
+- Menu, rodapé e ícones estão repetidos em cada página (não há include). Ao mudar o menu, mude em todas. O submenu do CapyFiscal é o bloco `nav-drop` no cabeçalho e os links `mob-sub` no menu móvel.
+- Ícones: um sprite SVG inline no início de cada `<body>` (`<symbol id="i-nome">`). Para usar: `<svg class="ico"><use href="#i-nome"/></svg>`. Para criar um ícone novo, desenhe no mesmo estilo (traço 1.6, cantos arredondados, um ou mais pontos dourados `class="n"`) e copie o `symbol` para todas as páginas.
+- Cores e fonte: `tailwind.config` no `<head>` de cada página e variáveis em `css/style.css`. Fonte Bulo em `fonts/`.
+- Preços: estão escritos nos HTML (`planos.html` e `capyfiscal.html`; os planos do CapyFiscal aparecem nos dois lugares, mantenha iguais).
+- Imagens: os mascotes têm versão `.webp` (30 a 70 KB) usada nas páginas; os `.png` originais (1 a 1,7 MB) ficam como fonte. Para novas imagens, gere o `.webp` antes de usar.
+- Formulário de contato (`faleconosco.html`): monta a mensagem e abre o WhatsApp (número em `js/main.js`).
 
----
+## Checklist antes de publicar
 
-## Planos
-
-| Recurso | CapyEssential | CapyPro | CapyElite | CapyEnterprise |
-|---------|---------------|---------|-----------|----------------|
-| **Usuários** | Até 5 | Até 15 | Até 30 | Até 30 |
-| **Storage** | 200 GB | 500 GB | 1 TB | 1 TB |
-| **Chamados/mês** | 5 | 15 | 30 | Ilimitado (uso justo) |
-| **SLA Resposta** | 8h úteis | 4h úteis | 1h útil | 1h útil + emergencial |
-| **Preço** | Sob Consulta | Sob Consulta | Sob Consulta | Sob Consulta |
-| **Destaque** | Essencial para equipes small | Mais escolhido | Controle avançado + auditoria | Prioridade máxima + suporte ilimitado |
-
-> Armazenamento e usuários adicionais sob demanda. Serviços limitados ao ambiente gerenciado Capycloud.
-
----
-
-## Comparativo de Custos — TI Interno vs Capycloud
-
-| Item | TI Interno | Capycloud |
-|------|------------|-----------|
-| Custo mensal | R$ 12k – 20k+ | Sob Consulta |
-| Investimento inicial | Alto (~R$ 36k) | Nenhum |
-| Equipe técnica | Necessária (salários + encargos ~70%) | Inclusa |
-| Manutenção | Interna | Inclusa |
-| Escalabilidade | Limitada (re-investir hardware) | Alta (sem custo extra de infra) |
-| Risco operacional | Alto (ferias, rotatividade, erros) | Controlado (SLA garantido) |
-| **Projeção 5 anos** | **R$ 748k – 1.245M** | **Economia de R$ 448k – 1.185M** |
-
----
-
-## Arquitetura
-
-```
-Internet
-  ↓
-OPNsense (Firewall + VPN + VLANs + IDS/IPS)
-  ↓
-┌─────────┬─────────┬─────────┐
-│ TrueNAS │ Zentyal │ Proxmox │
-│ Storage │   AD    │ Compute │
-└─────────┴─────────┴─────────┘
-  ↓
-Docker / VMs / Aplicações
-  ↓
-Zabbix + Grafana (Monitoramento 24/7)
-  ↓
-Borg + Rsync (Backup 3-2-1 → Off-site DR)
-```
-
----
-
-## Tecnologias
-
-- **Storage:** TrueNAS (ZFS, snapshots, deduplicação, replicação)
-- **Virtualização:** Proxmox VE (KVM / LXC)
-- **Firewall/VPN:** OPNsense (Suricata IDS/IPS, WireGuard, VLANs)
-- **Identidade:** Zentyal (Samba AD, LDAP, GPO, SSO)
-- **Monitoramento:** Zabbix + Grafana (24/7, dashboards, alertas)
-- **Containers:** Docker + Docker Compose
-- **Proxy:** Nginx (SSL automático, balanceamento)
-- **Backup:** BorgBackup + Rsync (3-2-1, deduplicação, off-site)
-
----
-
-## Estrutura do Projeto
-
-```
-Site-CapyCloud/
-├── index.html              # Home — hero, produtos, comparativo custos, 10 vantagens, projeção 5 anos, CTA
-├── servicos.html           # "O que você recebe" (negócio), stack por dentro (tech), comparativo custos, projeção 5 anos
-├── infraestrutura.html     # Stack tecnológica detalhada
-├── planos.html             # 4 tiers (CapyEssential/Pro/Elite/Enterprise), Sob Consulta, SLA detalhado
-├── faleconosco.html        # Formulário contato + WhatsApp + SLA garantido + sidebar detalhes
-├── README.md               # Esta documentação
-├── css/
-│   └── style.css           # Animações e efeitos custom (aurora, spotlight, glow, reveal, shimmer)
-├── js/
-│   └── main.js             # Menu mobile, spotlight, scroll reveal, WhatsApp form redirect, nav-link active
-└── img/                    # Imagens e assets (vazio por enquanto)
-```
-
----
-
-## Conteúdo por Página
-
-### index.html
-- **Hero:** Aurora + glow + grid tech effects, badge "Cloud Privada Gerenciada", titulo orientado a resultado ("A infraestrutura da sua empresa. Privada, segura e sem mensalidades abusivas."), proof points (dados sob controle, custos previsíveis, sem vendor lock-in, infra dedicada), stats em linguagem de negocio (Seus dados sao seus / Custo previsivel / Suporte especializado)
-- **Produtos Capy:** 6 cards (CapyDrive/AD/Host/Net/Backup/Monitor) — beneficio antes de tecnologia, descricao humana ("Seus arquivos organizados..." nao "Servidor de arquivos centralizado com TrueNAS")
-- **Comparativo de Custos:** TI Interno vs Capycloud — breakdown detalhado + tabela resumo + projeção 5 anos + frase emocional ("Enquanto sua equipe trabalha... a Capycloud cuida da infraestrutura nos bastidores.")
-- **10 Vantagens:** Linguagem humana — "Pare de investir em servidores obsoletos", "Seus dados protegidos todos os dias", "Acesse tudo de casa", etc. (nao checklist tech)
-- **Quem esta por tras:** Seção de confiança com descricao da equipe e badges (Infraestrutura, Virtualizacao, Seguranca da Informacao, Software Livre)
-- **CTA Final:** "Vamos conversar sobre a infraestrutura da sua empresa?" com "Solicitar diagnostico gratuito" (nao "Pronto para sair das Big Techs?")
-- **Footer:** 4 colunas (Logo+tagline, Solucoes, Empresa, Atendimento) + frase filosofica ("Acreditamos que empresas devem ser donas da propria infraestrutura.") + "Feito no Brasil"
-
-### servicos.html
-- **Hero:** "O que sua empresa recebe" — perspectiva negócio
-- **Seção 1 — O que você recebe:** 9 cards em linguagem de negócio (Servidor Arquivos, VPN, Gestão Usuários, Backup, Monitoramento 24/7, Hospedagem Sistemas, Firewall/Segurança, Suporte SLA, Auditoria/Relatórios)
-- **Seção 2 — A Stack por dentro:** 6 blocos alternados com detalhes técnicos de cada CapyProduct
-- **Seção 3 — Comparativo:** TI Interno vs Capycloud simplificado + projeção 5 anos (R$ 748k–1.245M vs Economia R$ 448k–1.185M)
-- **CTA Final:** "Pronto para focar no negócio?"
-
-### planos.html
-- **Hero:** "Planos de Cloud Privada"
-- **Grid 4 tiers:** CapyEssential (5 users, 200GB, 5 tickets, SLA 8h), CapyPro (15 users, 500GB, 15 tickets, SLA 4h — "Mais Escolhido"), CapyElite (30 users, 1TB, 30 tickets, SLA 1h), CapyEnterprise (30 users, 1TB, ∞ tickets, SLA 1h + emergencial)
-- **SLA Garantido:** 4 cards com tempo de resposta e chamados incluídos por plano
-- **Plano Customizado:** CapyMail, CapyDB, CapyVoIP etc.
-
-### faleconosco.html
-- **Hero:** "Fale com um Especialista"
-- **Formulário:** Nome, e-mail, empresa, telefone, mensagem → redirect WhatsApp
-- **Sidebar:** Card WhatsApp direto, SLA Garantido (tabela por plano), Observações importantes
-
----
-
-## Design System
-
-- **Framework CSS:** Tailwind CSS (CDN) — layout, componentes, responsivo
-- **CSS Customizado:** Apenas animações e efeitos que Tailwind não cobre
-  - Aurora background, Aurora glow, Grid pulse
-  - Text shimmer, Fade in up, Badge pulse
-  - Spotlight card (mouse-tracking glow), Glow card (hover border + shadow)
-  - Scroll reveal (IntersectionObserver), Custom scrollbar
-- **Paleta:** Slate 900 (fundo principal) + Emerald 400/500 (acento/destaque) + Red 400 (alerta/custo TI Interno)
-- **Fonte:** Inter (Google Fonts) — 400/500/600/700/800/900
-- **Responsivo:** Mobile-first, menu hamburger em telas < md, grid adapta de 1→2→3→4 colunas
-
----
-
-## Funcionalidades JS
-
-- [x] Menu responsivo — hamburger → X toggle com SVG swap, close on link click
-- [x] Spotlight card — mouse tracking com CSS custom properties (--mouse-x, --mouse-y)
-- [x] Scroll reveal — IntersectionObserver (threshold 0.1), add .revealed + .animate-fade-in-up
-- [x] Formulário contato → WhatsApp redirect (55 62 9948-79627)
-- [x] Nav-link active — match current page filename, add .active class
-
----
-
-## Estratégia de Preços
-
-- **Website:** Todos os planos mostram "Sob Consulta" — sem preço fixo publicado
-- **Proposta direta:** Valores reais apresentados em conversa/proposta individual
-- **Argumento:** Mensalidade Capycloud (~R$ 1k–5k) vs TI Interno (~R$ 12k–20k) = economia R$ 448k–1.185M em 5 anos
-
----
-
-## Contato
-
-- **WhatsApp:** [Conversar agora](https://wa.me/5562994879627)
-- **Formulário:** `/faleconosco.html`
-- **SLA Resposta:** CapyEnterprise até 1h útil + emergencial | CapyElite 1h | CapyPro 4h | CapyEssential 8h
-
----
-
-## Licença
-
-© 2026 Capycloud. Todos os direitos reservados.
+1. Abrir cada página no celular (largura 390 px) e conferir que não há rolagem horizontal.
+2. `sitemap.xml` com a data da alteração.
+3. Telefone: (61) 98259-7571 em todas as páginas e em `js/main.js`.

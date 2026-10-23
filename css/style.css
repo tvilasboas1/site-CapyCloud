@@ -430,3 +430,79 @@ body {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
 }
+
+/* =============================================
+   ACRÉSCIMOS (outubro/2026)
+   1) Raios: rede de nós animada atrás do hero
+   2) Rodapé novo
+   3) Ícones próprios (sprite inline nas páginas)
+   ============================================= */
+
+/* 1) Raios */
+.nodes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.nodes svg { width: 100%; height: 100%; }
+.nodes line { stroke: #B07340; stroke-width: 1.1; opacity: .35; }
+.nodes circle { fill: #C49A42; }
+.nodes .big { fill: none; stroke: #B07340; stroke-width: 1.4; }
+@media (prefers-reduced-motion: no-preference) {
+  .nodes line { stroke-dasharray: 600; stroke-dashoffset: 600; animation: traco 1.8s ease-out forwards; }
+  .nodes circle { animation: pulso 6s ease-in-out infinite; }
+  .nodes circle:nth-child(odd) { animation-delay: -3s; }
+}
+@keyframes traco { to { stroke-dashoffset: 0; } }
+@keyframes pulso { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+/* 3) Ícones */
+.ico { width: 1.5rem; height: 1.5rem; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; vertical-align: -0.35em; }
+.ico .n { fill: #C49A42; stroke: none; }
+.ico-copper { color: #B07340; }
+
+/* 2) Rodapé */
+.wrap { max-width: 80rem; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+@media (min-width: 640px) { .wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .wrap { padding-left: 2rem; padding-right: 2rem; } }
+.site-footer { background: #161410; color: #CDBFA9; padding: 3.5rem 0 2rem; }
+.site-footer .logo { text-decoration: none; letter-spacing: -0.04em; font-weight: 800; font-size: 1.6rem; line-height: 1; }
+.site-footer .logo-a { color: #B07340; } .site-footer .logo-b { color: #C0AD95; }
+.footer-grid { display: grid; gap: 2rem; }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }
+.footer-tag { margin-top: .9rem; max-width: 20rem; font-size: .95rem; }
+.footer-contact { display: flex; flex-direction: column; gap: .4rem; margin-top: 1rem; }
+.footer-contact a { text-decoration: none; color: #E0D4C2; display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; }
+.footer-contact a:hover { color: #C49A42; }
+.footer-col { display: flex; flex-direction: column; gap: .4rem; }
+.footer-col h4 { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+.footer-col a { text-decoration: none; color: #CDBFA9; font-size: .95rem; }
+.footer-col a:hover { color: #C49A42; }
+.footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(192, 173, 149, .25); font-size: .85rem; color: #9C8F7E; }
+
+/* 4) Quadradinhos da home (ecossistema e "Por que escolher"):
+      células brancas separadas por linha fina; no ecossistema cada uma é um link */
+.fronts { display: grid; gap: 1px; background: #C0AD95; border: 1px solid #C0AD95; border-radius: 14px; overflow: hidden; }
+.fronts-2 { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .fronts-2 { grid-template-columns: repeat(2, 1fr); } }
+.front { background: #fff; padding: 1.25rem 1.35rem; display: flex; gap: 1rem; align-items: flex-start; text-decoration: none; color: #4D4033; transition: background .15s; }
+a.front:hover { background: #EDE4D7; }
+.front .ico { width: 2.25rem; height: 2.25rem; stroke-width: 1.4; color: #B07340; margin-top: .1rem; }
+.front strong { display: block; color: #2D2926; font-size: 1.05rem; font-weight: 700; margin-bottom: .2rem; }
+.front small { display: block; color: #8A7B68; font-size: .92rem; line-height: 1.5; }
+.fronts-3 { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .fronts-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .fronts-3 { grid-template-columns: repeat(3, 1fr); } }
+.front[id], section[id] { scroll-margin-top: 6rem; }
+
+/* ── Serviços: lista de cada frente (Sistemas, CapyFiscal, Suporte, Rede, Sites) ── */
+.svc-ledger { border-top: 1px solid #C0AD95; }
+.svc-row { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid #E3D6C4; align-items: start; }
+.svc-row .svc-tag { grid-column: 2; justify-self: start; }
+@media (min-width: 768px) { .svc-row { grid-template-columns: 3rem 1fr auto; gap: 1.25rem; } .svc-row .svc-tag { grid-column: auto; } }
+.svc-row h3 { color: #2D2926; font-size: 1.15rem; font-weight: 700; margin-bottom: .25rem; }
+.svc-row p { color: #4D4033; line-height: 1.6; max-width: 42rem; }
+.svc-ico { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 12px; background: rgba(176,115,64,.1); border: 1px solid rgba(176,115,64,.2); color: #B07340; }
+.svc-ico .ico { width: 1.5rem; height: 1.5rem; }
+.svc-tag { display: inline-flex; align-items: center; font-size: .78rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; white-space: nowrap; border: 1px solid #C0AD95; }
+.svc-tag-mes { background: #FBF4E6; border-color: #E8D3A8; color: #7A5230; }
+.svc-tag-analise { background: #F1F1EC; border-color: #D5D2C8; color: #5E5A52; }
+.svc-tag-projeto { background: #EEF5F0; border-color: #BFDCC9; color: #2F7A50; }
+.svc-link { display: inline-block; margin-top: 1rem; color: #B07340; font-weight: 600; text-decoration: none; border-bottom: 1.5px solid rgba(176,115,64,.35); }
+.svc-link:hover { border-bottom-color: #B07340; }

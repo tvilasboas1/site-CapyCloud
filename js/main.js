@@ -60,9 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       const nome = document.getElementById('nome').value;
       const empresa = document.getElementById('empresa').value;
+      const assuntoEl = document.getElementById('assunto');
+      const assunto = assuntoEl ? ` Assunto: ${assuntoEl.value}.` : '';
       const mensagem = document.getElementById('mensagem').value;
-      const whatsappNumber = '5562994879627';
-      const text = `Olá! Meu nome é ${nome} da ${empresa}. ${mensagem}`;
+      const whatsappNumber = '5561982597571';
+      const text = `Olá! Meu nome é ${nome}${empresa ? ' da ' + empresa : ''}.${assunto} ${mensagem}`;
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
     });

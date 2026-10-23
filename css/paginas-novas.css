@@ -1,0 +1,196 @@
+/* =============================================================
+   CAPYCLOUD, componentes das páginas novas (Serviços, CapyFiscal, Planos...)
+   Carregado DEPOIS do style.css só nessas páginas. Não mexe em fonte,
+   cabeçalho nem corpo: isso continua sendo o do site original.
+   ============================================================= */
+
+:root {
+  --cream: #EDE4D7; --warm: #E5D2BC; --cool: #D8C4AE;
+  --copper: #B07340; --copper-light: #C88A58; --copper-dark: #8B5C32;
+  --gold: #C49A42; --gold-hover: #A87530; --brown: #8B6914;
+  --dark: #2D2926; --footer: #161410; --text: #4D4033; --muted: #8A7B68;
+  --line: #C0AD95; --line-soft: #D2BFA8;
+  --green: #5BAD7E; --coral: #E07A5F;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+/* 'body' na frente ganha do reset do Tailwind, que é injetado depois deste arquivo */
+body h1, body h2, body h3, body h4 { color: var(--dark); font-weight: 900; line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
+body h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); }
+body h2 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); }
+body h3 { font-size: 1.25rem; letter-spacing: -0.01em; }
+body p { margin: 0; }
+a { color: inherit; }
+.lead { font-size: 1.15rem; max-width: 38rem; }
+.measure { max-width: 38rem; }
+.wrap { max-width: 76rem; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+@media (min-width: 640px) { .wrap { padding-left: 1.5rem; padding-right: 1.5rem; } }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Ícones (sprite inline no fim de cada página) ---------- */
+.ico { width: 1.5rem; height: 1.5rem; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; vertical-align: -0.35em; }
+.ico .n { fill: var(--gold); stroke: none; }
+.ico-lg { width: 2.25rem; height: 2.25rem; stroke-width: 1.4; }
+.ico-sm { width: 1.1rem; height: 1.1rem; stroke-width: 2; }
+.ico-copper { color: var(--copper); }
+.ico-box { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 12px; background: var(--cream); color: var(--copper-dark); }
+
+/* ---------- Botões ---------- */
+.btn { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-weight: 700; border-radius: 12px; padding: .85rem 1.4rem; transition: background .15s, transform .15s; border: 0; cursor: pointer; }
+.btn:hover { transform: translateY(-1px); }
+.btn-gold { background: var(--gold); color: var(--dark); }
+.btn-gold:hover { background: var(--gold-hover); }
+.btn-dark { background: var(--dark); color: #fff; }
+.btn-dark:hover { background: #000; }
+.btn-ghost { background: transparent; color: var(--copper-dark); border: 1.5px solid var(--line); }
+.btn-ghost:hover { border-color: var(--copper); color: var(--copper); }
+.btn-wa { background: #25d366; color: #0b3d22; }
+.btn-wa:hover { background: #1ebd5b; }
+.link { color: var(--copper); font-weight: 600; text-decoration: none; border-bottom: 1.5px solid rgba(176, 115, 64, .35); }
+.link:hover { border-bottom-color: var(--copper); }
+
+/* ---------- Seções ---------- */
+.sec { padding: 4.5rem 0; }
+@media (min-width: 1024px) { .sec { padding: 6rem 0; } }
+.sec-cream { background: var(--cream); }
+.sec-warm { background: var(--warm); }
+.sec-dark { background: var(--dark); color: #E8DFD2; }
+.sec-dark h2, .sec-dark h3 { color: #fff; }
+.sec-dark .muted { color: #B8AC9D; }
+.muted { color: var(--muted); }
+.kicker { font-weight: 700; color: var(--copper); margin-bottom: .75rem; }
+
+/* ---------- Motivo de rede (hero e divisores) ---------- */
+.nodes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.nodes svg { width: 100%; height: 100%; }
+.nodes line { stroke: var(--copper); stroke-width: 1.1; opacity: .35; }
+.nodes circle { fill: var(--gold); }
+.nodes .big { fill: none; stroke: var(--copper); stroke-width: 1.4; }
+@media (prefers-reduced-motion: no-preference) {
+  .nodes line { stroke-dasharray: 600; stroke-dashoffset: 600; animation: traco 1.8s ease-out forwards; }
+  .nodes circle { transform-origin: center; animation: pulso 6s ease-in-out infinite; }
+  .nodes circle:nth-child(odd) { animation-delay: -3s; }
+  .hero-mascot { animation: flutua 7s ease-in-out infinite; }
+}
+@keyframes traco { to { stroke-dashoffset: 0; } }
+@keyframes pulso { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes flutua { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+/* sombra só no selo da home (PNG com fundo transparente); nas outras o fundo branco da imagem virava uma caixa */
+.mascot-shadow { filter: drop-shadow(0 8px 30px rgba(139, 105, 20, .25)); }
+
+/* ---------- Lista "razão" de serviços ---------- */
+.ledger { border-top: 1px solid var(--line); }
+.ledger-row { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line-soft); align-items: start; }
+@media (min-width: 768px) { .ledger-row { grid-template-columns: 3rem 1fr auto; gap: 1.25rem; } }
+.ledger-row h3 { margin-bottom: .25rem; }
+.ledger-row p { max-width: 42rem; }
+.tag { display: inline-flex; align-items: center; gap: .35rem; font-size: .8rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; white-space: nowrap; border: 1px solid var(--line); color: var(--copper-dark); background: #fff; }
+.tag-mes { background: #FBF4E6; border-color: #E8D3A8; color: var(--brown); }
+.tag-analise { background: #F1F1EC; border-color: #D5D2C8; color: #5E5A52; }
+.tag-projeto { background: #EEF5F0; border-color: #BFDCC9; color: #2F7A50; }
+
+/* ---------- Faixa de frentes (home) ---------- */
+.fronts { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+@media (min-width: 768px) { .fronts { grid-template-columns: repeat(5, 1fr); } }
+.front { background: #fff; padding: 1.4rem 1.2rem; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: .6rem; transition: background .15s; }
+.front:hover { background: var(--cream); }
+.front strong { color: var(--dark); font-size: 1.05rem; }
+.front small { color: var(--muted); font-size: .9rem; line-height: 1.45; }
+
+/* ---------- Planos ---------- */
+.plan-nav { display: flex; flex-wrap: wrap; gap: .5rem; position: sticky; top: 4.75rem; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); padding: .75rem 0; border-bottom: 1px solid var(--line-soft); }
+.plan-nav a { text-decoration: none; font-weight: 600; font-size: .95rem; padding: .45rem .9rem; border-radius: 999px; border: 1px solid var(--line); color: var(--text); }
+.plan-nav a:hover { border-color: var(--copper); color: var(--copper); }
+.plans { display: grid; gap: 1.25rem; }
+@media (min-width: 768px) { .plans-2 { grid-template-columns: repeat(2, 1fr); } .plans-3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .plans-4 { grid-template-columns: repeat(4, 1fr); } }
+.plan { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; background: #fff; display: flex; flex-direction: column; }
+.plan-hi { border: 2px solid var(--copper); }
+body .plan h3 { font-size: 1.35rem; }
+.plan .who { color: var(--copper); font-weight: 600; margin-top: .2rem; }
+.plan .desc { margin-top: .75rem; min-height: 3.2rem; }
+.price { margin: 1.25rem 0 1rem; display: flex; align-items: baseline; gap: .4rem; flex-wrap: wrap; }
+.price strong { font-size: 2.1rem; color: var(--dark); letter-spacing: -0.03em; line-height: 1; }
+.price s { color: var(--muted); font-size: .95rem; }
+.price span { color: var(--muted); }
+.price-note { color: var(--muted); font-size: .85rem; margin-top: -.6rem; margin-bottom: 1rem; }
+.plan ul { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+.plan li { display: flex; gap: .55rem; align-items: flex-start; font-size: .95rem; }
+.plan li .ico { color: var(--copper); width: 1.15rem; height: 1.15rem; margin-top: .2rem; stroke-width: 2.2; }
+.plan .btn { align-self: flex-start; }
+.plan-note { color: var(--muted); font-size: .9rem; margin-top: 1rem; max-width: 60rem; }
+
+/* ---------- Diversos ---------- */
+.steps { counter-reset: passo; display: grid; gap: 1.5rem; }
+@media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+.step { counter-increment: passo; padding-top: .5rem; border-top: 2px solid var(--gold); }
+.step::before { content: counter(passo); display: block; font-weight: 900; font-size: 2rem; color: var(--copper); line-height: 1; margin: .75rem 0 .5rem; }
+.step h3 { margin-bottom: .35rem; }
+.faq details { border-bottom: 1px solid var(--line-soft); padding: 1rem 0; }
+.faq summary { cursor: pointer; font-weight: 700; color: var(--dark); font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--copper); font-weight: 900; font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin-top: .6rem; max-width: 46rem; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.compare { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: .95rem; }
+.compare th, .compare td { text-align: left; padding: .8rem .75rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.compare th { color: var(--dark); }
+.compare td:first-child { color: var(--dark); font-weight: 600; }
+pre.code { background: var(--dark); color: #EADFCF; border-radius: 12px; padding: 1.1rem 1.25rem; overflow-x: auto; font-size: .85rem; line-height: 1.55; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre.code .k { color: #E7C77A; } pre.code .s { color: #9FD3B0; } pre.code .c { color: #9B8F80; }
+.stack-logos { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; align-items: center; }
+.stack-logos img { height: 2.1rem; width: auto; opacity: .85; filter: grayscale(.2); }
+.quote { border-left: 3px solid var(--gold); padding-left: 1.25rem; font-size: 1.15rem; color: var(--dark); max-width: 40rem; }
+.cta-box { background: var(--warm); border: 1px solid rgba(196, 154, 66, .35); border-radius: 22px; padding: 2.5rem 1.5rem; text-align: center; }
+@media (min-width: 768px) { .cta-box { padding: 3.5rem 3rem; } }
+.site-footer { background: var(--footer); color: #CDBFA9; padding: 3.5rem 0 2rem; margin-top: 0; }
+.footer-grid { display: grid; gap: 2rem; }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; } }
+.footer-tag { margin-top: .9rem; max-width: 20rem; font-size: .95rem; }
+.footer-contact { display: flex; flex-direction: column; gap: .4rem; margin-top: 1rem; }
+.footer-contact a { text-decoration: none; color: #E0D4C2; display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; }
+.footer-contact a:hover { color: var(--gold); }
+.footer-col { display: flex; flex-direction: column; gap: .4rem; }
+.footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: .4rem; }
+.footer-col a { text-decoration: none; color: #CDBFA9; font-size: .95rem; }
+.footer-col a:hover { color: var(--gold); }
+.footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(192, 173, 149, .25); font-size: .85rem; color: #9C8F7E; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn:hover { transform: none; } }
+.fronts.fronts-col { grid-template-columns: 1fr; }   /* lista vertical ao lado do diagrama, na home */
+.fronts.fronts-col .front { flex-direction: row; align-items: flex-start; gap: 1rem; }
+.fronts.fronts-col .front > div { display: flex; flex-direction: column; gap: .2rem; }
+
+/* Bloco "fale com a gente": sem caixa marrom, direto no fundo do site */
+.cta-box { background: none; border: 0; border-radius: 0; padding: 1rem 0; text-align: center; }
+
+/* Cloud com 5 planos (CapyLight entrou na frente) */
+@media (min-width: 768px) { .plans-5 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .plans-5 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .plans-5 { grid-template-columns: repeat(5, 1fr); gap: 1rem; } .plans-5 .plan { padding: 1.3rem; } .plans-5 .price strong { font-size: 1.75rem; } .plans-5 .btn { padding: .8rem .9rem; justify-content: center; white-space: nowrap; } }
+
+/* ── Planos: alinhamento (rodada 9) ── */
+.lead, .plan-note { text-align: justify; }
+.cta-box .lead, .text-center .lead { text-align: center; }
+.plan-hi { border: 1px solid var(--copper); box-shadow: 0 0 0 1px var(--copper); }   /* destaque sem deslocar o conteúdo */
+.price s { flex-basis: 100%; line-height: 1.2; }
+.price s.vazio { visibility: hidden; }
+.price-note { line-height: 1.5; }
+/* Tabela da manutenção remota */
+.table-wrap { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.compare { min-width: 40rem; table-layout: fixed; font-size: .95rem; }
+.compare th, .compare td { padding: .9rem 1rem; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+.compare thead th { background: var(--cream); color: var(--dark); font-weight: 700; text-align: center; border-bottom: 1px solid var(--line); }
+.compare thead th:first-child, .compare tbody th, .compare tfoot th { text-align: left; width: 32%; }
+.compare tbody th, .compare tfoot th { color: var(--dark); font-weight: 600; }
+.compare td { text-align: center; color: var(--text); }
+.compare td + td, .compare th + td, .compare thead th + th { border-left: 1px solid var(--line-soft); }
+.compare tfoot th, .compare tfoot td { background: #FBF4E6; border-bottom: 0; }
+.compare tfoot td strong { color: var(--dark); }
+.compare td:first-child { font-weight: 400; }
+/* Desktop: texto de abertura ocupa a largura toda, por cima dos quadradinhos */
+.lead, .plan-note { max-width: none; }
+/* Planos: título de cada serviço centralizado */
+.sec#cloud h2, .sec#capyfiscal h2, .sec#hospedagem h2, .sec#sites h2, .sec#manutencao h2 { text-align: center; }
