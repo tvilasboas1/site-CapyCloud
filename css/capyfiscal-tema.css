@@ -1,0 +1,45 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Tema exclusivo da página do CapyFiscal (carregado só em capyfiscal.html).
+   No resto do site, o que não é branco é amadeirado. Aqui, o que não é branco
+   usa o mesmo tom do rodapé (#161410), de propósito.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* O cabeçalho continua igual ao do resto do site (creme). */
+
+/* Faixas que eram creme agora são escuras */
+.sec-cream { background: #161410; color: #CDBFA9; }
+body .sec-cream h2, body .sec-cream h3 { color: #fff; }
+.sec-cream p, .sec-cream li, .sec-cream .lead { color: #CDBFA9; }
+.sec-cream .plan-note { color: #9C8F7E; }
+
+/* Cartões de plano continuam brancos, com o texto escuro de sempre */
+body .sec-cream .plan h3 { color: #2D2926; }
+.sec-cream .plan p, .sec-cream .plan li { color: #4D4033; }
+.sec-cream .plan .who { color: #B07340; }
+.sec-cream .plan .price-note { color: #8A7B68; }
+.sec-cream .plan-hi { border-color: #C49A42; box-shadow: 0 0 0 1px #C49A42; }
+
+/* Perguntas frequentes no fundo escuro */
+.sec-cream .faq details { border-bottom-color: rgba(205, 191, 169, .18); }
+.sec-cream .faq summary { color: #fff; }
+.sec-cream .faq summary::after { color: #C49A42; }
+
+/* Quadradinhos dos ícones: tom do rodapé, traço claro e os pontos em dourado (antes era tudo dourado e o ícone embolava) */
+.ico-box { background: #161410; color: #F3ECE2; width: 3.25rem; height: 3.25rem; }
+.ico-box .ico { width: 1.6rem; height: 1.6rem; stroke-width: 1.7; }
+.ico-box .ico .n { fill: #C49A42; }
+.sec-cream .ico-box { background: #2A251F; border: 1px solid rgba(196, 154, 66, .35); }
+
+/* Linhas da lista "O que vem incluído" */
+.ledger { border-top-color: rgba(22, 20, 16, .35); }
+.ledger-row { border-bottom-color: rgba(22, 20, 16, .15); }
+
+/* Teste (23/10): da seção "O que vem incluído" para baixo, o que era branco vira o creme da Capycloud.
+   O topo com a capivara e o "Como funciona" continuam brancos. */
+#o-que-entra, #desenvolvedores, #perguntas + section { background: #EDE4D7; }
+.sec-cream .plan { background: #EDE4D7; }
+
+/* "O que vem incluído": sem quadrado preto. Ícone de traço fino, direto no fundo creme. */
+#o-que-entra .ico-box { background: transparent; border: 0; width: 3rem; height: 3rem; color: #8B5C32; }
+#o-que-entra .ico-box .ico { width: 2.1rem; height: 2.1rem; stroke-width: 1.3; }
+#o-que-entra .ico-box .ico .n { fill: #C49A42; }
