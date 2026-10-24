@@ -43,3 +43,22 @@ body .sec-cream .plan h3 { color: #2D2926; }
 #o-que-entra .ico-box { background: transparent; border: 0; width: 3rem; height: 3rem; color: #8B5C32; }
 #o-que-entra .ico-box .ico { width: 2.1rem; height: 2.1rem; stroke-width: 1.3; }
 #o-que-entra .ico-box .ico .n { fill: #C49A42; }
+
+/* 24/10: o topo (capivara) e o "Como funciona" deixam de ser brancos e ganham o tom do rodapé,
+   com os mesmos tons de texto das outras faixas escuras da página. */
+#visao, #como-funciona { background: #161410 !important; }
+body #visao h1 { color: #fff !important; }
+#visao p { color: #CDBFA9 !important; }
+body #como-funciona h2, body #como-funciona h3 { color: #fff; }
+#como-funciona p { color: #CDBFA9; }
+#como-funciona .step { border-top-color: #C49A42; }
+
+/* 24/10: "Para quem é" volta ao creme, com os ícones no mesmo estilo de "O que vem incluído" (traço fino, sem caixa) */
+#para-quem { background: #EDE4D7; color: #4D4033; }
+body #para-quem h2, body #para-quem h3 { color: #2D2926; }
+#para-quem p { color: #4D4033; }
+#para-quem .ico-box { background: transparent; border: 0; width: 2.4rem; height: 2.4rem; justify-content: flex-start; color: #8B5C32; }
+#para-quem .ico-box .ico { width: 2.1rem; height: 2.1rem; stroke-width: 1.3; }
+#para-quem .ico-box .ico .n { fill: #C49A42; }
+/* "Para quem é" e "O que vem incluído" ficam colados e ambos creme: uma linha fina separa os dois */
+#o-que-entra { border-top: 1px solid rgba(22, 20, 16, .10); }

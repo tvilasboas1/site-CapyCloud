@@ -2,1688 +2,1460 @@ openapi: 3.0.3
 info:
   title: CapyFiscal API
   version: '1.0'
-  description: 'API de emissão de NF-e (modelo 55, layout 4.00) da Capycloud.
-
-
-    Autenticação: HTTP Basic com o token como usuário e senha em branco, ou Bearer. Há um token para o ambiente de testes
-    (homologação) e outro para produção.'
-  contact:
-    name: Capycloud
-    url: https://www.capycloud.com.br
+  description: API de emissão de NF-e (modelo 55, layout 4.00) da Capycloud.
 servers:
 - url: https://api-fiscal.capycloud.com.br/v2
-  description: Produção (tpAmb=1)
+  description: Produção
 - url: https://homologacao-fiscal.capycloud.com.br/v2
-  description: Homologação (tpAmb=2)
+  description: Testes (homologação)
 security:
 - BasicAuth: []
 - BearerAuth: []
 tags:
-- name: NFe
-- name: Webhooks
+- name: Notas fiscais
+  description: Emitir, consultar, cancelar e corrigir notas. Usa o token da empresa.
+- name: Numeração
+  description: Inutilização de números que não serão usados.
+- name: Arquivos
+  description: Download do XML e do DANFE.
+- name: Avisos (webhooks)
+  description: Avisos automáticos para o seu sistema quando a nota muda de situação.
 - name: Empresas
+  description: Cadastro das empresas emissoras. Usa o token de integrador.
+- name: Serviço
+  description: Situação do serviço.
 paths:
   /nfe:
     post:
       tags:
-      - NFe
-      summary: Emitir
-      description: 'Recebe o payload da NF-e e inicia o envio para autorização na SEFAZ.
+      - Notas fiscais
+      summary: Emitir uma nota
+      description: 'Recebe os dados da nota, confere e coloca na fila de envio à SEFAZ. A resposta vem na hora com `processando_autorizacao`;
+        o resultado chega pelo aviso (webhook) ou pela consulta.
 
-        Por padrão, o fluxo é **assíncrono**: a API confirma o recebimento da requisição e a nota segue em fila até o processamento.
-        Quando permitido pelo estado e pela configuração da conta, a emissão pode ocorrer de forma **síncrona**, com o resultado
-        retornado na mesma requisição.
 
-        Para acompanhar o status até a autorização, use a consulta da nota ou os webhooks.
-
-        A NF-e na versão 4.00 admite muitos campos; o schema NFeRequest lista os principais.'
-      operationId: emitir_nfe
+        **Reenvio com a mesma referência:** se a nota ainda está em processamento, volta `pending_operation`; se já foi autorizada,
+        cancelada ou denegada, volta `already_processed`; se foi rejeitada (`erro_autorizacao`), os novos dados são aceitos
+        como uma nova tentativa da mesma nota.'
+      responses:
+        '202':
+          description: Recebida e na fila.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nota'
+              example:
+                cnpj_emitente: '11222333000181'
+                ref: venda-123
+                status: processando_autorizacao
+        '400':
+          description: Referência ausente ou inválida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: requisicao_invalida
+                mensagem: 'Parâmetro "ref" inválido: use letras, números, "-" e "_" (até 64 caracteres).'
+        '401': &id001
+          $ref: '#/components/responses/NaoAutorizado'
+        '415': &id004
+          $ref: '#/components/responses/SemCorpo'
+        '422':
+          description: Dados inválidos ou nota já em andamento.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: erro_validacao_schema
+                mensagem: Erro na validação dos dados da nota.
+                erros:
+                - campo: itens[1].cfop
+                  mensagem: 'CFOP 6102 incompatível: saída com local_destino 1 pede CFOP iniciado em 5'
+        '429': &id002
+          $ref: '#/components/responses/LimiteExcedido'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NFe'
       parameters:
       - name: ref
         in: query
         required: true
-        description: Referência única da NFe no seu sistema
         schema:
           type: string
-          example: '12345'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NFeRequest'
-      responses:
-        '201':
-          description: NFe autorizada (emissão síncrona)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NFeAutorizadaResponse'
-              examples:
-                NFe autorizada:
-                  $ref: '#/components/examples/NFeAutorizada'
-        '202':
-          description: NFe em processamento (emissão assíncrona)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NFeProcessandoResponse'
-              examples:
-                Processando autorização:
-                  $ref: '#/components/examples/ProcessandoAutorizacao'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              example:
-                codigo: requisicao_invalida
-                mensagem: Parâmetro "ref" não informado.
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '415':
-          $ref: '#/components/responses/InvalidMediaType'
-        '422':
-          description: O servidor entendeu a requisição, mas os dados são inválidos ou não podem ser processados
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Permissão negada:
-                  $ref: '#/components/examples/PermissaoNegada'
-                Operação pendente:
-                  value:
-                    codigo: pending_operation
-                    mensagem: A nota fiscal ainda está em processamento.
-                Nota fiscal já autorizada:
-                  value:
-                    codigo: already_processed
-                    mensagem: A nota fiscal já foi autorizada.
-                Erro de validação:
-                  value:
-                    codigo: erro_validacao_schema
-                    mensagem: Erro na validação do Schema XML, verifique o detalhamento dos erros.
-                    erros:
-                    - mensagem: Tipo documento não pode ser vazio
-                      campo: tipo_documento
+          pattern: ^[A-Za-z0-9_-]{1,64}$
+        description: Referência única da nota no seu sistema (letras, números, - e _, até 64 caracteres). É por ela que você
+          consulta, cancela e corrige a nota depois.
   /nfe/{referencia}:
-    delete:
-      tags:
-      - NFe
-      summary: Cancelar
-      description: "Cancela uma NFe já autorizada.\n\nEste método é **síncrono**, ou seja, a comunicação com a SEFAZ será\
-        \ feita imediatamente.\n\nA NFe poderá ser cancelada em até 24 horas após a emissão. No entanto, alguns estados \n\
-        podem permitir um prazo maior para o cancelamento.\n"
-      operationId: cancelar_nfe
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        description: Referência da NFe
-        schema:
-          type: string
-          example: '12345'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CancelamentoNFeRequest'
-      responses:
-        '200':
-          description: NFe cancelada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelamentoNFeResponse'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              example:
-                codigo: requisicao_invalida
-                mensagem: Parâmetro "justificativa" deve ter entre 15 e 255 caracteres.
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '415':
-          $ref: '#/components/responses/InvalidMediaType'
-        '422':
-          description: O servidor entendeu a requisição, mas os dados são inválidos ou não podem ser processados
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Não autorizada:
-                  $ref: '#/components/examples/NaoAutorizado'
     get:
       tags:
-      - NFe
-      summary: Consultar
-      description: 'Consulta o status de uma NFe emitida.
-
-
-        Retorna informações sobre o processamento da nota, incluindo status de autorização,
-
-        caminhos para download do XML e DANFe, e dados de eventos associados.
-
-        '
-      operationId: consultar_nfe
+      - Notas fiscais
+      summary: Consultar uma nota
+      description: Devolve a situação atual da nota. Depois da autorização, traz a chave, o número, o protocolo e os caminhos
+        do XML e do DANFE.
+      responses:
+        '200':
+          description: Situação da nota.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nota'
+              example:
+                cnpj_emitente: '11222333000181'
+                ref: venda-123
+                status: autorizado
+                status_sefaz: '100'
+                mensagem_sefaz: Autorizado o uso da NF-e
+                chave_nfe: NFe35261111222333000181550010000015321000015320
+                numero: '1532'
+                serie: '1'
+                protocolo: '135260000123456'
+                caminho_xml_nota_fiscal: /arquivos/11222333000181/202611/XMLs/35261111222333000181550010000015321000015320-nfe.xml
+                caminho_danfe: /arquivos/11222333000181/202611/DANFEs/35261111222333000181550010000015321000015320.pdf
+        '401': *id001
+        '404': &id003
+          $ref: '#/components/responses/NaoEncontrado'
+        '429': *id002
       parameters:
-      - name: referencia
+      - &id005
+        name: referencia
         in: path
         required: true
-        description: Referência da NFe
         schema:
           type: string
-          example: '12345'
+          pattern: ^[A-Za-z0-9_-]{1,64}$
+        description: A referência que o seu sistema deu à nota no envio.
       - name: completa
         in: query
         required: false
-        description: Se informado como 1, retorna dados completos da requisição e protocolo
         schema:
           type: integer
           enum:
           - 0
           - 1
-          example: 1
+        description: 1 = inclui os dados enviados e o protocolo completo da SEFAZ.
+    delete:
+      tags:
+      - Notas fiscais
+      summary: Cancelar uma nota
+      description: Cancela uma nota autorizada. A resposta já traz o resultado da SEFAZ. O prazo legal para cancelar é de
+        24 horas depois da autorização na maioria das UFs.
       responses:
         '200':
-          description: Requisição processada com sucesso
+          description: Resultado do cancelamento.
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: '#/components/schemas/NFeProcessandoResponse'
-                - $ref: '#/components/schemas/NFeAutorizadaResponse'
-                - $ref: '#/components/schemas/CanceladaResponse'
-                - $ref: '#/components/schemas/ErroAutorizacaoResponse'
-              examples:
-                Processando autorização:
-                  $ref: '#/components/examples/ProcessandoAutorizacao'
-                Autorizada:
-                  $ref: '#/components/examples/NFeAutorizada'
-                Autorizada completa:
-                  $ref: '#/components/examples/NFeAutorizadaCompleta'
-                Cancelada:
-                  $ref: '#/components/examples/CanceladaResponse'
-                Erro autorização:
-                  $ref: '#/components/examples/ErroAutorizacaoResponse'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: '#/components/schemas/CancelamentoResultado'
+              example:
+                status: cancelado
+                status_sefaz: '135'
+                mensagem_sefaz: Evento registrado e vinculado a NF-e
+                caminho_xml_cancelamento: /arquivos/11222333000181/202611/XMLs/35261111222333000181550010000015321000015320-can.xml
+        '400':
+          description: Justificativa fora do tamanho ou nota não autorizada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: requisicao_invalida
+                mensagem: Parâmetro "justificativa" deve ter entre 15 e 255 caracteres.
+        '401': *id001
+        '404': *id003
+        '415': *id004
+        '422':
+          description: A nota já foi cancelada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: already_processed
+                mensagem: A nota fiscal já foi cancelada.
+        '429': *id002
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cancelamento'
+      parameters:
+      - *id005
   /nfe/{referencia}/carta_correcao:
     post:
       tags:
-      - NFe
-      summary: Emitir Carta de Correção
-      description: "Emite uma Carta de Correção Eletrônica (CCe) para uma NFe autorizada.\n\nEste método é **síncrono**, ou\
-        \ seja, a comunicação com a SEFAZ será feita imediatamente.\n\nA CCe pode ser utilizada para corrigir eventuais erros\
-        \ na NFe. As seguintes informações \n**não podem ser corrigidas**:\n- As variáveis que determinam o valor do imposto\
-        \ (base de cálculo, alíquota, etc.)\n- A correção de dados cadastrais que implique mudança do remetente ou do destinatário\n\
-        - A data de emissão ou de saída\n\nÉ possível enviar até 20 correções diferentes, sendo que será válido sempre a última\
-        \ correção enviada.\n"
-      operationId: emitir_carta_correcao
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        description: Referência da NFe
-        schema:
-          type: string
-          example: '12345'
+      - Notas fiscais
+      summary: Emitir carta de correção
+      description: 'Corrige informações de uma nota autorizada. A resposta já traz o resultado da SEFAZ. Cada nota aceita
+        até 20 cartas; a mais recente substitui as anteriores.
+
+
+        A carta de correção não pode alterar valores, impostos, dados cadastrais que mudem o emitente ou o destinatário, nem
+        a data de emissão ou de saída.'
+      responses:
+        '200':
+          description: Resultado da carta de correção.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartaCorrecaoResultado'
+        '400':
+          description: Texto fora do tamanho ou nota não autorizada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nfe_nao_autorizada
+                mensagem: Nota fiscal não autorizada.
+        '401': *id001
+        '404': *id003
+        '415': *id004
+        '422':
+          description: Limite de cartas atingido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: limite_cartas
+                mensagem: Limite de 20 cartas de correção atingido para esta nota.
+        '429': *id002
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CartaCorrecaoRequest'
-      responses:
-        '200':
-          description: Carta de correção autorizada
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CartaCorrecaoResponse'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Requisição inválida:
-                  value:
-                    codigo: requisicao_invalida
-                    mensagem: Parâmetro "correcao" deve ter entre 15 e 1000 caracteres.
-                Não autorizada:
-                  $ref: '#/components/examples/NaoAutorizado'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '415':
-          $ref: '#/components/responses/InvalidMediaType'
+              $ref: '#/components/schemas/CartaCorrecao'
+      parameters:
+      - *id005
   /nfe/inutilizacao:
     post:
       tags:
-      - NFe
-      summary: Inutilizar Numeração
-      description: "Inutiliza uma faixa de numeração de NFe.\n\nEm uma situação normal você não precisará informar ao SEFAZ\
-        \ a inutilização de um número \nda NFe, pois a API controla automaticamente a numeração das notas. Porém, se por alguma\
-        \ \nsituação específica for necessário a inutilização de alguma faixa de números você poderá \nusar este endpoint.\n\
-        \nEste método é **síncrono**.\n"
-      operationId: inutilizar_numeracao
+      - Numeração
+      summary: Inutilizar numeração
+      description: 'Informa à SEFAZ que uma faixa de números não será usada. No dia a dia não é preciso: o CapyFiscal controla
+        a numeração e não pula números. Use quando a numeração de outro emissor deixou um buraco.'
+      responses:
+        '200':
+          description: Resultado da inutilização.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InutilizacaoResultado'
+        '400':
+          description: Parâmetros ausentes ou inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: requisicao_invalida
+                mensagem: 'Parâmetros obrigatórios: justificativa.'
+        '401': *id001
+        '415': *id004
+        '429': *id002
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InutilizacaoRequest'
-      responses:
-        '200':
-          description: Inutilização realizada
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InutilizacaoResponse'
-              examples:
-                Autorização:
-                  value:
-                    status_sefaz: 102
-                    mensagem_sefaz: Inutilizacao de numero homologado
-                    serie: 1
-                    numero_inicial: 999
-                    numero_final: 1000
-                    modelo: 55
-                    cnpj: 12345678000123
-                    status: autorizado
-                    caminho_xml: /arquivos_development/123456789/201906/XMLs/190750450500010000001000000999000001000-inu.xml
-                    protocolo_sefaz: 135210002233889
-                Rejeição:
-                  value:
-                    status_sefaz: 215
-                    mensagem_sefaz: 'Rejeição: Falha no schema XML'
-                    cnpj: 12345678000123
-                    modelo: 55
-                    serie: 1
-                    numero_inicial: 1
-                    numero_final: 1000
-                    status: erro_autorizacao
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Não autorizada:
-                  $ref: '#/components/examples/NaoAutorizado'
-                Requisição inválida:
-                  value:
-                    codigo: requisicao_invalida
-                    mensagem: Parâmetros "cnpj" ou "cpf" não informados.
-                Número inválido:
-                  value:
-                    codigo: requisicao_invalida
-                    mensagem: 'Parâmetro "numero_inicial" inválido: informe apenas números (dígitos de 0 a 9)'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '415':
-          $ref: '#/components/responses/InvalidMediaType'
-        '422':
-          description: O servidor entendeu a requisição, mas os dados são inválidos ou não podem ser processados
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Permissão negada:
-                  $ref: '#/components/examples/PermissaoNegada'
+              $ref: '#/components/schemas/Inutilizacao'
   /nfe/inutilizacoes:
     get:
       tags:
-      - NFe
-      summary: Consultar Inutilizações
-      description: "Consulta XMLs de numerações inutilizadas.\n\nPermite consultar as faixas de numeração de notas fiscais\
-        \ eletrônicas (NF-e) \ndeclaradas como não utilizadas.\n"
-      operationId: consultar_inutilizacoes
+      - Numeração
+      summary: Listar inutilizações
+      description: Lista as faixas inutilizadas de uma empresa, das mais recentes para as mais antigas.
+      responses:
+        '200':
+          description: Lista de inutilizações.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InutilizacaoResultado'
+        '400':
+          description: CNPJ não informado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: requisicao_invalida
+                mensagem: Parâmetros "cnpj" ou "cpf" não informados.
+        '401': *id001
+        '429': *id002
       parameters:
       - name: cnpj
         in: query
-        description: CNPJ da empresa (obrigatório se não informado CPF)
-        schema:
+        required: true
+        schema: &id006
           type: string
-          example: '12345678000123'
-      - name: cpf
-        in: query
-        description: CPF da empresa (obrigatório se não informado CNPJ)
-        schema:
-          type: string
+        description: CNPJ da empresa.
       - name: data_recebimento_inicial
         in: query
-        description: Data inicial de recebimento da inutilização pela SEFAZ
         schema:
           type: string
           format: date
       - name: data_recebimento_final
         in: query
-        description: Data final de recebimento da inutilização pela SEFAZ
         schema:
           type: string
           format: date
       - name: numero_inicial
         in: query
-        description: Número inicial inutilizado
         schema:
           type: integer
       - name: numero_final
         in: query
-        description: Número final inutilizado
         schema:
           type: integer
-      responses:
-        '200':
-          description: Lista de inutilizações
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InutilizacaoResponse'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Requisição inválida:
-                  value:
-                    codigo: requisicao_invalida
-                    mensagem: Parâmetros "cnpj" ou "cpf" não informados.
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-  /nfe/{referencia}/email:
-    post:
-      tags:
-      - NFe
-      summary: Enviar NFe por Email
-      description: "Envia a NFe por email para os destinatários informados.\n\nA API imediatamente devolve a requisição com\
-        \ a confirmação dos emails. \nOs emails serão enviados em segundo plano, por isso pode levar alguns minutos \naté\
-        \ que eles cheguem à caixa postal.\n"
-      operationId: enviar_email_nfe
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        description: Referência da NFe
-        schema:
-          type: string
-          example: '12345'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EnvioEmailRequest'
-      responses:
-        '200':
-          description: Emails agendados para envio
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  mensagem:
-                    type: string
-                    description: Mensagem de confirmação
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Não autorizada:
-                  $ref: '#/components/examples/NaoAutorizado'
-                Requisição inválida:
-                  value:
-                    codigo: requisicao_invalida
-                    mensagem: Parâmetro "emails" não informado.
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '415':
-          $ref: '#/components/responses/InvalidMediaType'
   /nfe/{referencia}/hook:
     post:
       tags:
-      - NFe
-      summary: Solicitar reenvio de notificação de NFe
-      description: Para efeitos de teste ou para recuperar notificações perdidas é possível solicitar à API o reenvio desta
-        notificação para todos os gatilhos cadastrados.
-      operationId: reenviar_hook_nfe
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        description: Referência da NFe
-        schema:
-          type: string
+      - Avisos (webhooks)
+      summary: Reenviar o aviso de uma nota
+      description: Manda de novo o aviso da situação atual da nota para todos os endereços cadastrados. Útil para testes ou
+        para recuperar um aviso que o seu sistema perdeu.
       responses:
         '200':
-          description: Lista de gatilhos acionados
+          description: Avisos agendados.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Hook'
-  /nfe/danfe:
-    post:
-      tags:
-      - NFe
-      summary: Pré-visualização de DANFe
-      description: 'Gera uma DANFe de preview para visualização.
-
-
-        A DANFe gerada por este endpoint é apenas para fins de visualização e **não possui valor fiscal**.
-
-        Para a emissão de uma NFe com valor fiscal, utilize o processo de emissão padrão.
-
-        '
-      operationId: previsualizar_danfe
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NFeRequest'
-          application/xml:
-            schema:
-              type: string
-              description: Conteúdo do XML da NFe
-      responses:
-        '200':
-          description: DANFe gerada com sucesso
-          content:
-            application/pdf:
-              schema:
-                type: string
-                format: binary
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-  /hooks/{id}:
-    get:
-      tags:
-      - Webhooks
-      summary: Consultar por ID
-      operationId: consultar_webhook
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: Identificador do gatilho
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Gatilho encontrado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Hook'
-    delete:
-      tags:
-      - Webhooks
-      summary: Excluir
-      operationId: excluir_webhook
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: Identificador do gatilho
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Gatilho excluído com sucesso
-          content:
-            application/json:
-              schema:
-                allOf:
-                - $ref: '#/components/schemas/Hook'
-                - type: object
+                  type: object
                   properties:
-                    deleted:
-                      type: boolean
-                      example: true
-  /hooks:
-    post:
-      tags:
-      - Webhooks
-      summary: Criar
-      description: 'Cria um novo gatilho para receber notificações de eventos.
-
-        '
-      operationId: criar_webhook
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/HookCreateRequest'
-            example:
-              cnpj: '12345678000123'
-              event: nfe
-              url: http://minha.url/nfe
-      responses:
-        '200':
-          description: Gatilho criado com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Hook'
-              example:
-                id: Vj5rmkBq
-                url: http://minha.url/nfe
-                authorization: null
-                authorization_header: null
-                event: nfe
-                cnpj: '12345678000123'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
-          $ref: '#/components/responses/HookNaoEncontrado'
-    get:
-      tags:
-      - Webhooks
-      summary: Listar
-      description: Lista todos os gatilhos cadastrados para o token.
-      operationId: listar_webhooks
-      responses:
-        '200':
-          description: Lista de gatilhos
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Hook'
-        '400':
-          description: Requisição inválida
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-  /empresas/{id}:
-    put:
-      tags:
-      - Empresas
-      summary: Atualizar
-      description: 'Altera os dados de uma empresa. Utilize `dry_run=1` para simular a alteração sem efetivar no banco de
-        dados.
-
-        '
-      operationId: atualizar_empresa
+                    id: *id006
+                    event: *id006
+        '401': *id001
+        '404': *id003
+        '429': *id002
       parameters:
-      - name: id
-        in: path
-        required: true
-        description: Identificador único da empresa
-        schema:
-          type: string
-          example: '123'
-      - name: dry_run
-        in: query
-        required: false
-        description: Simula a alteração da empresa sem persistir os dados
-        schema:
-          type: integer
-          enum:
-          - 1
-          example: 1
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EmpresaCreate'
-            example:
-              nome: Nome da empresa Ltda
-              nome_fantasia: Nome Fantasia
-              bairro: Vila Isabel
-              cep: 80210000
-              cnpj: '12345678000123'
-              complemento: Loja 1
-              discrimina_impostos: true
-              email: test@example.com
-              enviar_email_destinatario: true
-              inscricao_estadual: 1234
-              inscricao_municipal: 46532
-              logradouro: Rua João da Silva
-              numero: '153'
-              regime_tributario: 1
-              telefone: '4130333333'
-              municipio: Curitiba
-              uf: PR
-      responses:
-        '200':
-          description: Requisição processada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmpresaResponse'
-              examples:
-                Empresa atualizada com sucesso:
-                  $ref: '#/components/examples/EmpresaResponse'
-        '400':
-          $ref: '#/components/responses/ParametrosInvalidos'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/EmpresaNaoEncontrada'
-        '422':
-          description: O servidor entendeu a requisição, mas os dados são inválidos ou não podem ser processados
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationErrorResponse'
-              example:
-                codigo: erro_validacao
-                mensagem: Erro de validação
-                erros:
-                - codigo: erro_validacao
-                  mensagem: Arquivo certificado base64 Certificado não pertence ao CNPJ informado
-                  campo: arquivo_certificado_base64
-    get:
-      tags:
-      - Empresas
-      summary: Consultar por ID
-      description: Retorna os dados de uma empresa.
-      operationId: consultar_empresa_por_id
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: Identificador único da empresa
-        schema:
-          type: string
-          example: '123'
-      responses:
-        '200':
-          description: Requisição processada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmpresaResponse'
-              examples:
-                Empresa consultada com sucesso:
-                  $ref: '#/components/examples/EmpresaResponse'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/EmpresaNaoEncontrada'
-        '422':
-          $ref: '#/components/responses/PermissaoNegada'
-    delete:
-      tags:
-      - Empresas
-      summary: Excluir
-      description: 'Exclui uma empresa e retorna seus dados. Esta operação não é reversível.
-
-        '
-      operationId: excluir_empresa
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: Identificador único da empresa
-        schema:
-          type: string
-          example: '123'
-      responses:
-        '200':
-          description: Requisição processada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmpresaResponse'
-              examples:
-                Empresa excluída com sucesso:
-                  $ref: '#/components/examples/EmpresaResponse'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '404':
-          $ref: '#/components/responses/EmpresaNaoEncontrada'
-        '422':
-          $ref: '#/components/responses/PermissaoNegada'
-  /empresas:
-    post:
-      tags:
-      - Empresas
-      summary: Criar
-      description: 'Cria uma nova empresa. Utilize `dry_run=1` para simular a criação sem efetivar no banco de dados.
-
-        '
-      operationId: criar_empresa
-      parameters:
-      - name: dry_run
-        in: query
-        required: false
-        description: Simula a criação da empresa sem persistir os dados
-        schema:
-          type: integer
-          enum:
-          - 1
-          example: 1
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/EmpresaCreate'
-            example:
-              nome: Nome da empresa Ltda
-              nome_fantasia: Nome Fantasia
-              bairro: Vila Isabel
-              cep: 80210000
-              cnpj: '12345678000123'
-              complemento: Loja 1
-              discrimina_impostos: true
-              email: test@example.com
-              enviar_email_destinatario: true
-              inscricao_estadual: 1234
-              inscricao_municipal: 46532
-              logradouro: Rua João da Silva
-              numero: '153'
-              regime_tributario: 1
-              telefone: '4130333333'
-              municipio: Curitiba
-              uf: PR
-              habilita_nfe: true
-              arquivo_certificado_base64: MIIj4gIBAzCCI54GCSqGSIb3DQEHAaCC..apagado…ASD==
-              senha_certificado: 123456
-      responses:
-        '200':
-          description: Requisição processada com sucesso
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmpresaResponse'
-              examples:
-                Empresa criada com sucesso:
-                  $ref: '#/components/examples/EmpresaResponse'
-        '400':
-          $ref: '#/components/responses/ParametrosInvalidos'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
-        '422':
-          description: O servidor entendeu a requisição, mas os dados são inválidos ou não podem ser processados
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationErrorResponse'
-              examples:
-                Certificado inválido:
-                  value:
-                    codigo: erro_validacao
-                    mensagem: Erro de validação
-                    erros:
-                    - codigo: erro_validacao
-                      mensagem: Arquivo certificado base64 Houve um erro ao instalar o certificado, verifique se a senha está
-                        correto e o arquivo está no formato PFX ou P12 codificado em base64
-                      campo: arquivo_certificado_base64
-                Certificado não pertence ao CNPJ:
-                  value:
-                    codigo: erro_validacao
-                    mensagem: Erro de validação
-                    erros:
-                    - codigo: erro_validacao
-                      mensagem: Arquivo certificado base64 Certificado não pertence ao CNPJ informado
-                      campo: arquivo_certificado_base64
-                Certificado vencido:
-                  value:
-                    codigo: erro_validacao
-                    mensagem: Erro de validação
-                    erros:
-                    - codigo: erro_validacao
-                      mensagem: Arquivo certificado base64 Certificado com prazo de validade vencido
-                      campo: arquivo_certificado_base64
-    get:
-      tags:
-      - Empresas
-      summary: Listar
-      description: 'Lista empresas com suporte a filtros e paginação. Cada página retorna até 50 registros.
-
-        '
-      operationId: listar_empresas
-      parameters:
-      - name: cnpj
-        in: query
-        required: false
-        description: Número do CNPJ da empresa (somente números)
-        schema:
-          type: string
-          pattern: ^[0-9]{14}$
-          example: '12345678000123'
-      - name: cpf
-        in: query
-        required: false
-        description: Número do CPF da empresa (somente números)
-        schema:
-          type: string
-          pattern: ^[0-9]{11}$
-          example: '12345678909'
-      - name: offset
-        in: query
-        required: false
-        description: Deslocamento para paginação. Cada página retorna até 50 registros.
-        schema:
-          type: integer
-          minimum: 0
-          example: 50
-      responses:
-        '200':
-          description: Requisição processada com sucesso
-          headers:
-            X-Total-Count:
-              description: Total de ocorrências da consulta
-              schema:
-                type: integer
-              example: 123
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EmpresaResponse'
-              examples:
-                Lista de empresas:
-                  $ref: '#/components/examples/ListaEmpresaResponse'
-        '401':
-          $ref: '#/components/responses/AccessDenied'
+      - *id005
   /nfe/{referencia}.xml:
     get:
       tags:
-      - NFe
-      summary: XML autorizado
-      description: 'Devolve o XML da nota autorizada (nfeProc: NF-e + protocolo). O mesmo arquivo também pode ser baixado
-        pelo caminho_xml_nota_fiscal devolvido na consulta.'
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        schema:
-          type: string
+      - Arquivos
+      summary: Baixar o XML autorizado
+      description: Atalho pela referência. O mesmo arquivo pode ser baixado pelo caminho devolvido na consulta.
       responses:
         '200':
-          description: XML
+          description: Arquivo.
           content:
             application/xml:
               schema:
                 type: string
-        '404':
-          description: Não encontrada
+                format: binary
+        '401': *id001
+        '404': *id003
         '422':
-          description: Nota ainda não autorizada
+          description: A nota ainda não foi autorizada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nfe_nao_autorizada
+                mensagem: Nota ainda não autorizada.
+        '429': *id002
+      parameters:
+      - *id005
   /nfe/{referencia}.pdf:
     get:
       tags:
-      - NFe
-      summary: DANFE em PDF
-      parameters:
-      - name: referencia
-        in: path
-        required: true
-        schema:
-          type: string
+      - Arquivos
+      summary: Baixar o DANFE em PDF
+      description: Atalho pela referência. O mesmo arquivo pode ser baixado pelo caminho devolvido na consulta.
       responses:
         '200':
-          description: PDF
+          description: Arquivo.
           content:
             application/pdf:
               schema:
                 type: string
                 format: binary
-        '404':
-          description: Não encontrada
+        '401': *id001
+        '404': *id003
         '422':
-          description: Nota ainda não autorizada
-  /arquivos/{caminho}:
+          description: A nota ainda não foi autorizada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nfe_nao_autorizada
+                mensagem: Nota ainda não autorizada.
+        '429': *id002
+      parameters:
+      - *id005
+  /arquivos/{cnpj}/{periodo}/{pasta}/{arquivo}:
     get:
       tags:
-      - NFe
-      summary: Download de XML/PDF pelo caminho devolvido nas respostas
-      description: 'Os campos caminho_xml_nota_fiscal, caminho_danfe, caminho_xml_cancelamento, caminho_xml_carta_correcao,
-        caminho_pdf_carta_correcao e caminho_xml (inutilização) apontam para esta rota. Formato: /arquivos/{cnpj}/{AAAAMM}/XMLs/{chave}-nfe.xml,
-        -can.xml, -cce-NN.xml, -inu.xml e /arquivos/{cnpj}/{AAAAMM}/DANFEs/{chave}.pdf. Exige o token da empresa dona.'
+      - Arquivos
+      summary: Baixar um arquivo pelo caminho
+      description: Os campos `caminho_...` das respostas apontam para esta rota. Ela fica no endereço do servidor, sem o `/v2`,
+        e exige o token da empresa dona do arquivo (ou o de integrador).
+      responses:
+        '200':
+          description: Arquivo (XML ou PDF).
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401': *id001
+        '404':
+          description: Arquivo não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Arquivo não encontrado.
+        '429': *id002
       parameters:
-      - name: caminho
+      - name: cnpj
+        in: path
+        required: true
+        schema: *id006
+      - name: periodo
+        in: path
+        required: true
+        schema: *id006
+        description: Ano e mês da emissão (AAAAMM).
+      - name: pasta
         in: path
         required: true
         schema:
           type: string
+          enum:
+          - XMLs
+          - DANFEs
+      - name: arquivo
+        in: path
+        required: true
+        schema: *id006
+      servers:
+      - url: https://api-fiscal.capycloud.com.br
+        description: Produção
+      - url: https://homologacao-fiscal.capycloud.com.br
+        description: Testes
+  /hooks:
+    post:
+      tags:
+      - Avisos (webhooks)
+      summary: Cadastrar um endereço de aviso
+      description: 'Cadastra o endereço do seu sistema que vai receber os avisos. Guarde o `segredo_hmac` da resposta: ele
+        não aparece de novo.'
       responses:
         '200':
-          description: Arquivo
+          description: Gatilho criado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatilhoNovo'
+        '400':
+          description: Evento ou URL inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: requisicao_invalida
+                mensagem: Parâmetro "url" deve começar com http:// ou https://.
+        '401': *id001
+        '415': *id004
+        '429': *id002
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatilhoCadastro'
+    get:
+      tags:
+      - Avisos (webhooks)
+      summary: Listar endereços de aviso
+      description: Lista os gatilhos ativos visíveis para o token.
+      responses:
+        '200':
+          description: Lista.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Gatilho'
+        '401': *id001
+        '429': *id002
+  /hooks/{id}:
+    get:
+      tags:
+      - Avisos (webhooks)
+      summary: Consultar um endereço de aviso
+      description: Devolve um gatilho pelo id.
+      responses:
+        '200':
+          description: Gatilho.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gatilho'
+        '401': *id001
         '404':
-          description: Não encontrado
+          description: Gatilho não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Gatilho não encontrado
+        '429': *id002
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema: *id006
+    delete:
+      tags:
+      - Avisos (webhooks)
+      summary: Excluir um endereço de aviso
+      description: Para de enviar avisos para este endereço.
+      responses:
+        '200':
+          description: Gatilho excluído.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gatilho'
+        '401': *id001
+        '404':
+          description: Gatilho não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Gatilho não encontrado
+        '429': *id002
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema: *id006
+  /empresas:
+    post:
+      tags:
+      - Empresas
+      summary: Cadastrar uma empresa
+      description: Cadastra uma empresa emissora e já devolve os dois tokens dela, de produção e de testes. Os tokens aparecem
+        só nesta resposta. Exige o token de integrador.
+      responses:
+        '200':
+          description: Empresa cadastrada (ou simulação, com dry_run=1).
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/EmpresaCriada'
+                - $ref: '#/components/schemas/Simulacao'
+        '401': *id001
+        '415': *id004
+        '422': &id007
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: erro_validacao
+                mensagem: Erro de validação
+                erros:
+                - campo: codigo_municipio
+                  mensagem: código IBGE do município deve ter 7 dígitos
+        '429': *id002
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmpresaNova'
+      parameters:
+      - &id009
+        name: dry_run
+        in: query
+        required: false
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+        description: 1 = só confere os dados, sem gravar nada.
+    get:
+      tags:
+      - Empresas
+      summary: Listar empresas
+      description: Lista as empresas do integrador, 50 por página.
+      responses:
+        '200':
+          description: Lista.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Empresa'
+        '401': *id001
+        '429': *id002
+      parameters:
+      - name: cnpj
+        in: query
+        schema: *id006
+        description: Filtra por CNPJ.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        description: Quantos registros pular.
+  /empresas/{id}:
+    get:
+      tags:
+      - Empresas
+      summary: Consultar uma empresa
+      description: Devolve os dados de uma empresa.
+      responses:
+        '200':
+          description: Empresa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empresa'
+        '401': *id001
+        '404':
+          description: Empresa não encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Empresa não encontrada.
+        '429': *id002
+      parameters:
+      - &id008
+        name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - Empresas
+      summary: Alterar uma empresa
+      description: Altera os campos enviados. Para trocar o certificado, envie `arquivo_certificado_base64` e `senha_certificado`.
+      responses:
+        '200':
+          description: Empresa alterada (ou simulação, com dry_run=1).
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/Empresa'
+                - $ref: '#/components/schemas/Simulacao'
+        '401': *id001
+        '404':
+          description: Empresa não encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Empresa não encontrada.
+        '415': *id004
+        '422': *id007
+        '429': *id002
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmpresaAlteracao'
+      parameters:
+      - *id008
+      - *id009
+    delete:
+      tags:
+      - Empresas
+      summary: Desativar uma empresa
+      description: Desativa a empresa e revoga os tokens dela. As notas já emitidas continuam guardadas pelo prazo legal.
+      responses:
+        '200':
+          description: Empresa desativada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empresa'
+        '401': *id001
+        '404':
+          description: Empresa não encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Erro'
+              example:
+                codigo: nao_encontrado
+                mensagem: Empresa não encontrada.
+        '429': *id002
+      parameters:
+      - *id008
   /status:
     get:
       tags:
-      - NFe
-      summary: Status do serviço
-      description: 'Devolve a situação da API e da comunicação com a SEFAZ (cStat 107: em operação; 108 ou 109: paralisada).'
-      security: []
+      - Serviço
+      summary: Situação do serviço
+      description: Mostra se a API está no ar e a última situação conhecida da SEFAZ. Não exige token.
       responses:
         '200':
-          description: OK
+          description: Situação.
           content:
             application/json:
-              example:
-                api: ok
-                fila: 3
-                sefaz:
-                  cStat: '107'
-                  xMotivo: Servico em Operacao
-                  consultado_em: '2026-10-18T22:30:00-03:00'
+              schema:
+                $ref: '#/components/schemas/Status'
+      security: []
 components:
   securitySchemes:
     BasicAuth:
       type: http
       scheme: basic
-      description: 'Usuário = token da empresa (um por ambiente), senha vazia. Authorization: Basic base64("TOKEN:")'
+      description: Usuário = token, senha em branco.
     BearerAuth:
       type: http
       scheme: bearer
-      description: 'Alternativa aceita pelo CapyFiscal: Authorization: Bearer TOKEN. Mesmo token.'
+      description: 'Authorization: Bearer TOKEN'
   schemas:
-    ErrorResponse:
-      title: Erro
+    NFe:
+      type: object
+      properties:
+        natureza_operacao:
+          type: string
+          maxLength: 60
+          minLength: 1
+          description: 'Natureza da operação, como aparece na nota. Ex.: Venda de mercadoria.'
+        data_emissao:
+          type: string
+          description: 'Data e hora da emissão em ISO 8601, com fuso horário. Ex.: 2026-11-03T10:15:00-03:00.'
+        tipo_documento:
+          type: integer
+          description: 0 = entrada, 1 = saída.
+        local_destino:
+          type: integer
+          description: 1 = operação interna, 2 = interestadual, 3 = com o exterior.
+        finalidade_emissao:
+          type: integer
+          default: 1
+          description: 1 = normal, 2 = complementar, 3 = ajuste, 4 = devolução.
+        consumidor_final:
+          type: integer
+          default: 1
+          description: 0 = normal, 1 = consumidor final.
+        presenca_comprador:
+          type: integer
+          default: 1
+          description: 0 = não se aplica, 1 = presencial, 2 = pela internet, 3 = por telefone, 5 = presencial fora do estabelecimento,
+            9 = outros.
+        cnpj_emitente:
+          type: string
+          nullable: true
+          description: Opcional. Se informado, precisa ser o CNPJ da empresa dona do token. Os demais dados do emitente vêm
+            do cadastro da empresa.
+        cpf_destinatario:
+          type: string
+          nullable: true
+          description: CPF do destinatário. Informe CPF ou CNPJ, nunca os dois.
+        cnpj_destinatario:
+          type: string
+          nullable: true
+          description: CNPJ do destinatário. Informe CPF ou CNPJ, nunca os dois.
+        nome_destinatario:
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Nome ou razão social do destinatário.
+        indicador_inscricao_estadual_destinatario:
+          type: integer
+          nullable: true
+          description: 1 = contribuinte do ICMS, 2 = contribuinte isento, 9 = não contribuinte. Para CPF é sempre 9 e é preenchido
+            automaticamente.
+        inscricao_estadual_destinatario:
+          type: string
+          nullable: true
+          description: Inscrição estadual do destinatário, quando houver.
+        logradouro_destinatario:
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Logradouro do destinatário.
+        numero_destinatario:
+          type: string
+          maxLength: 60
+          minLength: 1
+          description: Número do endereço. Aceita texto, como SN.
+        bairro_destinatario:
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Bairro do destinatário.
+        codigo_municipio_destinatario:
+          type: string
+          description: Código IBGE do município, com 7 dígitos. Precisa ser da mesma UF de uf_destinatario.
+        municipio_destinatario:
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Nome do município do destinatário.
+        uf_destinatario:
+          type: string
+          maxLength: 2
+          minLength: 2
+          description: Sigla da UF do destinatário.
+        cep_destinatario:
+          type: string
+          description: CEP do destinatário, com 8 dígitos.
+        email_destinatario:
+          type: string
+          nullable: true
+          description: E-mail do destinatário, gravado na nota.
+        modalidade_frete:
+          type: integer
+          default: 9
+          description: 0 = por conta do emitente, 1 = do destinatário, 2 = de terceiros, 3 = transporte próprio do remetente,
+            4 = transporte próprio do destinatário, 9 = sem frete.
+        valor_frete:
+          type: number
+          default: 0
+          description: Valor total do frete.
+        valor_seguro:
+          type: number
+          default: 0
+          description: Valor total do seguro.
+        valor_desconto:
+          type: number
+          default: 0
+          description: Valor total do desconto.
+        valor_outras_despesas:
+          type: number
+          default: 0
+          description: Valor das outras despesas acessórias.
+        valor_produtos:
+          type: number
+          nullable: true
+          description: Soma do valor_bruto dos itens que entram no total. Se não for enviado, é calculado; se for, precisa
+            bater.
+        valor_total:
+          type: number
+          nullable: true
+          description: Produtos − desconto + frete + seguro + outras despesas. Se não for enviado, é calculado; se for, precisa
+            bater.
+        itens:
+          items:
+            $ref: '#/components/schemas/Item'
+          type: array
+          description: Itens da nota, pelo menos um, com numero_item em sequência a partir de 1. O nome items também é aceito.
+        formas_pagamento:
+          items:
+            $ref: '#/components/schemas/FormaPagamento'
+          type: array
+          description: Obrigatório em nota de saída. A soma dos valores precisa ser igual a valor_total (exceto quando a forma
+            é 90, sem pagamento).
+        informacoes_adicionais_contribuinte:
+          maxLength: 5000
+          type: string
+          nullable: true
+          description: Informações complementares, impressas no DANFE.
+      required:
+      - natureza_operacao
+      - data_emissao
+      - tipo_documento
+      - local_destino
+      - nome_destinatario
+      - logradouro_destinatario
+      - numero_destinatario
+      - bairro_destinatario
+      - codigo_municipio_destinatario
+      - municipio_destinatario
+      - uf_destinatario
+      - cep_destinatario
+      example:
+        natureza_operacao: Venda de mercadoria
+        data_emissao: '2026-11-03T10:15:00-03:00'
+        tipo_documento: 1
+        local_destino: 1
+        cpf_destinatario: '12345678909'
+        nome_destinatario: Maria da Silva
+        logradouro_destinatario: Rua das Flores
+        numero_destinatario: '120'
+        bairro_destinatario: Centro
+        codigo_municipio_destinatario: '3550308'
+        municipio_destinatario: São Paulo
+        uf_destinatario: SP
+        cep_destinatario: '01001000'
+        itens:
+        - numero_item: 1
+          codigo_produto: CAM-001
+          descricao: Camiseta algodão M
+          codigo_ncm: '61091000'
+          cfop: '5102'
+          unidade_comercial: UN
+          quantidade_comercial: 2
+          valor_unitario_comercial: 49.9
+          icms_origem: 0
+          icms_situacao_tributaria: '102'
+          pis_situacao_tributaria: '07'
+          cofins_situacao_tributaria: '07'
+        formas_pagamento:
+        - forma_pagamento: '17'
+          valor_pagamento: 99.8
+      title: Nota fiscal (envio)
+    Item:
+      type: object
+      properties:
+        numero_item:
+          type: integer
+          maximum: 990
+          minimum: 1
+          description: Número do item, de 1 a 990, em sequência.
+        codigo_produto:
+          type: string
+          maxLength: 60
+          minLength: 1
+          description: Código do produto no seu sistema.
+        descricao:
+          type: string
+          maxLength: 120
+          minLength: 1
+          description: Descrição do produto.
+        codigo_ncm:
+          type: string
+          description: NCM com 8 dígitos.
+        cfop:
+          type: string
+          description: 'CFOP com 4 dígitos. O primeiro dígito precisa combinar com a operação: saída interna 5, interestadual
+            6, exterior 7; entrada interna 1, interestadual 2, exterior 3.'
+        unidade_comercial:
+          type: string
+          maxLength: 6
+          minLength: 1
+          description: Unidade de venda, como UN, KG ou CX.
+        quantidade_comercial:
+          type: number
+          description: Quantidade, maior que zero.
+        valor_unitario_comercial:
+          type: number
+          description: Valor unitário, maior que zero.
+        valor_bruto:
+          type: number
+          nullable: true
+          description: Quantidade × valor unitário. Se não for enviado, é calculado; se for, precisa bater.
+        inclui_no_total:
+          type: integer
+          default: 1
+          description: 1 = soma no total da nota, 0 = não soma.
+        icms_origem:
+          type: integer
+          maximum: 8
+          minimum: 0
+          description: Origem da mercadoria, de 0 a 8 (0 = nacional).
+        icms_situacao_tributaria:
+          type: string
+          description: CST do ICMS (2 dígitos, regime normal) ou CSOSN (3 dígitos, Simples Nacional).
+        icms_modalidade_base_calculo:
+          type: integer
+          nullable: true
+          description: Modalidade da base de cálculo do ICMS. Na CST 20, se não for enviada, usa 3 (valor da operação).
+        icms_reducao_base_calculo:
+          type: number
+          nullable: true
+          description: Percentual de redução da base de cálculo. Obrigatório na CST 20.
+        icms_base_calculo:
+          type: number
+          nullable: true
+          description: Base de cálculo do ICMS. Na CST 20, é calculada se não for enviada.
+        icms_aliquota:
+          type: number
+          nullable: true
+          description: Alíquota do ICMS, em %. Obrigatória na CST 20.
+        icms_valor:
+          type: number
+          nullable: true
+          description: Valor do ICMS. Na CST 20, é calculado se não for enviado.
+        pis_situacao_tributaria:
+          type: string
+          description: CST do PIS.
+        cofins_situacao_tributaria:
+          type: string
+          description: CST da COFINS.
+        codigo_beneficio_fiscal:
+          type: string
+          nullable: true
+          description: Código de benefício fiscal (cBenef), quando a UF exigir. Vale só para CST 20, 30, 40, 41, 50, 51, 70
+            e 90.
+        ibs_cbs_situacao_tributaria:
+          type: string
+          nullable: true
+          description: CST do IBS e da CBS, quando aplicável.
+        ibs_cbs_classificacao_tributaria:
+          type: string
+          nullable: true
+          description: Classificação tributária do IBS e da CBS (cClassTrib), quando aplicável.
+      required:
+      - numero_item
+      - codigo_produto
+      - descricao
+      - codigo_ncm
+      - cfop
+      - unidade_comercial
+      - quantidade_comercial
+      - valor_unitario_comercial
+      - icms_origem
+      - icms_situacao_tributaria
+      - pis_situacao_tributaria
+      - cofins_situacao_tributaria
+    FormaPagamento:
+      type: object
+      properties:
+        forma_pagamento:
+          type: string
+          description: 'Código da forma de pagamento: 01 dinheiro, 02 cheque, 03 cartão de crédito, 04 cartão de débito, 15
+            boleto, 17 PIX, 90 sem pagamento, 99 outros.'
+        valor_pagamento:
+          type: number
+          default: 0
+          description: Valor pago nesta forma.
+        indicador_pagamento:
+          type: integer
+          nullable: true
+          description: 0 = à vista, 1 = a prazo.
+        descricao_pagamento:
+          type: string
+          nullable: true
+          description: Descrição da forma de pagamento. Obrigatória quando forma_pagamento é 99.
+      required:
+      - forma_pagamento
+    EmpresaNova:
+      type: object
+      properties:
+        nome: &id010
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Razão social.
+        nome_fantasia: &id011
+          maxLength: 60
+          type: string
+          nullable: true
+          description: Nome fantasia.
+        cnpj: &id012
+          type: string
+          description: CNPJ da empresa.
+        inscricao_estadual: &id013
+          type: string
+          maxLength: 14
+          minLength: 2
+          description: Inscrição estadual.
+        inscricao_municipal: &id014
+          type: string
+          nullable: true
+          description: Inscrição municipal.
+        regime_tributario: &id015
+          type: integer
+          description: 1 = Simples Nacional, 2 = Simples Nacional com excesso de sublimite, 3 = regime normal, 4 = MEI.
+        logradouro: &id016
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Logradouro.
+        numero: &id017
+          type: string
+          maxLength: 60
+          minLength: 1
+          description: Número do endereço. Aceita texto, como SN.
+        complemento: &id018
+          maxLength: 60
+          type: string
+          nullable: true
+          description: Complemento do endereço.
+        bairro: &id019
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Bairro.
+        codigo_municipio: &id020
+          type: string
+          description: Código IBGE do município, com 7 dígitos.
+        municipio: &id021
+          type: string
+          maxLength: 60
+          minLength: 2
+          description: Nome do município.
+        uf: &id022
+          type: string
+          maxLength: 2
+          minLength: 2
+          description: Sigla da UF.
+        cep: &id023
+          type: string
+          description: CEP, com 8 dígitos.
+        telefone: &id024
+          type: string
+          nullable: true
+          description: Telefone.
+        email: &id025
+          type: string
+          nullable: true
+          description: E-mail de contato.
+        cpf_cnpj_contabilidade: &id026
+          type: string
+          nullable: true
+          description: CPF ou CNPJ da contabilidade. Algumas UFs exigem na nota.
+        habilita_nfe: &id027
+          type: boolean
+          default: true
+          description: Habilita a emissão de NF-e.
+        discrimina_impostos: &id028
+          type: boolean
+          default: false
+          description: Calcula e imprime o valor aproximado dos tributos (Lei da Transparência).
+        orientacao_danfe: &id029
+          type: string
+          default: portrait
+          description: 'Layout do DANFE: portrait (retrato), landscape (paisagem) ou simplified (simplificado).'
+        recibo_danfe: &id030
+          type: boolean
+          default: true
+          description: Imprime o canhoto de recebimento no DANFE.
+        serie_nfe_producao: &id031
+          type: integer
+          default: 1
+          description: Série da NF-e em produção.
+        proximo_numero_nfe_producao: &id032
+          type: integer
+          default: 1
+          description: Próximo número da NF-e em produção. Use para continuar a numeração de outro emissor.
+        serie_nfe_homologacao: &id033
+          type: integer
+          default: 1
+          description: Série da NF-e no ambiente de testes.
+        proximo_numero_nfe_homologacao: &id034
+          type: integer
+          default: 1
+          description: Próximo número da NF-e no ambiente de testes.
+        arquivo_certificado_base64:
+          type: string
+          nullable: true
+          description: Certificado digital A1 (arquivo .pfx ou .p12) em base64.
+        senha_certificado:
+          type: string
+          nullable: true
+          description: Senha do certificado. Obrigatória quando arquivo_certificado_base64 é enviado.
+        certificado_especifico: &id035
+          type: boolean
+          default: false
+          description: Marca o certificado como exclusivo desta empresa.
+      required:
+      - nome
+      - cnpj
+      - inscricao_estadual
+      - regime_tributario
+      - logradouro
+      - numero
+      - bairro
+      - codigo_municipio
+      - municipio
+      - uf
+      - cep
+      example:
+        nome: Loja Exemplo Ltda
+        nome_fantasia: Loja Exemplo
+        cnpj: '11222333000181'
+        inscricao_estadual: '123456789'
+        regime_tributario: 1
+        logradouro: Avenida Central
+        numero: '1000'
+        bairro: Centro
+        codigo_municipio: '3550308'
+        municipio: São Paulo
+        uf: SP
+        cep: '01001000'
+        arquivo_certificado_base64: MIIK...
+        senha_certificado: senha-do-certificado
+    EmpresaAlteracao:
+      type: object
+      properties:
+        nome:
+          type: string
+          nullable: true
+          description: Razão social.
+        nome_fantasia:
+          maxLength: 60
+          type: string
+          nullable: true
+          description: Nome fantasia.
+        cnpj:
+          type: string
+          nullable: true
+          description: CNPJ da empresa.
+        inscricao_estadual:
+          type: string
+          nullable: true
+          description: Inscrição estadual.
+        inscricao_municipal:
+          type: string
+          nullable: true
+          description: Inscrição municipal.
+        regime_tributario:
+          type: integer
+          nullable: true
+          description: 1 = Simples Nacional, 2 = Simples Nacional com excesso de sublimite, 3 = regime normal, 4 = MEI.
+        logradouro:
+          type: string
+          nullable: true
+          description: Logradouro.
+        numero:
+          type: string
+          nullable: true
+          description: Número do endereço. Aceita texto, como SN.
+        complemento:
+          maxLength: 60
+          type: string
+          nullable: true
+          description: Complemento do endereço.
+        bairro:
+          type: string
+          nullable: true
+          description: Bairro.
+        codigo_municipio:
+          type: string
+          nullable: true
+          description: Código IBGE do município, com 7 dígitos.
+        municipio:
+          type: string
+          nullable: true
+          description: Nome do município.
+        uf:
+          type: string
+          nullable: true
+          description: Sigla da UF.
+        cep:
+          type: string
+          nullable: true
+          description: CEP, com 8 dígitos.
+        telefone:
+          type: string
+          nullable: true
+          description: Telefone.
+        email:
+          type: string
+          nullable: true
+          description: E-mail de contato.
+        cpf_cnpj_contabilidade:
+          type: string
+          nullable: true
+          description: CPF ou CNPJ da contabilidade. Algumas UFs exigem na nota.
+        habilita_nfe:
+          type: boolean
+          nullable: true
+          description: Habilita a emissão de NF-e.
+        discrimina_impostos:
+          type: boolean
+          nullable: true
+          description: Calcula e imprime o valor aproximado dos tributos (Lei da Transparência).
+        orientacao_danfe:
+          type: string
+          nullable: true
+          description: 'Layout do DANFE: portrait (retrato), landscape (paisagem) ou simplified (simplificado).'
+        recibo_danfe:
+          type: boolean
+          nullable: true
+          description: Imprime o canhoto de recebimento no DANFE.
+        serie_nfe_producao:
+          type: integer
+          nullable: true
+          description: Série da NF-e em produção.
+        proximo_numero_nfe_producao:
+          type: integer
+          nullable: true
+          description: Próximo número da NF-e em produção. Use para continuar a numeração de outro emissor.
+        serie_nfe_homologacao:
+          type: integer
+          nullable: true
+          description: Série da NF-e no ambiente de testes.
+        proximo_numero_nfe_homologacao:
+          type: integer
+          nullable: true
+          description: Próximo número da NF-e no ambiente de testes.
+        arquivo_certificado_base64:
+          type: string
+          nullable: true
+          description: Certificado digital A1 (arquivo .pfx ou .p12) em base64.
+        senha_certificado:
+          type: string
+          nullable: true
+          description: Senha do certificado. Obrigatória quando arquivo_certificado_base64 é enviado.
+        certificado_especifico:
+          type: boolean
+          nullable: true
+          description: Marca o certificado como exclusivo desta empresa.
+      example:
+        telefone: '1133334444'
+        proximo_numero_nfe_producao: 1532
+      description: Envie só os campos que vão mudar.
+    Erro:
       type: object
       properties:
         codigo:
           type: string
-          description: Código do erro.
+          description: Código do erro, estável para o seu sistema tratar.
         mensagem:
           type: string
-          description: Mensagem do erro.
+          description: Explicação em português.
         erros:
           type: array
-          description: Lista de erros.
+          items:
+            $ref: '#/components/schemas/ErroCampo'
+          description: 'Presente nos erros de validação: um item por campo.'
+    ErroCampo:
+      type: object
+      properties:
+        campo:
+          type: string
+          description: Campo com problema. Itens aparecem como itens[2].cfop.
+        mensagem:
+          type: string
+    Nota:
+      type: object
+      description: Situação da nota. Os campos presentes dependem do status.
+      properties:
+        cnpj_emitente: *id006
+        ref:
+          type: string
+          description: A referência que o seu sistema enviou.
+        status:
+          type: string
+          enum:
+          - processando_autorizacao
+          - autorizado
+          - erro_autorizacao
+          - cancelado
+          - denegado
+        status_sefaz:
+          type: string
+          description: Código de retorno da SEFAZ (cStat).
+        mensagem_sefaz:
+          type: string
+          description: Mensagem da SEFAZ.
+        chave_nfe:
+          type: string
+          description: Chave de acesso, com o prefixo NFe.
+        numero: *id006
+        serie: *id006
+        protocolo:
+          type: string
+          description: Número do protocolo de autorização.
+        caminho_xml_nota_fiscal:
+          type: string
+          description: Caminho para baixar o XML autorizado.
+        caminho_danfe:
+          type: string
+          description: Caminho para baixar o DANFE em PDF.
+        caminho_xml_cancelamento:
+          type: string
+          description: Só em notas canceladas.
+        numero_carta_correcao:
+          type: integer
+          description: Sequência da última carta de correção autorizada.
+        caminho_xml_carta_correcao: *id006
+        caminho_pdf_carta_correcao:
+          type: string
+          nullable: true
+        erros:
+          type: array
           items:
             type: object
-            properties:
-              mensagem:
-                type: string
-                description: Mensagem do erro.
-              campo:
-                type: string
-                description: Nome do campo que causou o erro.
-    CancelamentoNFeRequest:
-      title: Requisição de Cancelamento
+          description: 'Só em erro_autorizacao: detalhes da rejeição.'
+        requisicao_nota_fiscal:
+          type: object
+          description: 'Só com completa=1: os dados enviados, já normalizados.'
+        protocolo_nota_fiscal:
+          type: object
+          description: 'Só com completa=1: dados do protocolo da SEFAZ.'
+    Cancelamento:
       type: object
       required:
       - justificativa
       properties:
         justificativa:
           type: string
-          description: Justificativa do cancelamento (15 a 255 caracteres)
           minLength: 15
           maxLength: 255
-          example: Teste de cancelamento de nota fiscal
-    CancelamentoNFeResponse:
-      title: Resposta Cancelamento NFe
+          description: Motivo do cancelamento.
+      example:
+        justificativa: Venda desfeita a pedido do cliente
+    CancelamentoResultado:
       type: object
       properties:
         status:
           type: string
-          description: Status do cancelamento
           enum:
           - cancelado
           - erro_cancelamento
-          example: cancelado
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-          example: '135'
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-          example: Evento registrado e vinculado a NF-e
+        status_sefaz: *id006
+        mensagem_sefaz: *id006
         caminho_xml_cancelamento:
           type: string
-          description: Caminho para download do XML de cancelamento
-    InutilizacaoResponse:
-      title: Resposta Inutilização
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status da inutilização
-          enum:
-          - autorizado
-          - erro_autorizacao
-          example: autorizado
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-          example: '102'
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-          example: Inutilizacao de numero homologado
-        serie:
-          type: string
-          description: Série da numeração
-          example: '1'
-        numero_inicial:
-          type: string
-          description: Número inicial inutilizado
-          example: '999'
-        numero_final:
-          type: string
-          description: Número final inutilizado
-          example: '1000'
-        modelo:
-          type: string
-          description: Modelo do documento (55 para NFe)
-          example: '55'
-        cnpj:
-          type: string
-          description: CNPJ da empresa
-          example: '12345678000123'
-        caminho_xml:
-          type: string
-          description: Caminho do XML para download
-        protocolo_sefaz:
-          type: string
-          description: Número de protocolo da inutilização
-          example: '135210002233889'
-    NFeAutorizadaResponse:
-      title: Resposta NFe Autorizada
-      type: object
-      properties:
-        cnpj_emitente:
-          type: string
-          description: CNPJ do emitente
-        ref:
-          type: string
-          description: Referência da emissão
-        status:
-          type: string
-          description: Status da NFe
-          enum:
-          - autorizado
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-        chave_nfe:
-          type: string
-          description: Chave da NFe
-        numero:
-          type: string
-          description: Número da nota fiscal
-        serie:
-          type: string
-          description: Série da nota fiscal
-        caminho_xml_nota_fiscal:
-          type: string
-          description: Caminho para download do XML
-        caminho_danfe:
-          type: string
-          description: Caminho para download do DANFe
-        caminho_danfe_etiqueta:
-          type: string
-          description: Caminho para download do DANFe Etiqueta
-    CanceladaResponse:
-      title: NFe cancelada
-      type: object
-      properties:
-        cnpj_emitente:
-          type: string
-          description: CNPJ do emitente
-        ref:
-          type: string
-          description: Referência da emissão
-        status:
-          type: string
-          description: Status da NFe
-          enum:
-          - cancelado
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-        chave_nfe:
-          type: string
-          description: Chave da NFe
-        numero:
-          type: string
-          description: Número da nota fiscal
-        serie:
-          type: string
-          description: Série da nota fiscal
-        caminho_xml_nota_fiscal:
-          type: string
-          description: Caminho para download do XML
-        caminho_danfe:
-          type: string
-          description: Caminho para download do DANFe
-        caminho_xml_cancelamento:
-          type: string
-          description: Caminho para download do XML de cancelamento
-    ErroAutorizacaoResponse:
-      title: Erro autorização
-      type: object
-      properties:
-        cnpj_emitente:
-          type: string
-          description: CNPJ do emitente
-        ref:
-          type: string
-          description: Referência da emissão
-        status:
-          type: string
-          description: Status da NFe
-          enum:
-          - erro_autorizacao
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-        erros:
-          type: array
-          description: Lista de erros de validação ou rejeição
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    NFeProcessandoResponse:
-      title: Resposta NFe Processando
-      type: object
-      properties:
-        cnpj_emitente:
-          type: string
-          description: CNPJ do emitente
-          example: '12345678000123'
-        ref:
-          type: string
-          description: Referência da emissão
-          example: referencia_000899_nfe
-        status:
-          type: string
-          description: Status da NFe
-          enum:
-          - processando_autorizacao
-          example: processando_autorizacao
-    CartaCorrecaoRequest:
-      title: Requisição de Carta de Correção
+          description: Presente quando o cancelamento é autorizado.
+    CartaCorrecao:
       type: object
       required:
       - correcao
       properties:
         correcao:
           type: string
-          description: Texto da carta de correção (15 a 1000 caracteres)
           minLength: 15
           maxLength: 1000
-          example: Correção do endereço do destinatário
-        data_evento:
-          type: string
-          format: date-time
-          description: Data do evento (se não informado será usado a data atual)
-    CartaCorrecaoResponse:
-      title: Resposta Carta de Correção
+          description: Texto da correção.
+      example:
+        correcao: O endereço correto do destinatário é Rua das Flores, 210.
+    CartaCorrecaoResultado:
       type: object
       properties:
         status:
           type: string
-          description: Status da carta de correção
           enum:
           - autorizado
           - erro_autorizacao
-          example: autorizado
-        status_sefaz:
-          type: string
-          description: Status na SEFAZ
-          example: '135'
-        mensagem_sefaz:
-          type: string
-          description: Mensagem descritiva da SEFAZ
-          example: Evento registrado e vinculado a NF-e
-        caminho_xml_carta_correcao:
-          type: string
-          description: Caminho para download do XML
-        caminho_pdf_carta_correcao:
-          type: string
-          description: Caminho para download do PDF
+        status_sefaz: *id006
+        mensagem_sefaz: *id006
         numero_carta_correcao:
           type: integer
-          description: Número da carta de correção
-          example: 1
-    NFeRequest:
-      title: Dados da NFe
-      type: object
-      required:
-      - natureza_operacao
-      - data_emissao
-      - tipo_documento
-      - finalidade_emissao
-      - items
-      properties:
-        natureza_operacao:
+        caminho_xml_carta_correcao: *id006
+        caminho_pdf_carta_correcao:
           type: string
-          description: Descrição da natureza da operação a ser realizada pela nota fiscal
-          example: Remessa
-        data_emissao:
-          type: string
-          format: date-time
-          description: Data da emissão da NFe (formato ISO)
-          example: '2024-01-15T12:00:00-03:00'
-        data_entrada_saida:
-          type: string
-          format: date-time
-          description: Data de entrada ou saída da mercadoria
-          example: '2024-01-15T12:00:00-03:00'
-        tipo_documento:
-          type: integer
-          description: 'Tipo da NFe:
-
-            - 0: Nota Fiscal de Entrada
-
-            - 1: Nota Fiscal de Saída
-
-            '
-          enum:
-          - 0
-          - 1
-          example: 1
-        local_destino:
-          type: integer
-          description: 'Local onde a operação irá acontecer:
-
-            - 1: Operação interna
-
-            - 2: Operação interestadual
-
-            - 3: Operação com exterior
-
-            '
-          enum:
-          - 1
-          - 2
-          - 3
-          example: 1
-        finalidade_emissao:
-          type: integer
-          description: 'Finalidade da emissão da nota:
-
-            - 1: Normal
-
-            - 2: Complementar
-
-            - 3: Nota de ajuste
-
-            - 4: Devolução
-
-            '
-          enum:
-          - 1
-          - 2
-          - 3
-          - 4
-          example: 1
-        consumidor_final:
-          type: integer
-          description: 'Indica se a operação é com consumidor final:
-
-            - 0: Normal
-
-            - 1: Consumidor final
-
-            '
-          enum:
-          - 0
-          - 1
-          example: 0
-        presenca_comprador:
-          type: integer
-          description: 'Presença do comprador:
-
-            - 0: Não se aplica
-
-            - 1: Operação presencial
-
-            - 2: Operação não presencial, pela Internet
-
-            - 3: Operação não presencial, Teleatendimento
-
-            - 4: NFC-e em operação com entrega em domicílio
-
-            - 9: Operação não presencial, outros
-
-            '
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 9
-          example: 1
-        cnpj_emitente:
-          type: string
-          description: CNPJ do emitente (usar este ou cpf_emitente)
-          example: '12345678000123'
-        cpf_emitente:
-          type: string
-          description: CPF do emitente (usar este ou cnpj_emitente)
-        nome_emitente:
-          type: string
-          description: Razão social do emitente
-          example: ACME LTDA
-        nome_fantasia_emitente:
-          type: string
-          description: Nome fantasia do emitente
-        logradouro_emitente:
-          type: string
-          description: Logradouro do emitente
-        numero_emitente:
-          type: string
-          description: Número do logradouro do emitente
-        bairro_emitente:
-          type: string
-          description: Bairro do emitente
-        municipio_emitente:
-          type: string
-          description: Município do emitente
-        uf_emitente:
-          type: string
-          description: UF do emitente
-          example: SP
-        cep_emitente:
-          type: string
-          description: CEP do emitente
-        inscricao_estadual_emitente:
-          type: string
-          description: Inscrição Estadual do emitente
-        regime_tributario_emitente:
-          type: integer
-          description: 'Regime tributário do emitente:
-
-            - 1: Simples Nacional
-
-            - 2: Simples Nacional – excesso de sublimite de receita bruta
-
-            - 3: Regime Normal
-
-            '
-          enum:
-          - 1
-          - 2
-          - 3
-        nome_destinatario:
-          type: string
-          description: Nome completo do destinatário
-          example: NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL
-        cnpj_destinatario:
-          type: string
-          description: CNPJ do destinatário (usar este ou cpf_destinatario)
-        cpf_destinatario:
-          type: string
-          description: CPF do destinatário (usar este ou cnpj_destinatario)
-        inscricao_estadual_destinatario:
-          type: string
-          description: Inscrição Estadual do destinatário
-        indicador_inscricao_estadual_destinatario:
-          type: integer
-          description: 'Indicador da IE do destinatário:
-
-            - 1: Contribuinte ICMS
-
-            - 2: Contribuinte isento
-
-            - 9: Não Contribuinte
-
-            '
-          enum:
-          - 1
-          - 2
-          - 9
-        logradouro_destinatario:
-          type: string
-          description: Logradouro do destinatário
-        numero_destinatario:
-          type: string
-          description: Número do logradouro do destinatário
-        bairro_destinatario:
-          type: string
-          description: Bairro do destinatário
-        municipio_destinatario:
-          type: string
-          description: Município do destinatário
-        uf_destinatario:
-          type: string
-          description: UF do destinatário
-        cep_destinatario:
-          type: string
-          description: CEP do destinatário
-        pais_destinatario:
-          type: string
-          description: País do destinatário
-          example: Brasil
-        telefone_destinatario:
-          type: string
-          description: Telefone do destinatário
-        valor_frete:
-          type: number
-          format: float
-          description: Valor total do frete
-          example: 0
-        valor_seguro:
-          type: number
-          format: float
-          description: Valor total do seguro
-          example: 0
-        valor_desconto:
-          type: number
-          format: float
-          description: Valor total do desconto
-          example: 0
-        valor_outras_despesas:
-          type: number
-          format: float
-          description: Valor das despesas acessórias
-          example: 0
-        valor_total:
-          type: number
-          format: float
-          description: Valor total da nota fiscal
-          example: 47.23
-        valor_produtos:
-          type: number
-          format: float
-          description: Valor total dos produtos
-          example: 47.23
-        modalidade_frete:
-          type: integer
-          description: 'Modalidade do frete:
-
-            - 0: Por conta do emitente
-
-            - 1: Por conta do destinatário
-
-            - 2: Por conta de terceiros
-
-            - 9: Sem frete
-
-            '
-          enum:
-          - 0
-          - 1
-          - 2
-          - 9
-          example: 0
-        items:
-          type: array
-          description: Lista de itens da NFe
-          items:
-            $ref: '#/components/schemas/ItemNFe'
-      description: Payload de emissão. Este schema lista os campos principais; o payload completo aceita todos os campos da
-        NF-e 4.00. Os nomes "items" e "itens" são aceitos.
-    ItemNFe:
-      title: Item da NFe
-      type: object
-      required:
-      - numero_item
-      - codigo_produto
-      - descricao
-      - cfop
-      - quantidade_comercial
-      - valor_unitario_comercial
-      - valor_bruto
-      - codigo_ncm
-      properties:
-        numero_item:
-          type: integer
-          description: Numeração sequencial do item (começando em 1)
-          example: 1
-        codigo_produto:
-          type: string
-          description: Código do produto
-          example: '1232'
-        descricao:
-          type: string
-          description: Descrição do produto
-          example: Cartões de Visita
-        cfop:
-          type: string
-          description: Código Fiscal da Operação
-          example: '5923'
-        quantidade_comercial:
-          type: number
-          format: float
-          description: Quantidade da mercadoria
-          example: 100
-        quantidade_tributavel:
-          type: number
-          format: float
-          description: Quantidade tributável da mercadoria
-          example: 100
-        valor_unitario_comercial:
-          type: number
-          format: float
-          description: Valor unitário da mercadoria
-          example: 0.4723
-        valor_unitario_tributavel:
-          type: number
-          format: float
-          description: Valor unitário tributável da mercadoria
-          example: 0.4723
-        unidade_comercial:
-          type: string
-          description: Unidade comercial do produto
-          example: UN
-        unidade_tributavel:
-          type: string
-          description: Unidade tributável do produto
-          example: UN
-        valor_bruto:
-          type: number
-          format: float
-          description: Valor bruto do produto
-          example: 47.23
-        codigo_ncm:
-          type: string
-          description: Código NCM do produto (8 dígitos)
-          example: '49111090'
-        inclui_no_total:
-          type: integer
-          description: 'Valor do item compõe valor total da NFe:
-
-            - 0: Não
-
-            - 1: Sim
-
-            '
-          enum:
-          - 0
-          - 1
-          example: 1
-        icms_origem:
-          type: integer
-          description: 'Origem do ICMS:
-
-            - 0: Nacional
-
-            - 1: Estrangeira (importação direta)
-
-            - 2: Estrangeira (adquirida no mercado interno)
-
-            - 3: Nacional com mais de 40% de conteúdo estrangeiro
-
-            - 4: Nacional produzida através de processos produtivos básicos
-
-            - 5: Nacional com menos de 40% de conteúdo estrangeiro
-
-            - 6: Estrangeira (importação direta) sem produto nacional similar
-
-            - 7: Estrangeira (adquirida no mercado interno) sem produto nacional similar
-
-            '
-          example: 0
-        icms_situacao_tributaria:
-          type: string
-          description: Situação tributária do ICMS
-          example: '41'
-        pis_situacao_tributaria:
-          type: string
-          description: Situação tributária do PIS
-          example: '07'
-        cofins_situacao_tributaria:
-          type: string
-          description: Situação tributária do COFINS
-          example: '07'
-    EnvioEmailRequest:
-      title: Requisição de Envio de Email
-      type: object
-      required:
-      - emails
-      properties:
-        emails:
-          type: array
-          description: Lista de emails que receberão a nota (máximo 10)
-          maxItems: 10
-          items:
-            type: string
-            format: email
-          example:
-          - email1@exemplo.com
-          - email2@exemplo.com
-    InutilizacaoRequest:
-      title: Requisição de Inutilização
+          nullable: true
+    Inutilizacao:
       type: object
       required:
       - cnpj
@@ -1694,884 +1466,216 @@ components:
       properties:
         cnpj:
           type: string
-          description: CNPJ da empresa emitente
-          example: '12345678000123'
+          description: CNPJ da empresa. Com token de empresa, precisa ser o da própria empresa.
         serie:
-          type: string
-          description: Série da numeração da NFe
-          example: '1'
+          type: integer
         numero_inicial:
           type: integer
-          description: Número inicial a ser inutilizado
-          example: 7
         numero_final:
           type: integer
-          description: Número final a ser inutilizado
-          example: 9
         justificativa:
           type: string
-          description: Justificativa da inutilização (mínimo 15 caracteres)
           minLength: 15
-          example: Teste de inutilização de nota
-    Hook:
-      title: Gatilho
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-          format: uri
-        authorization:
-          type: string
-          nullable: true
-        authorization_header:
-          type: string
-          nullable: true
-        event:
-          type: string
-          description: Evento monitorado
-          enum:
-          - nfe
-          - inutilizacao
-        cnpj:
-          type: string
-          description: CNPJ vinculado ao gatilho
-        cpf:
-          type: string
-          description: CPF vinculado ao gatilho
+          maxLength: 255
       example:
-        id: Vj5rmkBq
-        url: http://minha.url/nfe
-        authorization: null
-        authorization_header: null
-        event: nfe
-        cnpj: '12345678000123'
-    HookCreateRequest:
-      title: Criação de gatilho
+        cnpj: '11222333000181'
+        serie: 1
+        numero_inicial: 120
+        numero_final: 122
+        justificativa: Falha no sistema pulou a numeração
+    InutilizacaoResultado:
       type: object
       properties:
-        cnpj:
+        status:
           type: string
-          description: CNPJ da empresa
-        cpf:
+          enum:
+          - autorizado
+          - erro_autorizacao
+        status_sefaz: *id006
+        mensagem_sefaz: *id006
+        cnpj: *id006
+        modelo: *id006
+        serie: *id006
+        numero_inicial: *id006
+        numero_final: *id006
+        protocolo_sefaz: *id006
+        caminho_xml: *id006
+        data_recebimento:
           type: string
-          description: CPF do prestador de serviço
+          nullable: true
+    Gatilho:
+      type: object
+      properties:
+        id: *id006
+        url: *id006
         event:
           type: string
-          description: Evento a ser monitorado
           enum:
           - nfe
-          - inutilizacao
-        url:
-          type: string
-          format: uri
-          description: URL que receberá as notificações
+        cnpj: *id006
         authorization:
           type: string
-          description: Valor a ser enviado no cabeçalho de autorização
           nullable: true
         authorization_header:
           type: string
-          description: Nome do cabeçalho HTTP a ser utilizado para enviar o campo authorization
           nullable: true
+    GatilhoNovo:
+      allOf:
+      - $ref: '#/components/schemas/Gatilho'
+      - type: object
+        properties:
+          segredo_hmac:
+            type: string
+            description: 'Chave para conferir a assinatura de cada aviso. Aparece só nesta resposta: guarde.'
+    GatilhoCadastro:
+      type: object
       required:
       - event
       - url
-      example:
-        cnpj: '12345678000123'
-        event: nfe
-        url: http://minha.url/nfe
-    EmpresaCreate:
-      title: Dados de criação/atualização
-      type: object
       properties:
-        nome:
+        event:
           type: string
-          description: Razão social da empresa
-        nome_fantasia:
+          enum:
+          - nfe
+          description: 'nfe: a nota foi autorizada, recusada, denegada ou cancelada.'
+        url:
           type: string
-          description: Nome fantasia
+          description: Endereço do seu sistema que vai receber os avisos (http ou https).
         cnpj:
           type: string
-        cpf:
+          description: Obrigatório com token de integrador. Com token de empresa, é a própria empresa.
+        authorization:
           type: string
-        inscricao_estadual:
-          type: integer
-          description: Inscrição estadual
-        inscricao_municipal:
-          type: integer
-          description: Inscrição municipal
-        regime_tributario:
-          type: integer
-          description: 'Regime tributário. Valores possíveis:
-
-            1 - Simples Nacional
-
-            2 - Simples Nacional - Excesso de sublimite de receita bruta
-
-            3 - Regime Normal
-
-            4 - Simples Nacional - MEI
-
-            '
-        logradouro:
+          description: Valor enviado num cabeçalho de autenticação, se o seu sistema exigir.
+        authorization_header:
           type: string
-          description: Logradouro do endereço
-        numero:
-          type: string
-          maxLength: 60
-          description: 'Número do endereço. Aceita texto, ex.: "SN" (sem número).'
-        complemento:
-          type: string
-          description: Complemento do endereço
-        municipio:
-          type: string
-          description: Município do endereço
-        bairro:
-          type: string
-          description: Bairro do endereço
-        cep:
-          type: integer
-          description: CEP do endereço
-        uf:
-          type: string
-          description: UF do endereço
-        telefone:
-          type: string
-          description: Telefone da empresa
-        email:
-          type: string
-          format: email
-          description: Email de contato da empresa
-        enviar_email_destinatario:
-          type: boolean
-          description: Habilita envio de e-mail ao destinatário/tomador após emissão (produção)
-        discrimina_impostos:
-          type: boolean
-          description: Habilita o cálculo automático de impostos totais aproximados (Lei da Transparência).
-        habilita_nfe:
-          type: boolean
-          description: Habilita emissão de NFe (modelo 55)
-        orientacao_danfe:
-          type: string
-          enum:
-          - portrait
-          - landscape
-          - simplified
-          description: 'Orientação da DANFe. Valores possíveis: portrait (retrato), simplified (Simplificado Tipo 2) ou landscape
-            (paisagem).'
-        recibo_danfe:
-          type: boolean
-          description: Exibe recibo na DANFe
-        exibe_sempre_ipi_danfe:
-          type: boolean
-          description: Imprime sempre colunas do IPI na DANFe
-        exibe_issqn_danfe:
-          type: boolean
-          description: Mostra dados do ISSQN na DANFe
-        exibe_impostos_adicionais_danfe:
-          type: boolean
-          description: Imprime impostos adicionais na DANFe (II, PIS, COFINS, ICMS UF Destino, ICMS UF Remetente, valor total
-            de tributos)
-        exibe_rastro_danfe:
-          type: boolean
-          description: Exibe dados de rastreabilidade na DANFe
-        exibe_unidade_tributaria_danfe:
-          type: boolean
-          description: Exibe unidade tributária na DANFe
-        exibe_sempre_volumes_danfe:
-          type: boolean
-          description: Mostra sempre volumes na DANFe
-        enviar_email_homologacao:
-          type: boolean
-          description: Habilita envio de e-mail ao destinatário em homologação
-        cpf_cnpj_contabilidade:
-          type: string
-          description: 'CPF/CNPJ da contabilidade da empresa. Alguns estados exigem esta informação (ex.: BA).'
-        arquivo_certificado_base64:
-          type: string
-          description: Arquivo PFX/P12 em base64
-        senha_certificado:
-          type: string
-          description: Senha do certificado digital. Obrigatória apenas se informado arquivo_certificado_base64.
-        certificado_especifico:
-          type: boolean
-          description: Informa se a atualização de certificado é exclusiva para esta empresa.  Se não informado ou false,
-            atualização de certificado é propagada para todas empresas com o mesmo CNPJ base  (matriz e filiais), exceto as
-            que já possuam este campo definido como true.
-        arquivo_logo_base64:
-          type: string
-          description: Logomarca da empresa para DANFE. Utilize PNG até 200x200 pixels. Nem todas as prefeituras aceitam.
-        delete_logo:
-          type: boolean
-          description: Quando verdadeiro, remove a logo existente da empresa
-        nome_responsavel:
-          type: string
-          description: Nome do responsável pela empresa
-        cpf_responsavel:
-          type: string
-          description: CPF do responsável pela empresa
-        smtp_endereco:
-          type: string
-          description: Endereço do servidor SMTP
-        smtp_dominio:
-          type: string
-          description: Domínio do servidor SMTP (HELO)
-        smtp_autenticacao:
-          type: string
-          enum:
-          - plain
-          - login
-          - cram_md5
-          description: Tipo de autenticação do SMTP.
-        smtp_porta:
-          type: integer
-          description: Porta do servidor SMTP
-        smtp_login:
-          type: string
-          description: Login do servidor SMTP (se exigir autenticação)
-        smtp_senha:
-          type: string
-          description: Senha do servidor SMTP (se exigir autenticação)
-        smtp_remetente:
-          type: string
-          description: Remetente (from) dos e-mails enviados
-        smtp_responder_para:
-          type: string
-          description: Endereço de resposta (reply-to) dos e-mails enviados
-        smtp_modo_verificacao_openssl:
-          type: string
-          enum:
-          - peer
-          - none
-          description: Modo de verificação do OpenSSL.
-        smtp_habilita_starttls:
-          type: boolean
-          description: Utiliza STARTTLS ao conectar no SMTP
-        smtp_ssl:
-          type: boolean
-          description: Utiliza SSL ao conectar no SMTP
-        smtp_tls:
-          type: boolean
-          description: Utiliza TLS ao conectar no SMTP
-        proximo_numero_nfe_producao:
-          type: string
-          description: Próximo número da NFe a ser emitida em produção (calculado automaticamente)
-        proximo_numero_nfe_homologacao:
-          type: string
-          description: Próximo número da NFe a ser emitida em homologação (calculado automaticamente)
-        serie_nfe_producao:
-          type: string
-          description: 'Série da NFe em produção (padrão: 1)'
-        serie_nfe_homologacao:
-          type: string
-          description: 'Série da NFe em homologação (padrão: 1)'
-        nfe_sincrono:
-          type: boolean
-          description: 'Define emissão síncrona da NFe. Se verdadeiro, a autorização/rejeição ocorre na mesma requisição.
-
-            Em caso de SEFAZ indisponível e contingência desligada, não há alternância automática; será necessário reenviar
-            quando a contingência estiver disponível.
-
-            '
-        nfe_sincrono_homologacao:
-          type: boolean
-          description: Define emissão síncrona da NFe em homologação
-    EmpresaResponse:
-      title: Empresa
+          description: 'Nome desse cabeçalho. Ex.: Authorization.'
+      example:
+        event: nfe
+        url: https://meusistema.com.br/avisos/nfe
+    Empresa:
       type: object
       properties:
         id:
           type: integer
-        nome:
-          type: string
-        nome_fantasia:
-          type: string
-        inscricao_estadual:
-          type: string
-        inscricao_municipal:
-          type: string
-        bairro:
-          type: string
-        cargo_responsavel:
-          type: string
-        cep:
-          type: string
-        cnpj:
-          type: string
-        cpf:
-          type: string
-        codigo_municipio:
-          type: string
-        codigo_pais:
-          type: string
-        codigo_uf:
-          type: string
-        complemento:
-          type: string
-        cpf_cnpj_contabilidade:
-          type: string
-        cpf_responsavel:
-          type: string
-        discrimina_impostos:
-          type: boolean
-        email:
-          type: string
-        enviar_email_destinatario:
-          type: boolean
-        enviar_email_homologacao:
-          type: boolean
-        habilita_nfe:
-          type: boolean
-        habilita_manifestacao_homologacao:
-          type: boolean
-        logradouro:
-          type: string
-        municipio:
-          type: string
-        nome_responsavel:
-          type: string
-        numero:
-          type: string
-        pais:
-          type: string
-        regime_tributario:
-          type: string
-        telefone:
-          type: string
-        uf:
-          type: string
-        proximo_numero_nfe_producao:
-          type: string
-        proximo_numero_nfe_homologacao:
-          type: string
-        serie_nfe_producao:
-          type: string
-        serie_nfe_homologacao:
-          type: string
-        certificado_valido_ate:
-          type: string
+        nome: *id010
+        nome_fantasia: *id011
+        cnpj: *id012
+        inscricao_estadual: *id013
+        inscricao_municipal: *id014
+        regime_tributario: *id015
+        logradouro: *id016
+        numero: *id017
+        complemento: *id018
+        bairro: *id019
+        codigo_municipio: *id020
+        municipio: *id021
+        uf: *id022
+        cep: *id023
+        telefone: *id024
+        email: *id025
+        cpf_cnpj_contabilidade: *id026
+        habilita_nfe: *id027
+        discrimina_impostos: *id028
+        orientacao_danfe: *id029
+        recibo_danfe: *id030
+        serie_nfe_producao: *id031
+        proximo_numero_nfe_producao: *id032
+        serie_nfe_homologacao: *id033
+        proximo_numero_nfe_homologacao: *id034
+        certificado_especifico: *id035
         certificado_valido_de:
           type: string
+          nullable: true
+        certificado_valido_ate:
+          type: string
+          nullable: true
         certificado_cnpj:
           type: string
-        certificado_especifico:
-          type: boolean
+          nullable: true
         data_ultima_emissao:
           type: string
-        caminho_logo:
-          type: string
-        orientacao_danfe:
-          type: string
-        recibo_danfe:
+          nullable: true
+        ativo:
           type: boolean
-        exibe_sempre_ipi_danfe:
-          type: boolean
-        exibe_issqn_danfe:
-          type: boolean
-        exibe_impostos_adicionais_danfe:
-          type: boolean
-        exibe_fatura_danfe:
-          type: boolean
-        exibe_rastro_danfe:
-          type: boolean
-        exibe_unidade_tributaria_danfe:
-          type: boolean
-        exibe_desconto_itens:
-          type: boolean
-        exibe_sempre_volumes_danfe:
-          type: boolean
-        habilita_csrt_nfe:
-          type: boolean
-        nfe_sincrono:
-          type: boolean
-        nfe_sincrono_homologacao:
-          type: boolean
-        smtp_endereco:
-          type: string
-        smtp_dominio:
-          type: string
-        smtp_autenticacao:
-          type: string
-        smtp_porta:
-          type: string
-        smtp_login:
-          type: string
-        smtp_remetente:
-          type: string
-        smtp_responder_para:
-          type: string
-        smtp_modo_verificacao_openssl:
-          type: string
-        smtp_habilita_starttlls:
-          type: boolean
-        smtp_ssl:
-          type: boolean
-        smtp_tls:
-          type: boolean
-        token_producao:
-          type: string
-        token_homologacao:
-          type: string
-    ValidationDetail:
-      type: object
-      properties:
-        codigo:
-          type: string
-        mensagem:
-          type: string
-        campo:
-          type: string
-    ValidationErrorResponse:
-      title: Erro de validação
-      type: object
-      properties:
-        codigo:
-          type: string
-        mensagem:
-          type: string
-        erros:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationDetail'
-  responses:
-    AccessDenied:
-      description: Não autorizado
-      content:
-        text/html:
-          schema:
+    EmpresaCriada:
+      allOf:
+      - $ref: '#/components/schemas/Empresa'
+      - type: object
+        properties:
+          token_producao:
             type: string
-            example: 'HTTP Basic: Access denied'
-    InvalidMediaType:
-      description: O tipo de mídia especificado no cabeçalho Content-Type da requisição não é suportado pelo servidor.
+            description: Token da empresa para produção. Aparece só nesta resposta.
+          token_homologacao:
+            type: string
+            description: Token da empresa para o ambiente de testes. Aparece só nesta resposta.
+    Simulacao:
+      type: object
+      properties:
+        dry_run:
+          type: boolean
+        mensagem: *id006
+    Status:
+      type: object
+      properties:
+        api:
+          type: string
+          enum:
+          - ok
+          - erro
+        ambiente:
+          type: integer
+          description: 1 = produção, 2 = testes.
+        sefaz:
+          type: object
+          nullable: true
+          properties:
+            cStat:
+              type: string
+              description: 107 = em operação; 108 ou 109 = paralisada.
+            xMotivo: *id006
+            consultado_em: *id006
+      example:
+        api: ok
+        ambiente: 1
+        sefaz:
+          cStat: '107'
+          xMotivo: Servico em Operacao
+          consultado_em: '2026-11-03T10:30:00-03:00'
+  responses:
+    NaoAutorizado:
+      description: Token ausente, inválido ou de outro ambiente.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/Erro'
           example:
-            codigo: formato_invalido
-            mensagem: Recebida requisição vazia quando eram esperados dados.
-    NotFound:
-      description: Recurso não encontrado
+            codigo: nao_autorizado
+            mensagem: Token inválido ou ausente.
+    NaoEncontrado:
+      description: Não encontrado.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/Erro'
           example:
             codigo: nao_encontrado
             mensagem: Nota fiscal não encontrada.
-    HookNaoEncontrado:
-      description: Recurso não encontrado
+    SemCorpo:
+      description: A requisição chegou sem corpo JSON.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/Erro'
           example:
-            codigo: nao_encontrado
-            mensagem: Gatilho não encontrado
-    EmpresaNaoEncontrada:
-      description: Recurso não encontrado
+            codigo: formato_invalido
+            mensagem: Recebida requisição vazia quando eram esperados dados.
+    LimiteExcedido:
+      description: Limite de requisições por minuto excedido.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/Erro'
           example:
-            codigo: nao_encontrado
-            mensagem: Empresa não encontrada
-    ParametrosInvalidos:
-      description: Requisição inválida
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              erros:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ErrorResponse'
-          example:
-            erros:
-            - codigo: parametros_invalidos
-              mensagem: 'Existe um problema no JSON recebido: 822: unexpected token at ''empresa_id=12079'''
-    PermissaoNegada:
-      description: Permissão negada
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            codigo: permissao_negada
-            mensagem: Empresa não encontrada como propriedade da revenda
-  examples:
-    NaoAutorizado:
-      value:
-        codigo: nfe_nao_autorizada
-        mensagem: Nota fiscal não autorizada.
-    NFeAutorizada:
-      value:
-        cnpj_emitente: '12345678000123'
-        ref: referencia_000899_nfe
-        status: autorizado
-        status_sefaz: '100'
-        mensagem_sefaz: Autorizado o uso da NF-e
-        chave_nfe: NFe41190612345678000123550010000000221923094166
-        numero: '22'
-        serie: '1'
-        caminho_xml_nota_fiscal: /arquivos/12345678000123/201906/XMLs/41190612345678000123550010000000221923094166-nfe.xml
-        caminho_danfe: /arquivos/12345678000123/201906/DANFEs/41190612345678000123550010000000221923094166.pdf
-    NFeAutorizadaCompleta:
-      value:
-        cnpj_emitente: '12345678000123'
-        ref: nf_ref_ficticia_d3205ae455b84ac2
-        status: autorizado
-        status_sefaz: '100'
-        mensagem_sefaz: Autorizado o uso da NF-e
-        chave_nfe: NFe51260312345678000111558890000015041002168843
-        numero: '1504'
-        serie: '889'
-        protocolo: '151260029467289'
-        caminho_xml_nota_fiscal: /arquivos/12345678000123_176610/202603/XMLs/51260312345678000111558890000015041002168843-nfe.xml
-        caminho_danfe: /arquivos/12345678000123_176610/202603/DANFEs/51260312345678000111558890000015041002168843.pdf
-        requisicao_nota_fiscal:
-          versao: '4.00'
-          chave_nfe: NFe51260312345678000111558890000015041002168843
-          uf: '51'
-          codigo_unico: 00216884
-          natureza_operacao: Venda de mercadoria
-          modelo: '55'
-          serie: '889'
-          numero: '1504'
-          data_emissao: '2026-03-30T12:40:37-03:00'
-          tipo_documento: '1'
-          local_destino: '1'
-          municipio: '5106265'
-          formato_impressao: '1'
-          forma_emissao: '1'
-          digito_verificador: '3'
-          ambiente: '1'
-          finalidade_emissao: '1'
-          consumidor_final: '0'
-          presenca_comprador: '0'
-          indicador_intermediario: null
-          processo_emissao: '0'
-          versao_aplicativo: 0.1.0
-          notas_referenciadas: []
-          chaves_nfe_antecipacao_pagamento: []
-          cnpj_emitente: '12345678000123'
-          nome_emitente: EMPRESA EXEMPLO AGRONEGOCIO LTDA
-          nome_fantasia_emitente: Exemplo Agro Fictício
-          logradouro_emitente: CASTANHA
-          numero_emitente: SN
-          bairro_emitente: GLEBA DIVISA
-          codigo_municipio_emitente: '5106265'
-          municipio_emitente: Novo Mundo
-          uf_emitente: MT
-          cep_emitente: '78528000'
-          codigo_pais_emitente: '1058'
-          pais_emitente: Brasil
-          telefone_emitente: '1111111111'
-          inscricao_estadual_emitente: '136360173'
-          regime_tributario_emitente: '3'
-          cnpj_destinatario: '99887766000155'
-          nome_destinatario: DESTINATARIO EXEMPLO AGRO LTDA
-          logradouro_destinatario: DIVISA
-          numero_destinatario: SN
-          complemento_destinatario: LINHA PARANA        KM    2
-          bairro_destinatario: ZONA RURAL
-          codigo_municipio_destinatario: '5106265'
-          municipio_destinatario: Novo Mundo
-          uf_destinatario: MT
-          cep_destinatario: '78528000'
-          codigo_pais_destinatario: '1058'
-          pais_destinatario: Brasil
-          indicador_inscricao_estadual_destinatario: '1'
-          inscricao_estadual_destinatario: '140212370'
-          email_destinatario: compras@destinatario-exemplo-ficticio.com.br
-          pessoas_autorizadas: []
-          itens:
-          - numero_item: '1'
-            codigo_produto: SOJA INTACTA
-            codigo_barras_comercial: SEM GTIN
-            descricao: SOJA EM GRAOS (INTACTA)
-            codigo_ncm: '12019000'
-            nves: []
-            codigo_beneficio_fiscal: SEM CBENEF
-            infos_credito_presumido: []
-            cfop: '5101'
-            unidade_comercial: KG
-            quantidade_comercial: '46720.0000'
-            valor_unitario_comercial: '1.584658'
-            valor_bruto: '74035.23'
-            codigo_barras_tributavel: SEM GTIN
-            unidade_tributavel: KG
-            quantidade_tributavel: '46720.0000'
-            valor_unitario_tributavel: '1.584658'
-            inclui_no_total: '1'
-            documentos_importacao: []
-            detalhes_exportacao: []
-            rastros: []
-            armamentos: []
-            origens_combustivel: []
-            icms_percentual_partilha: '100.0000'
-            ibs_cbs_situacao_tributaria: '200'
-            ibs_cbs_classificacao_tributaria: '200038'
-            ibs_cbs_base_calculo: '74035.23'
-            ibs_uf_aliquota: '0.1000'
-            ibs_uf_percentual_reducao_aliquota: '60.0000'
-            ibs_uf_aliquota_efetiva: '0.0400'
-            ibs_uf_valor: '29.62'
-            ibs_mun_aliquota: '0'
-            ibs_mun_percentual_reducao_aliquota: '60.0000'
-            ibs_mun_aliquota_efetiva: '0'
-            ibs_mun_valor: '0'
-            ibs_valor_total: '29.62'
-            cbs_aliquota: '0.9000'
-            cbs_percentual_reducao_aliquota: '60.0000'
-            cbs_aliquota_efetiva: '0.3600'
-            cbs_valor: '266.53'
-            informacoes_adicionais_item: Soja intacta.
-            observacoes_contribuinte: []
-            icms_origem: '0'
-            icms_situacao_tributaria: '51'
-            icms_reducao_base_calculo: '0'
-            icms_base_calculo: '0'
-            icms_aliquota: '0'
-            icms_valor_operacao: '0'
-            icms_valor_diferido: '0'
-            icms_valor: '0'
-            pis_situacao_tributaria: 09
-            cofins_situacao_tributaria: 09
-          icms_base_calculo: '0'
-          icms_valor_total: '0'
-          icms_valor_total_desonerado: '0'
-          fcp_valor_total: '0'
-          icms_base_calculo_st: '0'
-          icms_valor_total_st: '0'
-          fcp_valor_total_st: '0'
-          fcp_valor_total_retido_st: '0'
-          valor_produtos: '74035.23'
-          valor_frete: '0'
-          valor_seguro: '0'
-          valor_desconto: '0'
-          valor_total_ii: '0'
-          valor_ipi: '0'
-          valor_ipi_devolvido: '0'
-          valor_pis: '0'
-          valor_cofins: '0'
-          valor_outras_despesas: '0'
-          valor_total: '74035.23'
-          ibs_cbs_base_calculo: '74035.23'
-          ibs_uf_valor_total_diferimento: '0'
-          ibs_uf_valor_total_devolucao: '0'
-          ibs_uf_valor_total: '29.62'
-          ibs_mun_valor_total_diferimento: '0'
-          ibs_mun_valor_total_devolucao: '0'
-          ibs_mun_valor_total: '0'
-          ibs_valor_total: '29.62'
-          ibs_valor_total_credito_presumido: '0'
-          ibs_valor_total_condicao_suspensiva: '0'
-          cbs_valor_total_diferimento: '0'
-          cbs_valor_total_devolucao: '0'
-          cbs_valor_total: '266.53'
-          cbs_valor_total_credito_presumido: '0'
-          cbs_valor_total_condicao_suspensiva: '0'
-          ibs_cbs_is_valor_total: null
-          modalidade_frete: '9'
-          reboques: []
-          volumes: []
-          duplicatas: []
-          formas_pagamento:
-          - forma_pagamento: '90'
-            valor_pagamento: '0'
-            tipo_integracao: null
-          informacoes_adicionais_contribuinte: Texto fictício de informações adicionais do contribuinte (ICMS diferido, produtor
-            rural, referências legais de exemplo sem valor jurídico).
-          observacoes_contribuinte: []
-          observacoes_fisco: []
-          processos_referenciados: []
-          cana_fornecimentos: []
-          cana_deducoes: []
-          cnpj_responsavel_tecnico: '07504505000132'
-          contato_responsavel_tecnico: João Exemplo Fictício
-          email_responsavel_tecnico: contato@exemplo-ficticio-doc.com.br
-          telefone_responsavel_tecnico: '1111111111'
-          agropecuario_defensivo: []
-        protocolo_nota_fiscal:
-          versao: '4.00'
-          ambiente: '1'
-          versao_aplicativo: MT_A2_SRV240225-4.00
-          chave_nfe: '51260312345678000111558890000015041002168843'
-          data_recebimento: '2026-03-30T11:40:40-04:00'
-          numero_protocolo: '151260029467289'
-          digest_value: XtMpTWKzD/M9geerCPwAOZ5YRU8=
-          status: '100'
-          motivo: Autorizado o uso da NF-e
-    ProcessandoAutorizacao:
-      value:
-        cnpj_emitente: '12345678000123'
-        ref: referencia_000899_nfe
-        status: processando_autorizacao
-    CanceladaResponse:
-      value:
-        cnpj_emitente: '12345678000123'
-        ref: referencia_000899_nfe
-        status: cancelado
-        status_sefaz: '135'
-        mensagem_sefaz: Evento registrado e vinculado a NF-e
-        chave_nfe: NFe41190612345678000123550010000000221923094166
-        numero: '22'
-        serie: '1'
-        caminho_xml_nota_fiscal: /arquivos/12345678000123/201906/XMLs/41190612345678000123550010000000221923094166-nfe.xml
-        caminho_danfe: /arquivos/12345678000123/201906/DANFEs/41190612345678000123550010000000221923094166.pdf
-        caminho_xml_cancelamento: /arquivos/12345678000123/201906/XMLs/41190612345678000123550010000000221923094166-can.xml
-    ErroAutorizacaoResponse:
-      value:
-        cnpj_emitente: '12345678000123'
-        ref: referencia_000899_nfe
-        status: erro_autorizacao
-        status_sefaz: '598'
-        mensagem_sefaz: 'Rejeição: Total da NF difere do somatório dos valores que compõe o valor total da NF'
-        erros:
-        - codigo: ''
-          mensagem: Total da NF difere do somatório dos valores que compõe o valor total da NF
-    PermissaoNegada:
-      value:
-        codigo: permissao_negada
-        mensagem: CNPJ do emitente não autorizado.
-    EmpresaResponse:
-      value:
-        id: 123
-        nome: Razão social da empresa
-        nome_fantasia: Nome fantasia da empresa
-        inscricao_estadual: '123456'
-        inscricao_municipal: '123456'
-        bairro: Bairro
-        cargo_responsavel: null
-        cep: 12345-678
-        cnpj: '12345678000123'
-        cpf: ''
-        codigo_municipio: '12345678'
-        codigo_pais: '1058'
-        codigo_uf: '26'
-        complemento: ''
-        cpf_cnpj_contabilidade: ''
-        cpf_responsavel: ''
-        discrimina_impostos: false
-        email: ''
-        enviar_email_destinatario: false
-        enviar_email_homologacao: false
-        habilita_nfe: false
-        habilita_manifestacao_homologacao: false
-        logradouro: Logradouro
-        municipio: Municipio
-        nome_responsavel: ''
-        numero: '1234'
-        pais: Pais
-        regime_tributario: '3'
-        telefone: ''
-        uf: UF
-        proximo_numero_nfe_producao: null
-        proximo_numero_nfe_homologacao: null
-        serie_nfe_producao: null
-        serie_nfe_homologacao: null
-        certificado_valido_ate: '2025-04-01T15:03:25-03:00'
-        certificado_valido_de: '2024-04-01T15:03:25-03:00'
-        certificado_cnpj: '12345678000123'
-        certificado_especifico: false
-        data_ultima_emissao: null
-        caminho_logo: null
-        orientacao_danfe: portrait
-        recibo_danfe: true
-        exibe_sempre_ipi_danfe: false
-        exibe_issqn_danfe: false
-        exibe_impostos_adicionais_danfe: false
-        exibe_fatura_danfe: false
-        exibe_rastro_danfe: false
-        exibe_unidade_tributaria_danfe: false
-        exibe_desconto_itens: false
-        exibe_sempre_volumes_danfe: false
-        habilita_csrt_nfe: true
-        nfe_sincrono: false
-        nfe_sincrono_homologacao: false
-        smtp_endereco: null
-        smtp_dominio: null
-        smtp_autenticacao: null
-        smtp_porta: null
-        smtp_login: null
-        smtp_remetente: null
-        smtp_responder_para: null
-        smtp_modo_verificacao_openssl: null
-        smtp_habilita_starttlls: true
-        smtp_ssl: false
-        smtp_tls: false
-        token_producao: ''
-        token_homologacao: ''
-    ListaEmpresaResponse:
-      value:
-      - id: 123
-        nome: Razão social da empresa
-        nome_fantasia: Nome fantasia da empresa
-        inscricao_estadual: '123456'
-        inscricao_municipal: '123456'
-        bairro: Bairro
-        cargo_responsavel: null
-        cep: 12345-678
-        cnpj: '12345678000123'
-        cpf: ''
-        codigo_municipio: '12345678'
-        codigo_pais: '1058'
-        codigo_uf: '26'
-        complemento: ''
-        cpf_cnpj_contabilidade: ''
-        cpf_responsavel: ''
-        discrimina_impostos: false
-        email: ''
-        enviar_email_destinatario: false
-        enviar_email_homologacao: false
-        habilita_nfe: false
-        habilita_manifestacao_homologacao: false
-        logradouro: Logradouro
-        municipio: Municipio
-        nome_responsavel: ''
-        numero: '1234'
-        pais: Pais
-        regime_tributario: '3'
-        telefone: ''
-        uf: UF
-        proximo_numero_nfe_producao: null
-        proximo_numero_nfe_homologacao: null
-        serie_nfe_producao: null
-        serie_nfe_homologacao: null
-        certificado_valido_ate: '2025-04-01T15:03:25-03:00'
-        certificado_valido_de: '2024-04-01T15:03:25-03:00'
-        certificado_cnpj: '12345678000123'
-        certificado_especifico: false
-        data_ultima_emissao: null
-        caminho_logo: null
-        orientacao_danfe: portrait
-        recibo_danfe: true
-        exibe_sempre_ipi_danfe: false
-        exibe_issqn_danfe: false
-        exibe_impostos_adicionais_danfe: false
-        exibe_fatura_danfe: false
-        exibe_rastro_danfe: false
-        exibe_unidade_tributaria_danfe: false
-        exibe_desconto_itens: false
-        exibe_sempre_volumes_danfe: false
-        habilita_csrt_nfe: true
-        nfe_sincrono: false
-        nfe_sincrono_homologacao: false
-        smtp_endereco: null
-        smtp_dominio: null
-        smtp_autenticacao: null
-        smtp_porta: null
-        smtp_login: null
-        smtp_remetente: null
-        smtp_responder_para: null
-        smtp_modo_verificacao_openssl: null
-        smtp_habilita_starttlls: true
-        smtp_ssl: false
-        smtp_tls: false
-        token_producao: ''
-        token_homologacao: ''
+            codigo: limite_excedido
+            mensagem: Limite de 100 requisições por minuto excedido para este token.

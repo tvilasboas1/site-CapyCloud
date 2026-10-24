@@ -55,7 +55,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
   <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css">
-  <style>.swagger-ui .topbar{display:none}.swagger-ui{font-family:inherit}.swagger-ui .info .title{color:#2D2926}</style>
+  <link rel="stylesheet" href="css/capyfiscal-api.css">
 </head>
 <body class="bg-white text-capy-dark font-sans antialiased fx-grain">
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arquivos" viewBox="0 0 24 24"><path d="M3.5 7.5v10a1.5 1.5 0 0 0 1.5 1.5h14a1.5 1.5 0 0 0 1.5-1.5V9.5a1.5 1.5 0 0 0-1.5-1.5h-7l-2-2.5H5a1.5 1.5 0 0 0-1.5 1.5Z"/><path d="M8 13.5h8M8 16h5"/><circle class="n" cx="19" cy="5" r="1.6"/></symbol><symbol id="i-vpn" viewBox="0 0 24 24"><path d="M12 3.5 5 6.2v5.3c0 4.1 2.9 7.2 7 8.5 4.1-1.3 7-4.4 7-8.5V6.2L12 3.5Z"/><path d="M12 9.5v4"/><circle class="n" cx="12" cy="15.2" r="1.4"/></symbol><symbol id="i-usuarios" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M15.5 5.8a3 3 0 0 1 0 5.4"/><path d="M17 14.3c2 .6 3.5 2.4 3.5 4.7"/><circle class="n" cx="16.5" cy="8.5" r="1.2"/></symbol><symbol id="i-backup" viewBox="0 0 24 24"><ellipse cx="11" cy="6.5" rx="6.5" ry="2.5"/><path d="M4.5 6.5v9c0 1.4 2.9 2.5 6.5 2.5"/><path d="M17.5 6.5V11"/><path d="M15.5 16.5h5m0 0-2-2m2 2-2 2"/><circle class="n" cx="19.5" cy="11.5" r="1.5"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M6.5 11.5h2.5l1.5-3 2 6 1.5-3h3.5"/><path d="M9 20h6M12 16.5V20"/><circle class="n" cx="17.5" cy="11.5" r="1.2"/></symbol><symbol id="i-host" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M7.5 7h.01M7.5 17h.01"/><circle class="n" cx="16.5" cy="7" r="1.2"/><circle class="n" cx="16.5" cy="17" r="1.2"/></symbol><symbol id="i-firewall" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M4 6v12M20 6v12M9 6v4M15 6v4M12 10v4M7 14v4M17 14v4"/><circle class="n" cx="12" cy="10" r="1.3"/></symbol><symbol id="i-suporte" viewBox="0 0 24 24"><path d="M5 13v-2a7 7 0 0 1 14 0v2"/><rect x="3.5" y="12" width="4" height="6" rx="1.5"/><rect x="16.5" y="12" width="4" height="6" rx="1.5"/><path d="M18.5 18v1a2 2 0 0 1-2 2H13"/><circle class="n" cx="12" cy="21" r="1.2"/></symbol><symbol id="i-auditoria" viewBox="0 0 24 24"><rect x="5.5" y="4" width="13" height="16" rx="1.8"/><path d="M9 3.5h6v2H9z"/><path d="m8.5 12.5 2 2 4.5-4.5"/><path d="M8.5 17h7"/><circle class="n" cx="18.5" cy="9" r="1.3"/></symbol><symbol id="i-seguranca" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/><circle class="n" cx="12" cy="12" r="1.2"/></symbol><symbol id="i-manutencao" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 4.9 4.9l-7.9 7.9a2 2 0 0 1-2.8-2.8l7.9-7.9a4 4 0 0 0-2.1-2.1Z"/><path d="M15 3.5a4.5 4.5 0 0 1 5.5 5.5"/><circle class="n" cx="6.2" cy="17.8" r="1.2"/></symbol><symbol id="i-rede" viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="19" cy="17" r="2"/><path d="m10.8 7.2-4.6 7.9M13.2 7.2l4.6 7.9M7 17h10"/><circle class="n" cx="12" cy="5.5" r="1"/><circle class="n" cx="5" cy="17" r="1"/><circle class="n" cx="19" cy="17" r="1"/></symbol><symbol id="i-cabo" viewBox="0 0 24 24"><path d="M4 12h5M15 12h5"/><rect x="9" y="8.5" width="6" height="7" rx="1.5"/><path d="M11 8.5V6M13 8.5V6M11 18v-2.5M13 18v-2.5"/><circle class="n" cx="4" cy="12" r="1.3"/><circle class="n" cx="20" cy="12" r="1.3"/></symbol><symbol id="i-automacao" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 0 1-12.8 5.3M4.5 12A7.5 7.5 0 0 1 17.3 6.7"/><path d="M17.3 3.5v3.2h-3.2M6.7 20.5v-3.2h3.2"/><circle cx="12" cy="12" r="2.2"/><circle class="n" cx="12" cy="12" r="1"/></symbol><symbol id="i-nfe" viewBox="0 0 24 24"><path d="M6.5 3.5h7l4 4V20a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M13.5 3.5v4h4"/><path d="M9 11h6M9 14h6M9 17h3.5"/><circle class="n" cx="16" cy="17.5" r="1.4"/></symbol><symbol id="i-site" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="1.8"/><path d="M3 8.5h18"/><path d="M6.5 6.5h.01M9 6.5h.01"/><path d="M6.5 12h7M6.5 15h4.5"/><circle class="n" cx="16.5" cy="14" r="1.6"/></symbol><symbol id="i-vps" viewBox="0 0 24 24"><path d="m12 3.5 7.5 4.3v8.4L12 20.5l-7.5-4.3V7.8L12 3.5Z"/><path d="M12 12 4.5 7.8M12 12l7.5-4.2M12 12v8.5"/><circle class="n" cx="12" cy="12" r="1.3"/></symbol><symbol id="i-remoto" viewBox="0 0 24 24"><rect x="4" y="6" width="13" height="9" rx="1.5"/><path d="M2.5 18.5h16"/><path d="M19.5 7.5a3.5 3.5 0 0 1 0 5M21.5 5.5a6.5 6.5 0 0 1 0 9"/><circle class="n" cx="10.5" cy="10.5" r="1.3"/></symbol><symbol id="i-celular" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17.5h2"/><circle class="n" cx="12" cy="9" r="1.3"/></symbol><symbol id="i-email" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.8"/><path d="m3.5 7 8.5 6 8.5-6"/><circle class="n" cx="12" cy="13" r="1.2"/></symbol><symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8.3 18.9L4 20Z"/><path d="M9.3 9.2c.2 2.6 2.5 5 5.4 5.4l1-1.5-2-1-1 .8a4.7 4.7 0 0 1-1.8-1.9l.8-1-1-2-1.4 1.2Z"/></symbol><symbol id="i-telegram" viewBox="0 0 24 24"><path d="m3.5 11.5 16.5-7-3 15.5-5-3.5-2.5 2.5v-4l7.5-7-9.5 5.5-4-2Z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol><symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/><circle class="n" cx="12" cy="12" r="1"/></symbol><symbol id="i-chave" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.5"/><path d="M11.5 12h9M17.5 12v3M20.5 12v2.5"/><circle class="n" cx="8" cy="12" r="1.2"/></symbol><symbol id="i-pasta5" viewBox="0 0 24 24"><path d="M4 7h5l2 2h9v10H4z"/><path d="M8 13h8"/><circle class="n" cx="16" cy="16" r="1.3"/></symbol><symbol id="i-webhook" viewBox="0 0 24 24"><path d="M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 2h-14z"/><path d="M10 20.5a2 2 0 0 0 4 0"/><circle class="n" cx="17.5" cy="6" r="1.6"/></symbol><symbol id="i-pdf" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="4.5" rx="1"/><path d="M5 8.5v10a1.5 1.5 0 0 0 1.5 1.5h11a1.5 1.5 0 0 0 1.5-1.5v-10"/><path d="M10 12.5h4"/><circle class="n" cx="12" cy="16.5" r="1.2"/></symbol><symbol id="i-painel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.8"/><path d="M3 9h18M8 9v11"/><circle class="n" cx="14.5" cy="14.5" r="1.4"/></symbol><symbol id="i-mapa" viewBox="0 0 24 24"><path d="m3.5 6 5.5-2 6 2 5.5-2v14l-5.5 2-6-2-5.5 2V6Z"/><path d="M9 4v14M15 6v14"/><circle class="n" cx="12" cy="11" r="1.3"/></symbol><symbol id="i-visita" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-10.5a6 6 0 0 1 12 0C18 15.5 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.2"/><circle class="n" cx="12" cy="10.5" r=".9"/></symbol><symbol id="i-alvo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle class="n" cx="12" cy="12" r="1.4"/></symbol><symbol id="i-camadas" viewBox="0 0 24 24"><path d="m12 4 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/><circle class="n" cx="12" cy="8" r="1"/></symbol></svg>
@@ -101,30 +101,156 @@
 
   <main>
 
-<section class="sec-cream">
-  <div class="wrap py-10 lg:py-14 grid gap-6 lg:grid-cols-12 items-end">
-    <div class="lg:col-span-8">
-      <p class="kicker">CapyFiscal</p>
-      <h1>Documentação da API</h1>
-      <p class="lead mt-4">Referência completa das rotas, campos e respostas da API do CapyFiscal, com os endereços de produção e de testes.</p>
+<section class="api-sec api-escura" id="topo">
+  <div class="wrap py-6 lg:py-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+    <div class="w-full lg:w-5/12 flex justify-center">
+      <img src="img/capyfiscal.webp" alt="Capivara emitindo NF-e e DANFE no notebook" class="w-full max-w-md lg:max-w-none fx-float" width="1227" height="1014">
     </div>
-    <div class="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
-      <a class="btn btn-ghost" href="capyfiscal/openapi.yaml" download>Baixar OpenAPI (YAML)</a>
-      <a class="btn btn-gold" href="capyfiscal.html#planos">Planos</a>
+    <div class="w-full lg:w-7/12">
+    <p class="kicker">CapyFiscal</p>
+    <h1>Documentação da API</h1>
+    <p class="lead mt-5">Tudo o que o seu sistema precisa para emitir NF-e pelo CapyFiscal: o caminho de uma nota, as situações, os erros, os avisos automáticos e a referência de cada rota.</p>
+    <p class="api-aviso mt-5">O acesso é liberado depois do cadastro da empresa. Fale com a equipe para receber os tokens do ambiente de testes.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="btn btn-gold" href="faleconosco.html">Pedir acesso</a>
+      <a class="btn btn-claro" href="capyfiscal/openapi.yaml" download>Baixar OpenAPI (YAML)</a>
+    </div>
     </div>
   </div>
 </section>
-<section class="py-6">
+
+<section class="api-sec api-creme" id="comecar">
   <div class="wrap">
-    <div id="swagger-ui"></div>
-    <noscript><p>A documentação interativa precisa de JavaScript. Baixe o arquivo OpenAPI em <a href="capyfiscal/openapi.yaml">capyfiscal/openapi.yaml</a>.</p></noscript>
+    <h2>Antes de começar</h2>
+    <div class="api-3 mt-8">
+      <div>
+        <h3>Endereços</h3>
+        <p>Produção:<br><code>https://api-fiscal.capycloud.com.br/v2</code></p>
+        <p class="mt-3">Testes (homologação), sem valor fiscal:<br><code>https://homologacao-fiscal.capycloud.com.br/v2</code></p>
+      </div>
+      <div>
+        <h3>Autenticação</h3>
+        <p>HTTP Basic com o token como usuário e senha em branco, ou <code>Authorization: Bearer TOKEN</code>.</p>
+        <p class="mt-3">Cada empresa tem dois tokens, um de produção e um de testes. O token de integrador serve para cadastrar empresas.</p>
+      </div>
+      <div>
+        <h3>Regras gerais</h3>
+        <p>JSON em UTF-8 no envio e na resposta.</p>
+        <p class="mt-3">Até 100 requisições por minuto por token.</p>
+        <p class="mt-3">Cada nota leva uma referência sua, única por empresa: letras, números, <code>-</code> e <code>_</code>, até 64 caracteres.</p>
+      </div>
+    </div>
   </div>
 </section>
+
+<section class="api-sec api-escura" id="caminho">
+  <div class="wrap">
+    <h2>O caminho de uma nota</h2>
+    <div class="steps mt-8">
+      <div class="step"><h3>Envie a nota</h3><p><code>POST /v2/nfe?ref=venda-123</code> com os dados da venda. A resposta vem na hora, com <code>202</code> e a situação <code>processando_autorizacao</code>.</p></div>
+      <div class="step"><h3>Receba o resultado</h3><p>O aviso automático chega no endereço que você cadastrou. Se preferir, consulte com <code>GET /v2/nfe/venda-123</code>.</p></div>
+      <div class="step"><h3>Autorizada: guarde os arquivos</h3><p>A resposta traz a chave, o protocolo e os caminhos do XML e do DANFE, guardados por 5 anos.</p></div>
+    </div>
+    <div class="api-2 mt-12">
+      <div>
+        <h3>Se a SEFAZ recusar</h3>
+        <p>A situação vira <code>erro_autorizacao</code> e o motivo vem em <code>mensagem_sefaz</code>. Corrija os dados e envie de novo com a mesma referência: ela vira uma nova tentativa da mesma nota.</p>
+      </div>
+      <div>
+        <h3>Depois da autorização</h3>
+        <p>Cancelamento com <code>DELETE /v2/nfe/venda-123</code>, em geral até 24 horas depois. Carta de correção com <code>POST /v2/nfe/venda-123/carta_correcao</code>, até 20 por nota. As duas respondem na hora, já com o resultado da SEFAZ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="api-sec api-creme" id="situacoes">
+  <div class="wrap">
+    <h2>Situações da nota</h2>
+    <div class="table-wrap mt-8"><table class="api-tabela"><thead><tr><th>status</th><th>O que significa</th></tr></thead><tbody><tr><td><code>processando_autorizacao</code></td><td>A nota foi recebida e está na fila ou em análise na SEFAZ. Aguarde o aviso.</td></tr><tr><td><code>autorizado</code></td><td>Nota válida. Chave, protocolo, XML e DANFE já estão disponíveis.</td></tr><tr><td><code>erro_autorizacao</code></td><td>A SEFAZ recusou a nota. O motivo vem em mensagem_sefaz. Corrija e envie de novo com a mesma referência.</td></tr><tr><td><code>denegado</code></td><td>A SEFAZ negou o uso por irregularidade cadastral do emitente ou do destinatário. O número fica usado e a nota não pode ser reenviada.</td></tr><tr><td><code>cancelado</code></td><td>A nota foi cancelada. O XML do cancelamento vem em caminho_xml_cancelamento.</td></tr></tbody></table></div>
+    <h2 class="mt-16">Erros</h2>
+    <p class="lead mt-4">Todo erro volta no mesmo formato: <code>codigo</code>, <code>mensagem</code> e, nos erros de validação, a lista <code>erros</code> com o campo de cada problema.</p>
+    <div class="table-wrap mt-8"><table class="api-tabela"><thead><tr><th>HTTP</th><th>codigo</th><th>Quando acontece</th></tr></thead><tbody><tr><td>400</td><td><code>requisicao_invalida</code></td><td>Parâmetro ausente ou fora do formato, como a referência.</td></tr><tr><td>400</td><td><code>nfe_nao_autorizada</code></td><td>A operação exige uma nota autorizada.</td></tr><tr><td>401</td><td><code>nao_autorizado</code></td><td>Token ausente ou inválido.</td></tr><tr><td>401</td><td><code>ambiente_incorreto</code></td><td>Token de testes usado em produção, ou o contrário.</td></tr><tr><td>404</td><td><code>nao_encontrado</code></td><td>Nota, empresa, gatilho ou arquivo não encontrado.</td></tr><tr><td>415</td><td><code>formato_invalido</code></td><td>A requisição chegou sem corpo JSON.</td></tr><tr><td>422</td><td><code>erro_validacao_schema</code></td><td>Dados da nota inválidos. A lista erros traz cada campo.</td></tr><tr><td>422</td><td><code>erro_validacao</code></td><td>Dados da empresa inválidos. A lista erros traz cada campo.</td></tr><tr><td>422</td><td><code>pending_operation</code></td><td>A nota com essa referência ainda está em processamento.</td></tr><tr><td>422</td><td><code>already_processed</code></td><td>A nota com essa referência já foi autorizada, cancelada ou denegada.</td></tr><tr><td>422</td><td><code>permissao_negada</code></td><td>O CNPJ informado não pertence ao token, ou a empresa está desativada.</td></tr><tr><td>422</td><td><code>certificado_ausente</code></td><td>A empresa ainda não tem certificado digital cadastrado.</td></tr><tr><td>422</td><td><code>limite_cartas</code></td><td>A nota já tem 20 cartas de correção.</td></tr><tr><td>429</td><td><code>limite_excedido</code></td><td>Mais de 100 requisições por minuto com o mesmo token.</td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section class="api-sec api-escura" id="avisos">
+  <div class="wrap api-2">
+    <div>
+      <h2>Avisos automáticos</h2>
+      <p class="lead mt-4">Cadastre um endereço com <code>POST /v2/hooks</code> e o seu sistema recebe um <code>POST</code> sempre que uma nota é autorizada, recusada, denegada ou cancelada. O corpo é o mesmo da consulta.</p>
+      <ul class="api-lista mt-6">
+        <li>Responda com qualquer código 2xx para confirmar o recebimento.</li>
+        <li>Sem resposta 2xx, o aviso é reenviado depois de 1 minuto, 30 minutos, 1 hora, 3 horas e 24 horas.</li>
+        <li>Cada aviso traz os cabeçalhos <code>X-CapyFiscal-Event</code>, <code>X-CapyFiscal-Delivery</code> (identificador único) e <code>X-CapyFiscal-Signature</code>.</li>
+        <li>Use o <code>X-CapyFiscal-Delivery</code> para ignorar um aviso repetido.</li>
+      </ul>
+    </div>
+    <div class="min-w-0">
+      <h3>Conferindo a assinatura</h3>
+      <p class="mt-2">A assinatura é um HMAC-SHA256 do corpo, com o <code>segredo_hmac</code> devolvido no cadastro do endereço.</p>
+      <pre class="code mt-4"><span class="c"># Python</span>
+<span class="k">import</span> hmac, hashlib
+
+assinatura = cabecalhos[<span class="s">"X-CapyFiscal-Signature"</span>]
+calculada = hmac.new(SEGREDO.encode(), corpo_bruto,
+                     hashlib.sha256).hexdigest()
+valido = hmac.compare_digest(<span class="s">"sha256="</span> + calculada,
+                             assinatura)</pre>
+    </div>
+  </div>
+</section>
+
+<section class="api-sec api-creme" id="referencia">
+  <div class="wrap">
+    <h2>Referência das rotas</h2>
+    <p class="lead mt-4">Clique em uma rota para ver os parâmetros, o corpo esperado e os exemplos de resposta.</p>
+    <div id="swagger-ui" class="mt-6"></div>
+    <noscript><p>A referência interativa precisa de JavaScript. Baixe o arquivo <a href="capyfiscal/openapi.yaml">openapi.yaml</a>.</p></noscript>
+  </div>
+</section>
+
+
 <script src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js" crossorigin></script>
 <script>
+  /* Rótulos do Swagger em português */
+  var TRADUCOES = {
+    'Parameters': 'Parâmetros', 'Responses': 'Respostas', 'Request body': 'Corpo da requisição', 'Description': 'Descrição',
+    'Name': 'Nome', 'Code': 'Código', 'Example Value': 'Exemplo', 'Schema': 'Modelo', 'Schemas': 'Modelos de dados',
+    'No parameters': 'Sem parâmetros', 'Media type': 'Tipo de conteúdo', 'Servers': 'Servidor', 'Links': '',
+    'No links': '', 'required': 'obrigatório', 'Examples': 'Exemplos', 'Default value': 'Padrão', 'Available values': 'Valores aceitos',
+    'Controls Accept header.': '', 'Expand all': 'Abrir todos', 'Collapse all': 'Fechar todos'
+  };
+  function traduzir(raiz) {
+    var w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, null);
+    var n; while ((n = w.nextNode())) {
+      var t = n.nodeValue.trim();
+      if (t && Object.prototype.hasOwnProperty.call(TRADUCOES, t)) n.nodeValue = n.nodeValue.replace(t, TRADUCOES[t]);
+      else if (/^Default value\s*:/.test(t)) n.nodeValue = n.nodeValue.replace('Default value', 'Padrão');
+    }
+    /* restrições dos campos ("maxLength: 60" etc.): o React parte o texto em pedaços, então traduz pelo elemento */
+    var ROT = { 'maxLength': 'máximo de caracteres', 'minLength': 'mínimo de caracteres', 'default': 'padrão',
+                 'maximum': 'máximo', 'minimum': 'mínimo', 'pattern': 'formato', 'nullable': 'pode ser nulo' };
+    raiz.querySelectorAll('.property.primitive').forEach(function (el) {
+      if (el.dataset.traduzido) return;
+      var m = el.textContent.trim().match(/^(\w+):\s*(.*)$/);
+      if (!m || !ROT[m[1]]) return;
+      var texto = m[1] === 'nullable' ? ROT.nullable : ROT[m[1]] + ': ' + m[2];
+      el.dataset.traduzido = '1';
+      el.replaceChildren(document.createElement('br'), document.createTextNode(texto));
+    });
+  }
   window.addEventListener('load', function () {
-    window.ui = SwaggerUIBundle({ url: 'capyfiscal/openapi.yaml', dom_id: '#swagger-ui', deepLinking: true, docExpansion: 'list',
-      defaultModelsExpandDepth: 0, tryItOutEnabled: false, supportedSubmitMethods: [] });
+    var alvo = document.getElementById('swagger-ui');
+    window.ui = SwaggerUIBundle({
+      url: 'capyfiscal/openapi.yaml', dom_id: '#swagger-ui', deepLinking: true, docExpansion: 'list',
+      defaultModelsExpandDepth: -1, defaultModelExpandDepth: 2, tryItOutEnabled: false, supportedSubmitMethods: [],
+      displayRequestDuration: false, filter: false, showExtensions: false,
+      syntaxHighlight: { activated: true, theme: 'tomorrow-night' }
+    });
+    var agendado = false;
+    new MutationObserver(function () { if (agendado) return; agendado = true; requestAnimationFrame(function () { agendado = false; traduzir(alvo); }); })
+      .observe(alvo, { childList: true, subtree: true, characterData: true });
   });
 </script>
 
