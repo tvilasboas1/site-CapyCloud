@@ -127,7 +127,7 @@
         </form>
         <div class="mt-5 flex flex-wrap justify-between gap-2 text-sm">
           <a class="text-capy-copper font-semibold hover:underline" href="https://cliente.capycloud.com.br/esqueci-senha">Esqueci minha senha</a>
-          <a class="text-capy-copper font-semibold hover:underline" href="https://cliente.capycloud.com.br/cadastro">Criar conta do CapyFiscal</a>
+          <a class="text-capy-copper font-semibold hover:underline" href="https://cliente.capycloud.com.br/cadastro">Criar conta de cliente</a>
         </div>
       </div>
     </div>
@@ -189,6 +189,14 @@
         sessao: "Sessão encerrada. Entre de novo."
       };
       var oks = { senha: "Senha alterada. Entre com a senha nova." };
+
+      /* Quem já entrou e voltou ao site vai direto para os seus serviços (não precisa entrar de novo). */
+      if (!p.get("erro") && window.fetch) {
+        fetch("https://cliente.capycloud.com.br/sessao", { credentials: "include" })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (d) { if (d && d.logado && d.destino) { window.location.replace(d.destino); } })
+          .catch(function () {});
+      }
       var caixa = document.getElementById("aviso-login");
       var texto = erros[p.get("erro")] || oks[p.get("ok")];
       if (!caixa || !texto) return;
