@@ -1,0 +1,1224 @@
+{
+ "NFeRequest": {
+  "$defs": {
+   "FormaPagamento": {
+    "additionalProperties": true,
+    "properties": {
+     "forma_pagamento": {
+      "description": "tPag: 01 dinheiro, 03 crédito, 15 boleto, 17 PIX, 90 sem pagamento, 99 outros",
+      "title": "Forma Pagamento",
+      "type": "string"
+     },
+     "valor_pagamento": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       }
+      ],
+      "default": "0",
+      "title": "Valor Pagamento"
+     },
+     "indicador_pagamento": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "description": "0 à vista, 1 a prazo",
+      "title": "Indicador Pagamento"
+     },
+     "descricao_pagamento": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Descricao Pagamento"
+     }
+    },
+    "required": [
+     "forma_pagamento"
+    ],
+    "title": "FormaPagamento",
+    "type": "object"
+   },
+   "Item": {
+    "additionalProperties": true,
+    "properties": {
+     "numero_item": {
+      "maximum": 990,
+      "minimum": 1,
+      "title": "Numero Item",
+      "type": "integer"
+     },
+     "codigo_produto": {
+      "maxLength": 60,
+      "minLength": 1,
+      "title": "Codigo Produto",
+      "type": "string"
+     },
+     "descricao": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Descricao",
+      "type": "string"
+     },
+     "codigo_ncm": {
+      "title": "Codigo Ncm",
+      "type": "string"
+     },
+     "cfop": {
+      "title": "Cfop",
+      "type": "string"
+     },
+     "unidade_comercial": {
+      "maxLength": 6,
+      "minLength": 1,
+      "title": "Unidade Comercial",
+      "type": "string"
+     },
+     "quantidade_comercial": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       }
+      ],
+      "title": "Quantidade Comercial"
+     },
+     "valor_unitario_comercial": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       }
+      ],
+      "title": "Valor Unitario Comercial"
+     },
+     "valor_bruto": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Valor Bruto"
+     },
+     "inclui_no_total": {
+      "default": 1,
+      "title": "Inclui No Total",
+      "type": "integer"
+     },
+     "icms_origem": {
+      "maximum": 8,
+      "minimum": 0,
+      "title": "Icms Origem",
+      "type": "integer"
+     },
+     "icms_situacao_tributaria": {
+      "title": "Icms Situacao Tributaria",
+      "type": "string"
+     },
+     "icms_modalidade_base_calculo": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Icms Modalidade Base Calculo"
+     },
+     "icms_reducao_base_calculo": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Icms Reducao Base Calculo"
+     },
+     "icms_base_calculo": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Icms Base Calculo"
+     },
+     "icms_aliquota": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Icms Aliquota"
+     },
+     "icms_valor": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Icms Valor"
+     },
+     "pis_situacao_tributaria": {
+      "title": "Pis Situacao Tributaria",
+      "type": "string"
+     },
+     "cofins_situacao_tributaria": {
+      "title": "Cofins Situacao Tributaria",
+      "type": "string"
+     },
+     "codigo_beneficio_fiscal": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Codigo Beneficio Fiscal"
+     },
+     "ibs_cbs_situacao_tributaria": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Ibs Cbs Situacao Tributaria"
+     },
+     "ibs_cbs_classificacao_tributaria": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": null,
+      "title": "Ibs Cbs Classificacao Tributaria"
+     }
+    },
+    "required": [
+     "numero_item",
+     "codigo_produto",
+     "descricao",
+     "codigo_ncm",
+     "cfop",
+     "unidade_comercial",
+     "quantidade_comercial",
+     "valor_unitario_comercial",
+     "icms_origem",
+     "icms_situacao_tributaria",
+     "pis_situacao_tributaria",
+     "cofins_situacao_tributaria"
+    ],
+    "title": "Item",
+    "type": "object"
+   }
+  },
+  "additionalProperties": true,
+  "properties": {
+   "natureza_operacao": {
+    "maxLength": 60,
+    "minLength": 1,
+    "title": "Natureza Operacao",
+    "type": "string"
+   },
+   "data_emissao": {
+    "title": "Data Emissao",
+    "type": "string"
+   },
+   "tipo_documento": {
+    "description": "0 entrada, 1 saída",
+    "title": "Tipo Documento",
+    "type": "integer"
+   },
+   "local_destino": {
+    "description": "1 interna, 2 interestadual, 3 exterior",
+    "title": "Local Destino",
+    "type": "integer"
+   },
+   "finalidade_emissao": {
+    "default": 1,
+    "title": "Finalidade Emissao",
+    "type": "integer"
+   },
+   "consumidor_final": {
+    "default": 1,
+    "title": "Consumidor Final",
+    "type": "integer"
+   },
+   "presenca_comprador": {
+    "default": 1,
+    "title": "Presenca Comprador",
+    "type": "integer"
+   },
+   "cnpj_emitente": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cnpj Emitente"
+   },
+   "cpf_destinatario": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cpf Destinatario"
+   },
+   "cnpj_destinatario": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cnpj Destinatario"
+   },
+   "nome_destinatario": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Nome Destinatario",
+    "type": "string"
+   },
+   "indicador_inscricao_estadual_destinatario": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Indicador Inscricao Estadual Destinatario"
+   },
+   "inscricao_estadual_destinatario": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Inscricao Estadual Destinatario"
+   },
+   "logradouro_destinatario": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Logradouro Destinatario",
+    "type": "string"
+   },
+   "numero_destinatario": {
+    "maxLength": 60,
+    "minLength": 1,
+    "title": "Numero Destinatario",
+    "type": "string"
+   },
+   "bairro_destinatario": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Bairro Destinatario",
+    "type": "string"
+   },
+   "codigo_municipio_destinatario": {
+    "title": "Codigo Municipio Destinatario",
+    "type": "string"
+   },
+   "municipio_destinatario": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Municipio Destinatario",
+    "type": "string"
+   },
+   "uf_destinatario": {
+    "maxLength": 2,
+    "minLength": 2,
+    "title": "Uf Destinatario",
+    "type": "string"
+   },
+   "cep_destinatario": {
+    "title": "Cep Destinatario",
+    "type": "string"
+   },
+   "email_destinatario": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Email Destinatario"
+   },
+   "modalidade_frete": {
+    "default": 9,
+    "title": "Modalidade Frete",
+    "type": "integer"
+   },
+   "valor_frete": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     }
+    ],
+    "default": "0",
+    "title": "Valor Frete"
+   },
+   "valor_seguro": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     }
+    ],
+    "default": "0",
+    "title": "Valor Seguro"
+   },
+   "valor_desconto": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     }
+    ],
+    "default": "0",
+    "title": "Valor Desconto"
+   },
+   "valor_outras_despesas": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     }
+    ],
+    "default": "0",
+    "title": "Valor Outras Despesas"
+   },
+   "valor_produtos": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Valor Produtos"
+   },
+   "valor_total": {
+    "anyOf": [
+     {
+      "type": "number"
+     },
+     {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Valor Total"
+   },
+   "itens": {
+    "items": {
+     "$ref": "#/$defs/Item"
+    },
+    "title": "Itens",
+    "type": "array"
+   },
+   "items": {
+    "anyOf": [
+     {
+      "items": {
+       "$ref": "#/$defs/Item"
+      },
+      "type": "array"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Items"
+   },
+   "formas_pagamento": {
+    "items": {
+     "$ref": "#/$defs/FormaPagamento"
+    },
+    "title": "Formas Pagamento",
+    "type": "array"
+   },
+   "informacoes_adicionais_contribuinte": {
+    "anyOf": [
+     {
+      "maxLength": 5000,
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Informacoes Adicionais Contribuinte"
+   }
+  },
+  "required": [
+   "natureza_operacao",
+   "data_emissao",
+   "tipo_documento",
+   "local_destino",
+   "nome_destinatario",
+   "logradouro_destinatario",
+   "numero_destinatario",
+   "bairro_destinatario",
+   "codigo_municipio_destinatario",
+   "municipio_destinatario",
+   "uf_destinatario",
+   "cep_destinatario"
+  ],
+  "title": "NFeRequest",
+  "type": "object"
+ },
+ "EmpresaCreate": {
+  "additionalProperties": false,
+  "properties": {
+   "nome": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Nome",
+    "type": "string"
+   },
+   "nome_fantasia": {
+    "anyOf": [
+     {
+      "maxLength": 60,
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Nome Fantasia"
+   },
+   "cnpj": {
+    "title": "Cnpj",
+    "type": "string"
+   },
+   "inscricao_estadual": {
+    "maxLength": 14,
+    "minLength": 2,
+    "title": "Inscricao Estadual",
+    "type": "string"
+   },
+   "inscricao_municipal": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Inscricao Municipal"
+   },
+   "regime_tributario": {
+    "description": "1 Simples, 2 Simples excesso sublimite, 3 Normal, 4 MEI",
+    "title": "Regime Tributario",
+    "type": "integer"
+   },
+   "logradouro": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Logradouro",
+    "type": "string"
+   },
+   "numero": {
+    "maxLength": 60,
+    "minLength": 1,
+    "title": "Numero",
+    "type": "string"
+   },
+   "complemento": {
+    "anyOf": [
+     {
+      "maxLength": 60,
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Complemento"
+   },
+   "bairro": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Bairro",
+    "type": "string"
+   },
+   "codigo_municipio": {
+    "title": "Codigo Municipio",
+    "type": "string"
+   },
+   "municipio": {
+    "maxLength": 60,
+    "minLength": 2,
+    "title": "Municipio",
+    "type": "string"
+   },
+   "uf": {
+    "maxLength": 2,
+    "minLength": 2,
+    "title": "Uf",
+    "type": "string"
+   },
+   "cep": {
+    "title": "Cep",
+    "type": "string"
+   },
+   "telefone": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Telefone"
+   },
+   "email": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Email"
+   },
+   "cpf_cnpj_contabilidade": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cpf Cnpj Contabilidade"
+   },
+   "habilita_nfe": {
+    "default": true,
+    "title": "Habilita Nfe",
+    "type": "boolean"
+   },
+   "enviar_email_destinatario": {
+    "default": false,
+    "title": "Enviar Email Destinatario",
+    "type": "boolean"
+   },
+   "enviar_email_homologacao": {
+    "default": false,
+    "title": "Enviar Email Homologacao",
+    "type": "boolean"
+   },
+   "discrimina_impostos": {
+    "default": false,
+    "title": "Discrimina Impostos",
+    "type": "boolean"
+   },
+   "orientacao_danfe": {
+    "default": "portrait",
+    "title": "Orientacao Danfe",
+    "type": "string"
+   },
+   "recibo_danfe": {
+    "default": true,
+    "title": "Recibo Danfe",
+    "type": "boolean"
+   },
+   "nfe_sincrono": {
+    "default": false,
+    "title": "Nfe Sincrono",
+    "type": "boolean"
+   },
+   "nfe_sincrono_homologacao": {
+    "default": false,
+    "title": "Nfe Sincrono Homologacao",
+    "type": "boolean"
+   },
+   "serie_nfe_producao": {
+    "default": 1,
+    "title": "Serie Nfe Producao",
+    "type": "integer"
+   },
+   "proximo_numero_nfe_producao": {
+    "default": 1,
+    "title": "Proximo Numero Nfe Producao",
+    "type": "integer"
+   },
+   "serie_nfe_homologacao": {
+    "default": 1,
+    "title": "Serie Nfe Homologacao",
+    "type": "integer"
+   },
+   "proximo_numero_nfe_homologacao": {
+    "default": 1,
+    "title": "Proximo Numero Nfe Homologacao",
+    "type": "integer"
+   },
+   "arquivo_certificado_base64": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Arquivo Certificado Base64"
+   },
+   "senha_certificado": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Senha Certificado"
+   },
+   "certificado_especifico": {
+    "default": false,
+    "title": "Certificado Especifico",
+    "type": "boolean"
+   }
+  },
+  "required": [
+   "nome",
+   "cnpj",
+   "inscricao_estadual",
+   "regime_tributario",
+   "logradouro",
+   "numero",
+   "bairro",
+   "codigo_municipio",
+   "municipio",
+   "uf",
+   "cep"
+  ],
+  "title": "EmpresaCreate",
+  "type": "object"
+ },
+ "EmpresaUpdate": {
+  "additionalProperties": false,
+  "description": "No PUT todos os campos são opcionais; só o que vier é alterado.",
+  "properties": {
+   "nome": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Nome"
+   },
+   "nome_fantasia": {
+    "anyOf": [
+     {
+      "maxLength": 60,
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Nome Fantasia"
+   },
+   "cnpj": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cnpj"
+   },
+   "inscricao_estadual": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Inscricao Estadual"
+   },
+   "inscricao_municipal": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Inscricao Municipal"
+   },
+   "regime_tributario": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Regime Tributario"
+   },
+   "logradouro": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Logradouro"
+   },
+   "numero": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Numero"
+   },
+   "complemento": {
+    "anyOf": [
+     {
+      "maxLength": 60,
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Complemento"
+   },
+   "bairro": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Bairro"
+   },
+   "codigo_municipio": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Codigo Municipio"
+   },
+   "municipio": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Municipio"
+   },
+   "uf": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Uf"
+   },
+   "cep": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cep"
+   },
+   "telefone": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Telefone"
+   },
+   "email": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Email"
+   },
+   "cpf_cnpj_contabilidade": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Cpf Cnpj Contabilidade"
+   },
+   "habilita_nfe": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Habilita Nfe"
+   },
+   "enviar_email_destinatario": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Enviar Email Destinatario"
+   },
+   "enviar_email_homologacao": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Enviar Email Homologacao"
+   },
+   "discrimina_impostos": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Discrimina Impostos"
+   },
+   "orientacao_danfe": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Orientacao Danfe"
+   },
+   "recibo_danfe": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Recibo Danfe"
+   },
+   "nfe_sincrono": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Nfe Sincrono"
+   },
+   "nfe_sincrono_homologacao": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Nfe Sincrono Homologacao"
+   },
+   "serie_nfe_producao": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Serie Nfe Producao"
+   },
+   "proximo_numero_nfe_producao": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Proximo Numero Nfe Producao"
+   },
+   "serie_nfe_homologacao": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Serie Nfe Homologacao"
+   },
+   "proximo_numero_nfe_homologacao": {
+    "anyOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Proximo Numero Nfe Homologacao"
+   },
+   "arquivo_certificado_base64": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Arquivo Certificado Base64"
+   },
+   "senha_certificado": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Senha Certificado"
+   },
+   "certificado_especifico": {
+    "anyOf": [
+     {
+      "type": "boolean"
+     },
+     {
+      "type": "null"
+     }
+    ],
+    "default": null,
+    "title": "Certificado Especifico"
+   }
+  },
+  "title": "EmpresaUpdate",
+  "type": "object"
+ }
+}
